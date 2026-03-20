@@ -4,3 +4,4 @@ venv/
 .env
 .idea/
 NOTES.md
+failed_items.log

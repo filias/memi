@@ -1,3 +1,4 @@
+import logging
 import random
 from urllib.parse import quote
 
@@ -11,6 +12,25 @@ from memi.categories.people import ATHLETE_SPORTS
 app = Flask(__name__)
 
 HEADERS = {"User-Agent": "Memi/1.0"}
+
+# Log failed image lookups so we can clean up the lists
+_fail_logger = logging.getLogger("memi.failed")
+_fail_handler = logging.FileHandler("failed_items.log")
+_fail_handler.setFormatter(logging.Formatter("%(asctime)s %(message)s"))
+_fail_logger.addHandler(_fail_handler)
+_fail_logger.setLevel(logging.WARNING)
+
+# Fandom wikis for character categories
+FANDOM_WIKIS = {
+    "characters:star wars": "starwars",
+    "characters:lord of the rings": "lotr",
+    "characters:harry potter": "harrypotter",
+    "characters:disney": "disney",
+    "characters:marvel": "marvel",
+    "characters:dc": "dc",
+    "characters:anime": None,  # no single wiki, use Wikipedia
+    "characters:all": None,
+}
 
 
 def get_wikipedia_image(title):
@@ -37,6 +57,32 @@ def get_wikipedia_image(title):
                 "name": page.get("title", title),
                 "image": thumb,
             }
+    return None
+
+
+def get_fandom_image(title, wiki):
+    """Fetch image from a Fandom wiki using the imageserving API."""
+    # Strip Wikipedia disambiguation suffixes like "(Star Wars)" or "(character)"
+    clean = title.split("(")[0].strip().replace(" ", "_")
+    try:
+        resp = requests.get(
+            f"https://{wiki}.fandom.com/api.php",
+            params={
+                "action": "imageserving",
+                "wisTitle": clean,
+                "format": "json",
+            },
+            headers=HEADERS,
+            timeout=10,
+        )
+        if resp.status_code != 200:
+            return None
+        data = resp.json()
+        image_url = data.get("image", {}).get("imageserving")
+        if image_url:
+            return {"name": title, "image": image_url}
+    except Exception:
+        pass
     return None
 
 
@@ -184,17 +230,26 @@ def random_item():
 
     is_athlete = category.startswith("people:athlete")
     is_logo = category == "logos"
+    fandom_wiki = FANDOM_WIKIS.get(category)
 
     for item in candidates:
+        result = None
         if is_country:
             result = get_country_item(item, mode)
         elif is_logo:
             result = get_logo_image(item)
+        elif fandom_wiki:
+            result = get_fandom_image(item, fandom_wiki)
+            if not result or not result.get("image"):
+                result = get_wikipedia_image(item)
         else:
             result = get_wikipedia_image(item)
+
         if result and result.get("image"):
             if is_athlete and item in ATHLETE_SPORTS:
                 result["tag"] = ATHLETE_SPORTS[item]
             return jsonify(result)
+        else:
+            _fail_logger.warning("FAILED: %s (category: %s)", item, category)
 
     return jsonify({"error": "No image found"}), 404
