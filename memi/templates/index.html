@@ -115,7 +115,7 @@
 
     <div class="categories">
         {% for cat in categories %}
-        <button onclick="selectCategory('{{ cat }}')">{{ cat }}</button>
+        <button data-key="{{ cat.key }}" onclick="selectCategory('{{ cat.key }}', this)">{{ cat.label }}</button>
         {% endfor %}
     </div>
 
@@ -131,10 +131,10 @@
         let revealed = false;
         let loaded = false;
 
-        function selectCategory(cat) {
+        function selectCategory(cat, btn) {
             currentCategory = cat;
             document.querySelectorAll('.categories button').forEach(b => {
-                b.classList.toggle('active', b.textContent === cat);
+                b.classList.toggle('active', b === btn);
             });
             loadNew();
         }

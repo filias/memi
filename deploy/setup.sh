@@ -7,26 +7,24 @@ DOMAIN="${1:?Usage: bash setup.sh memi.yourdomain.com}"
 
 # Install Caddy
 apt-get update
-apt-get install -y debian-keyring debian-archive-keyring apt-transport-https curl
+apt-get install -y debian-keyring debian-archive-keyring apt-transport-https curl git
 curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
 curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | tee /etc/apt/sources.list.d/caddy-stable.list
 apt-get update
 apt-get install -y caddy
 
-# Install uv
+# Install uv (globally so the memi user can use it)
 curl -LsSf https://astral.sh/uv/install.sh | sh
-export PATH="$HOME/.local/bin:$PATH"
+cp /root/.local/bin/uv /usr/local/bin/uv
+cp /root/.local/bin/uvx /usr/local/bin/uvx
 
-# Create app user and directory
+# Create app user and clone
 useradd --system --create-home --shell /usr/sbin/nologin memi || true
-mkdir -p /opt/memi
-chown memi:memi /opt/memi
-
-# Clone and install
 git clone https://github.com/filias/memi.git /opt/memi
+
+# Install dependencies as memi user
 cd /opt/memi
-uv sync
-chown -R memi:memi /opt/memi
+sudo -u memi uv sync
 
 # Configure Caddy
 cat > /etc/caddy/Caddyfile <<EOF
