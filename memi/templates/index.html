@@ -82,13 +82,9 @@
         .card img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .card.contain-image img {
             object-fit: contain;
-            padding: 2rem;
+            padding: 1rem;
+            display: block;
         }
 
         .card .answer {
@@ -156,9 +152,6 @@
         let revealed = false;
         let loaded = false;
 
-        const containCategories = ['countries:flags', 'countries:shapes',
-            'people:all', 'people:scientists', 'people:explorers',
-            'people:artists', 'people:musicians', 'people:writers', 'people:leaders'];
         const subcategories = {{ subcategories | tojson }};
 
         function selectCategory(cat) {
@@ -167,8 +160,6 @@
                 if (b.classList.contains('back-btn')) return;
                 b.classList.remove('active');
             });
-            const card = document.getElementById('card');
-            card.classList.toggle('contain-image', containCategories.includes(cat));
             loadNew();
         }
 
