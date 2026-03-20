@@ -1,18 +1,43 @@
 STAR_WARS = [
+    # Original trilogy
     "Luke Skywalker", "Darth Vader", "Leia Organa",
     "Han Solo", "Chewbacca", "Yoda", "Obi-Wan Kenobi",
     "Emperor Palpatine", "R2-D2", "C-3PO",
     "Boba Fett", "Jabba the Hutt", "Lando Calrissian",
-    "Darth Maul", "Mace Windu", "Qui-Gon Jinn",
-    "Padmé Amidala", "Anakin Skywalker", "Count Dooku",
-    "General Grievous", "Jango Fett", "Ahsoka Tano",
+    "Grand Moff Tarkin", "Admiral Ackbar", "Wedge Antilles",
+    "Wicket W. Warrick", "Nien Nunb", "Mon Mothma",
+    "Greedo", "Bossk", "IG-88", "Dengar",
+    "Lobot", "Max Rebo", "Salacious B. Crumb",
+    "Figrin D'an", "Bib Fortuna",
+    # Prequel trilogy
+    "Anakin Skywalker", "Padmé Amidala", "Qui-Gon Jinn",
+    "Darth Maul", "Mace Windu", "Count Dooku",
+    "General Grievous", "Jango Fett", "Jar Jar Binks",
+    "Watto", "Sebulba", "Shmi Skywalker",
+    "Ki-Adi-Mundi", "Aayla Secura", "Plo Koon",
+    "Kit Fisto", "Shaak Ti", "Luminara Unduli",
+    "Barriss Offee", "Zam Wesell", "Dexter Jettster",
+    "Captain Typho", "Bail Organa", "Nute Gunray",
+    # Sequel trilogy
     "Kylo Ren", "Rey (Star Wars)", "Finn (Star Wars)",
     "Poe Dameron", "BB-8", "Supreme Leader Snoke",
+    "Rose Tico", "Maz Kanata", "General Hux",
+    "Captain Phasma", "DJ (Star Wars)", "Zorii Bliss",
+    "Jannah (Star Wars)", "Pryde",
+    # Clone Wars & Rebels
+    "Ahsoka Tano", "Captain Rex", "Asajj Ventress",
+    "Cad Bane", "Savage Opress", "Pre Vizsla",
+    "Bo-Katan Kryze", "Satine Kryze",
+    "Hera Syndulla", "Kanan Jarrus", "Ezra Bridger",
+    "Sabine Wren", "Chopper (Star Wars)", "Grand Admiral Thrawn",
+    "Grand Inquisitor",
+    # Mandalorian & other shows
     "The Mandalorian (character)", "Grogu",
-    "Grand Moff Tarkin", "Admiral Ackbar",
-    "Wedge Antilles", "Wicket W. Warrick",
-    "Jar Jar Binks", "Watto", "Sebulba",
-    "Asajj Ventress", "Captain Rex",
+    "Cara Dune", "Greef Karga", "Moff Gideon",
+    "Fennec Shand", "Cobb Vanth",
+    "Cassian Andor", "K-2SO", "Chirrut Îmwe", "Baze Malbus",
+    "Jyn Erso", "Orson Krennic",
+    "Cal Kestis", "Inquisitor (Star Wars)",
 ]
 
 LORD_OF_THE_RINGS = [
