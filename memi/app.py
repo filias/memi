@@ -5,6 +5,7 @@ import requests
 from flask import Flask, jsonify, render_template, request
 
 from memi.categories import CATEGORIES
+from memi.categories.countries import CAPITALS
 
 app = Flask(__name__)
 
@@ -68,11 +69,18 @@ def get_country_shape(country):
 
 
 def get_country_item(country, mode):
-    """Fetch a country image based on mode (flags or shapes)."""
+    """Fetch a country image based on mode (flags, shapes, or capitals)."""
     if mode == "flags":
         result = get_wikipedia_image("Flag of " + country)
         if result and result["image"]:
             result["name"] = country
+            return result
+    elif mode == "capitals":
+        result = get_country_shape(country)
+        if result:
+            capital = CAPITALS.get(country, "Unknown")
+            result["clue"] = country
+            result["name"] = capital
             return result
     else:
         return get_country_shape(country)
