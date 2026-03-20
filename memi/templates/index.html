@@ -156,7 +156,9 @@
         let revealed = false;
         let loaded = false;
 
-        const containCategories = ['countries:flags', 'countries:shapes', 'people'];
+        const containCategories = ['countries:flags', 'countries:shapes',
+            'people:all', 'people:scientists', 'people:explorers',
+            'people:artists', 'people:musicians', 'people:writers', 'people:leaders'];
         const subcategories = {{ subcategories | tojson }};
 
         function selectCategory(cat) {
