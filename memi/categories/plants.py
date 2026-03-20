@@ -1,0 +1,33 @@
+ALL = [
+    # Flowers
+    "Sunflower", "Rose", "Tulip", "Orchid", "Lotus",
+    "Dandelion", "Daisy", "Chrysanthemum", "Poppy", "Lily",
+    "Iris (plant)", "Daffodil", "Hydrangea", "Wisteria",
+    "Bougainvillea", "Peony", "Camellia", "Azalea",
+    "Carnation", "Hibiscus", "Jasmine", "Magnolia",
+    "Lavender", "Cherry blossom", "Passionflower",
+    "Bird of paradise (plant)", "Protea", "Amaryllis",
+    "Begonia", "Frangipani", "Foxglove", "Bluebell",
+    "Snowdrop", "Edelweiss", "Rhododendron",
+    "Marigold", "Zinnia", "Dahlia", "Gardenia", "Freesia",
+    "Anemone", "Crocus", "Gladiolus", "Delphinium",
+    "Lupinus", "Plumeria", "Heliconia", "Anthurium",
+    "Ranunculus", "Snapdragon", "Sweet pea", "Clematis",
+    "Geranium", "Petunia", "Violet (plant)",
+    # Trees
+    "Oak", "Pine", "Birch", "Maple", "Willow",
+    "Palm tree", "Eucalyptus", "Redwood", "Sequoia",
+    "Cedar", "Cypress", "Banyan", "Baobab", "Mangrove",
+    "Olive tree", "Acacia", "Jacaranda", "Kapok",
+    "Dragon blood tree", "Ginkgo", "Japanese maple",
+    "Weeping willow", "Scots pine", "Douglas fir",
+    "Giant sequoia", "Coast redwood", "Boab",
+    "Joshua tree", "Monkey puzzle tree",
+    # Other plants
+    "Bamboo", "Fern", "Ivy", "Cactus", "Aloe vera",
+    "Monstera", "Venus flytrap", "Pitcher plant", "Sundew",
+    "Rafflesia", "Corpse flower", "Welwitschia",
+    "Saguaro", "Agave", "Yucca", "Air plant",
+    "Spanish moss", "Seagrass", "Kelp", "Sphagnum",
+    "Lichen", "Liverwort", "Horsetail", "Club moss",
+]
