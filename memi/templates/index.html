@@ -149,15 +149,15 @@
     <p class="hint" id="hint"></p>
 
     <script>
-        let currentCategory = null;
+        let selectedCategories = [];
         let revealed = false;
         let loaded = false;
 
         const subcategories = {{ subcategories | tojson }};
 
         function selectCategory(cat) {
-            currentCategory = cat;
-            document.querySelectorAll('.categories button').forEach(b => {
+            selectedCategories = [cat];
+            document.querySelectorAll('#main-categories button').forEach(b => {
                 if (b.classList.contains('back-btn')) return;
                 b.classList.remove('active');
             });
@@ -168,12 +168,14 @@
             const main = document.getElementById('main-categories');
             const submenu = document.getElementById('submenu');
             const buttons = document.getElementById('submenu-buttons');
+            selectedCategories = [];
 
             buttons.innerHTML = '';
             for (const sub of subcategories[parent]) {
                 const btn = document.createElement('button');
                 btn.textContent = sub.label;
-                btn.onclick = function() { selectCategory(sub.key); this.classList.add('active'); };
+                btn.dataset.key = sub.key;
+                btn.onclick = function() { toggleSubcategory(sub.key, this); };
                 buttons.appendChild(btn);
             }
 
@@ -181,12 +183,29 @@
             submenu.style.display = 'flex';
         }
 
+        function toggleSubcategory(key, btn) {
+            const idx = selectedCategories.indexOf(key);
+            if (idx === -1) {
+                selectedCategories.push(key);
+                btn.classList.add('active');
+            } else {
+                selectedCategories.splice(idx, 1);
+                btn.classList.remove('active');
+            }
+            if (selectedCategories.length > 0) {
+                loadNew();
+            }
+        }
+
         function closeSubmenu() {
             document.getElementById('main-categories').style.display = 'flex';
             document.getElementById('submenu').style.display = 'none';
+            selectedCategories = [];
         }
 
         async function loadNew() {
+            if (selectedCategories.length === 0) return;
+
             const card = document.getElementById('card');
             const image = document.getElementById('image');
             const answer = document.getElementById('answer');
@@ -203,7 +222,8 @@
             loaded = false;
 
             try {
-                const resp = await fetch(`/api/random/${currentCategory}`);
+                const cats = selectedCategories.join(',');
+                const resp = await fetch(`/api/random?cats=${encodeURIComponent(cats)}`);
                 const data = await resp.json();
 
                 if (data.error) {
@@ -232,7 +252,7 @@
                 document.getElementById('card').classList.add('revealed');
                 document.getElementById('hint').textContent = 'click again for a new one';
                 revealed = true;
-            } else {
+            } else if (selectedCategories.length > 0) {
                 loadNew();
             }
         }

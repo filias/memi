@@ -2,7 +2,7 @@ import random
 from urllib.parse import quote
 
 import requests
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
 
 from memi.categories import CATEGORIES
 
@@ -92,11 +92,15 @@ def index():
     return render_template("index.html", categories=categories, subcategories=subs)
 
 
-@app.route("/api/random/<path:category>")
-def random_item(category):
-    if category not in CATEGORIES:
+@app.route("/api/random")
+def random_item():
+    cats = request.args.get("cats", "")
+    cat_list = [c for c in cats.split(",") if c in CATEGORIES]
+    if not cat_list:
         return jsonify({"error": "Unknown category"}), 400
 
+    # Pick a random category, then a random item from it
+    category = random.choice(cat_list)
     items = CATEGORIES[category]
     candidates = random.sample(items, min(10, len(items)))
 
