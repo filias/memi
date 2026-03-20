@@ -184,6 +184,7 @@
         }
 
         function toggleSubcategory(key, btn) {
+            const wasEmpty = selectedCategories.length === 0;
             const idx = selectedCategories.indexOf(key);
             if (idx === -1) {
                 selectedCategories.push(key);
@@ -192,7 +193,7 @@
                 selectedCategories.splice(idx, 1);
                 btn.classList.remove('active');
             }
-            if (selectedCategories.length > 0) {
+            if (wasEmpty && selectedCategories.length > 0) {
                 loadNew();
             }
         }
