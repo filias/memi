@@ -16,6 +16,7 @@ CATEGORIES = {
     "people:writers": people.WRITERS,
     "people:leaders": people.LEADERS,
     "people:actors": people.ACTORS,
+    "people:athletes": people.ATHLETES,
     "countries:capitals": countries.ALL,
     "countries:flags": countries.ALL,
     "countries:shapes": countries.ALL,

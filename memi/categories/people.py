@@ -244,48 +244,162 @@ LEADERS = [
 ]
 
 ACTORS = [
-    # Classic Hollywood
-    "Charlie Chaplin", "Buster Keaton", "Greta Garbo",
-    "Marlene Dietrich", "Humphrey Bogart", "Ingrid Bergman",
-    "James Cagney", "Bette Davis", "Katharine Hepburn",
-    "Cary Grant", "Grace Kelly", "Audrey Hepburn",
-    "Marilyn Monroe", "James Dean", "Marlon Brando",
-    "Elizabeth Taylor", "Paul Newman", "Sidney Poitier",
-    "Gregory Peck", "Rita Hayworth", "Lauren Bacall",
-    "Vivien Leigh", "Clark Gable", "Fred Astaire",
-    "Ginger Rogers", "Gene Kelly", "Judy Garland",
-    "Shirley Temple", "Joan Crawford", "Orson Welles",
-    # Modern legends
+    # Silent era & early Hollywood
+    "Charlie Chaplin", "Buster Keaton", "Harold Lloyd",
+    "Greta Garbo", "Marlene Dietrich", "Louise Brooks",
+    # Golden age Hollywood
+    "Humphrey Bogart", "Ingrid Bergman", "James Cagney",
+    "Bette Davis", "Katharine Hepburn", "Cary Grant",
+    "Grace Kelly", "Audrey Hepburn", "Marilyn Monroe",
+    "James Dean", "Marlon Brando", "Elizabeth Taylor",
+    "Paul Newman", "Sidney Poitier", "Gregory Peck",
+    "Rita Hayworth", "Lauren Bacall", "Vivien Leigh",
+    "Clark Gable", "Fred Astaire", "Ginger Rogers",
+    "Gene Kelly", "Judy Garland", "Shirley Temple",
+    "Joan Crawford", "Orson Welles", "Spencer Tracy",
+    "James Stewart", "Kirk Douglas", "Burt Lancaster",
+    "Rock Hudson", "Tony Curtis", "Sophia Loren",
+    "Marcello Mastroianni", "Anna Magnani",
+    # 70s-80s
     "Robert De Niro", "Al Pacino", "Jack Nicholson",
     "Meryl Streep", "Dustin Hoffman", "Robert Redford",
     "Jane Fonda", "Clint Eastwood", "Morgan Freeman",
     "Anthony Hopkins", "Jodie Foster", "Sean Connery",
-    "Michael Caine", "Helen Mirren", "Judi Dench",
-    "Ian McKellen", "Patrick Stewart", "Maggie Smith",
-    "Denzel Washington", "Samuel L. Jackson", "Tom Hanks",
-    "Robin Williams", "Harrison Ford", "Sigourney Weaver",
+    "Michael Caine", "Gene Hackman", "Sissy Spacek",
+    "Faye Dunaway", "Sally Field", "Christopher Walken",
+    "Jeff Bridges", "William Hurt", "Jessica Lange",
+    "Sigourney Weaver", "Harrison Ford", "Kurt Russell",
+    "Sylvester Stallone", "Arnold Schwarzenegger",
+    # 90s-2000s
+    "Tom Hanks", "Denzel Washington", "Samuel L. Jackson",
+    "Robin Williams", "Kevin Spacey", "Russell Crowe",
+    "Tom Cruise", "Will Smith", "Johnny Depp",
+    "Brad Pitt", "Leonardo DiCaprio", "George Clooney",
+    "Matt Damon", "Edward Norton", "Benicio del Toro",
+    "Nicole Kidman", "Cate Blanchett", "Kate Winslet",
+    "Halle Berry", "Charlize Theron", "Julia Roberts",
+    "Sandra Bullock", "Natalie Portman", "Julianne Moore",
+    "Hilary Swank", "Angelina Jolie",
+    # Contemporary
+    "Joaquin Phoenix", "Viola Davis", "Frances McDormand",
+    "Daniel Day-Lewis", "Tilda Swinton", "Christoph Waltz",
+    "Mads Mikkelsen", "Song Kang-ho", "Christian Bale",
+    "Michael Fassbender", "Oscar Isaac", "Adam Driver",
+    "Timothée Chalamet", "Florence Pugh", "Saoirse Ronan",
+    "Lupita Nyong'o", "Rami Malek", "Mahershala Ali",
+    "Youn Yuh-jung", "Michelle Yeoh", "Ke Huy Quan",
+    # British legends
+    "Helen Mirren", "Judi Dench", "Ian McKellen",
+    "Patrick Stewart", "Maggie Smith", "Ralph Fiennes",
+    "Gary Oldman", "Emma Thompson", "Kenneth Branagh",
+    "Ben Kingsley", "Daniel Craig", "Idris Elba",
+    "Benedict Cumberbatch", "Olivia Colman",
     # International cinema
-    "Toshiro Mifune", "Marcello Mastroianni", "Sophia Loren",
-    "Alain Delon", "Jean-Paul Belmondo", "Catherine Deneuve",
-    "Isabelle Huppert", "Gong Li", "Tony Leung Chiu-wai",
+    "Toshiro Mifune", "Alain Delon", "Jean-Paul Belmondo",
+    "Catherine Deneuve", "Isabelle Huppert", "Gong Li",
+    "Tony Leung Chiu-wai", "Zhang Ziyi", "Chow Yun-fat",
     "Amitabh Bachchan", "Shah Rukh Khan", "Rajinikanth",
     "Omar Sharif", "Max von Sydow", "Liv Ullmann",
     "Juliette Binoche", "Penélope Cruz", "Javier Bardem",
-    "Roberto Benigni", "Gael García Bernal",
-    # Contemporary
-    "Leonardo DiCaprio", "Brad Pitt", "Cate Blanchett",
-    "Nicole Kidman", "Kate Winslet", "Daniel Day-Lewis",
-    "Joaquin Phoenix", "Natalie Portman", "Viola Davis",
-    "Frances McDormand", "Tilda Swinton", "Christoph Waltz",
-    "Mads Mikkelsen", "Song Kang-ho",
+    "Roberto Benigni", "Gael García Bernal", "Pedro Almodóvar",
+    "Isabelle Adjani", "Marion Cotillard",
     # Comedy
-    "Buster Keaton", "Harold Lloyd", "Peter Sellers",
-    "John Cleese", "Rowan Atkinson", "Steve Martin",
-    "Bill Murray", "Eddie Murphy", "Jim Carrey",
-    "Whoopi Goldberg", "Lucille Ball",
+    "Peter Sellers", "John Cleese", "Rowan Atkinson",
+    "Steve Martin", "Bill Murray", "Eddie Murphy",
+    "Jim Carrey", "Whoopi Goldberg", "Lucille Ball",
+    "Tina Fey", "Amy Poehler", "Melissa McCarthy",
+    "Ben Stiller", "Adam Sandler", "Mike Myers",
+    "Sacha Baron Cohen", "Will Ferrell",
     # Directors who also acted
-    "Alfred Hitchcock", "Woody Allen", "Orson Welles",
-    "Charlie Chaplin", "Clint Eastwood",
+    "Alfred Hitchcock", "Woody Allen", "Mel Brooks",
+    "John Huston", "Takeshi Kitano",
 ]
 
-ALL = SCIENTISTS + EXPLORERS + ARTISTS + MUSICIANS + WRITERS + LEADERS + ACTORS
+ATHLETES = [
+    # Football (soccer)
+    "Pelé", "Diego Maradona", "Johan Cruyff",
+    "Franz Beckenbauer", "Zinedine Zidane", "Ronaldo (Brazilian footballer)",
+    "Ronaldinho", "Lionel Messi", "Cristiano Ronaldo",
+    "Thierry Henry", "Michel Platini", "Marco van Basten",
+    "George Best", "Eusébio", "Alfredo Di Stéfano",
+    "Lev Yashin", "Gerd Müller", "Bobby Charlton",
+    "Ferenc Puskás", "Garrincha", "Marta (footballer)",
+    "Mia Hamm", "Megan Rapinoe", "Alex Morgan",
+    "Kylian Mbappé", "Erling Haaland", "Neymar",
+    # Basketball
+    "Michael Jordan", "LeBron James", "Kobe Bryant",
+    "Kareem Abdul-Jabbar", "Magic Johnson", "Larry Bird",
+    "Wilt Chamberlain", "Bill Russell", "Shaquille O'Neal",
+    "Tim Duncan", "Hakeem Olajuwon", "Allen Iverson",
+    "Stephen Curry", "Kevin Durant", "Giannis Antetokounmpo",
+    "Diana Taurasi", "Lisa Leslie", "Sue Bird",
+    # Tennis
+    "Roger Federer", "Rafael Nadal", "Novak Djokovic",
+    "Pete Sampras", "Andre Agassi", "Björn Borg",
+    "John McEnroe", "Jimmy Connors", "Rod Laver",
+    "Serena Williams", "Venus Williams", "Steffi Graf",
+    "Martina Navratilova", "Billie Jean King", "Chris Evert",
+    "Monica Seles", "Maria Sharapova", "Naomi Osaka",
+    "Carlos Alcaraz",
+    # Athletics (track & field)
+    "Usain Bolt", "Carl Lewis", "Jesse Owens",
+    "Florence Griffith-Joyner", "Jackie Joyner-Kersee",
+    "Haile Gebrselassie", "Eliud Kipchoge", "Mo Farah",
+    "Sergey Bubka", "Bob Beamon", "Paavo Nurmi",
+    "Emil Zátopek", "Fanny Blankers-Koen", "Allyson Felix",
+    "Shelly-Ann Fraser-Pryce",
+    # Swimming
+    "Michael Phelps", "Mark Spitz", "Ian Thorpe",
+    "Katie Ledecky", "Johnny Weissmuller", "Dawn Fraser",
+    "Caeleb Dressel", "Sun Yang",
+    # Boxing
+    "Muhammad Ali", "Mike Tyson", "Sugar Ray Robinson",
+    "Joe Louis", "Floyd Mayweather Jr.", "Manny Pacquiao",
+    "Rocky Marciano", "Sugar Ray Leonard", "Lennox Lewis",
+    "Oscar De La Hoya", "Canelo Álvarez",
+    # Motorsport
+    "Ayrton Senna", "Michael Schumacher", "Lewis Hamilton",
+    "Juan Manuel Fangio", "Niki Lauda", "Alain Prost",
+    "Max Verstappen", "Sebastian Vettel", "Fernando Alonso",
+    "Valentino Rossi", "Giacomo Agostini",
+    # Golf
+    "Tiger Woods", "Jack Nicklaus", "Arnold Palmer",
+    "Gary Player", "Seve Ballesteros", "Rory McIlroy",
+    "Annika Sörenstam",
+    # Cycling
+    "Eddy Merckx", "Fausto Coppi", "Bernard Hinault",
+    "Miguel Indurain", "Marco Pantani", "Tadej Pogačar",
+    "Marianne Vos",
+    # Cricket
+    "Sachin Tendulkar", "Don Bradman", "Vivian Richards",
+    "Shane Warne", "Brian Lara", "Virat Kohli",
+    # Baseball
+    "Babe Ruth", "Jackie Robinson", "Willie Mays",
+    "Hank Aaron", "Ted Williams", "Roberto Clemente",
+    "Mickey Mantle", "Ichiro Suzuki", "Shohei Ohtani",
+    # American football
+    "Tom Brady", "Joe Montana", "Jerry Rice",
+    "Jim Brown", "Walter Payton", "Johnny Unitas",
+    "Peyton Manning", "Patrick Mahomes",
+    # Ice hockey
+    "Wayne Gretzky", "Mario Lemieux", "Gordie Howe",
+    "Bobby Orr", "Alexander Ovechkin", "Sidney Crosby",
+    # Rugby
+    "Jonah Lomu", "Richie McCaw", "Dan Carter",
+    "Gareth Edwards", "Siya Kolisi",
+    # Gymnastics
+    "Nadia Comăneci", "Simone Biles", "Olga Korbut",
+    "Kohei Uchimura", "Larisa Latynina",
+    # Winter sports
+    "Lindsey Vonn", "Marcel Hirscher", "Ingemar Stenmark",
+    "Shaun White", "Mikaela Shiffrin", "Marit Bjørgen",
+    "Ole Einar Bjørndalen", "Janica Kostelić",
+    # Combat sports
+    "Bruce Lee", "Jackie Chan", "Jet Li",
+    "Conor McGregor", "Ronda Rousey", "Georges St-Pierre",
+    # Other sports
+    "Pelé", "Nadia Comăneci", "Usain Bolt",
+    "Serena Williams", "Roger Federer",
+]
+
+ALL = SCIENTISTS + EXPLORERS + ARTISTS + MUSICIANS + WRITERS + LEADERS + ACTORS + ATHLETES
