@@ -29,4 +29,6 @@ CATEGORIES = {
     "plants:ferns & mosses": plants.FERNS_AND_MOSSES,
     "plants:houseplants": plants.HOUSEPLANTS,
     "plants:unusual": plants.UNUSUAL,
+    "plants:fruits": plants.FRUITS,
+    "plants:vegetables": plants.VEGETABLES,
 }

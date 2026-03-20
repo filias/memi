@@ -178,4 +178,93 @@ UNUSUAL = [
     "Telegraph plant", "Trigger plant",
 ]
 
-ALL = FLOWERS + TREES + SUCCULENTS + CARNIVOROUS + FERNS_AND_MOSSES + HOUSEPLANTS + UNUSUAL
+FRUITS = [
+    # Common fruits
+    "Apple", "Banana", "Orange (fruit)", "Grape", "Strawberry",
+    "Blueberry", "Raspberry", "Blackberry", "Cherry", "Peach",
+    "Pear", "Plum", "Apricot", "Nectarine", "Fig",
+    "Pomegranate", "Persimmon", "Quince",
+    # Citrus
+    "Lemon", "Lime (fruit)", "Grapefruit", "Tangerine",
+    "Mandarin orange", "Kumquat", "Yuzu", "Bergamot orange",
+    "Blood orange", "Clementine", "Satsuma",
+    # Tropical
+    "Mango", "Pineapple", "Papaya", "Coconut", "Guava",
+    "Passion fruit", "Lychee", "Dragon fruit", "Starfruit",
+    "Jackfruit", "Durian", "Rambutan", "Mangosteen",
+    "Longan", "Soursop", "Cherimoya", "Atemoya",
+    "Breadfruit", "Tamarind", "Acai", "Plantain",
+    "Sapodilla", "Calamansi", "Feijoa",
+    # Berries
+    "Cranberry", "Gooseberry", "Boysenberry", "Elderberry",
+    "Mulberry", "Lingonberry", "Açaí", "Goji berry",
+    "Cloudberry", "Huckleberry", "Currant",
+    "Blackcurrant", "Redcurrant", "Sea buckthorn",
+    # Melons
+    "Watermelon", "Cantaloupe", "Honeydew melon",
+    "Galia melon", "Casaba melon",
+    # Stone fruits
+    "Olive", "Date (fruit)", "Avocado",
+    "Jujube", "Loquat", "Medlar",
+    # Other
+    "Kiwifruit", "Pomelo", "Ugli fruit",
+    "Carambola", "Jabuticaba", "Miracle fruit",
+    "Buddha's hand", "Horned melon", "Prickly pear fruit",
+    "Cactus fruit", "Rose hip",
+]
+
+VEGETABLES = [
+    # Root vegetables
+    "Carrot", "Potato", "Sweet potato", "Beetroot",
+    "Turnip", "Parsnip", "Radish", "Daikon",
+    "Celeriac", "Rutabaga", "Yam", "Taro",
+    "Cassava", "Ginger", "Turmeric", "Horseradish",
+    "Wasabi", "Jicama", "Lotus root", "Water chestnut",
+    # Leafy greens
+    "Lettuce", "Spinach", "Kale", "Arugula",
+    "Swiss chard", "Collard greens", "Bok choy",
+    "Watercress", "Endive", "Radicchio", "Romaine lettuce",
+    "Iceberg lettuce", "Mizuna", "Mustard greens",
+    "Sorrel", "Purslane", "Lamb's lettuce",
+    # Brassicas
+    "Broccoli", "Cauliflower", "Cabbage", "Brussels sprout",
+    "Kohlrabi", "Romanesco broccoli", "Savoy cabbage",
+    "Red cabbage", "Chinese cabbage", "Kai-lan",
+    "Broccolini", "Rapini",
+    # Alliums
+    "Onion", "Garlic", "Leek", "Shallot",
+    "Spring onion", "Chive", "Ramp (plant)",
+    # Nightshades
+    "Tomato", "Bell pepper", "Chili pepper", "Eggplant",
+    "Tomatillo", "Habanero", "Jalapeño",
+    "Scotch bonnet (pepper)", "Cayenne pepper",
+    "Ghost pepper", "Carolina Reaper",
+    # Cucurbits
+    "Cucumber", "Zucchini", "Pumpkin", "Butternut squash",
+    "Acorn squash", "Spaghetti squash", "Delicata squash",
+    "Kabocha", "Chayote", "Bitter melon", "Luffa",
+    # Legumes
+    "Green bean", "Pea", "Snow pea", "Sugar snap pea",
+    "Lima bean", "Broad bean", "Edamame",
+    "Chickpea", "Lentil", "Black-eyed pea",
+    # Stems & stalks
+    "Celery", "Asparagus", "Rhubarb", "Fennel",
+    "Bamboo shoot", "Hearts of palm", "Cardoon",
+    # Mushrooms (fungi, but kitchen category)
+    "Button mushroom", "Shiitake", "Oyster mushroom",
+    "Portobello mushroom", "Chanterelle", "Morel",
+    "Enoki mushroom", "King trumpet mushroom",
+    "Porcini", "Truffle", "Matsutake", "Maitake",
+    "Lion's mane mushroom", "Reishi",
+    # Other vegetables
+    "Artichoke", "Okra", "Corn", "Avocado",
+    "Olive", "Caper", "Seaweed", "Nori",
+    "Wakame", "Kombu", "Samphire",
+    # Herbs (fresh)
+    "Basil", "Parsley", "Cilantro", "Dill",
+    "Mint", "Rosemary", "Thyme", "Oregano",
+    "Sage", "Tarragon", "Chervil", "Marjoram",
+    "Lemongrass", "Bay leaf", "Curry leaf",
+]
+
+ALL = FLOWERS + TREES + SUCCULENTS + CARNIVOROUS + FERNS_AND_MOSSES + HOUSEPLANTS + UNUSUAL + FRUITS + VEGETABLES
