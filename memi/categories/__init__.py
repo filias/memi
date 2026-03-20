@@ -16,5 +16,12 @@ CATEGORIES = {
     "people:leaders": people.LEADERS,
     "countries:flags": countries.ALL,
     "countries:shapes": countries.ALL,
-    "plants": plants.ALL,
+    "plants:all": plants.ALL,
+    "plants:flowers": plants.FLOWERS,
+    "plants:trees": plants.TREES,
+    "plants:succulents": plants.SUCCULENTS,
+    "plants:carnivorous": plants.CARNIVOROUS,
+    "plants:ferns & mosses": plants.FERNS_AND_MOSSES,
+    "plants:houseplants": plants.HOUSEPLANTS,
+    "plants:unusual": plants.UNUSUAL,
 }
