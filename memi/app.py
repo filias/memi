@@ -12,20 +12,30 @@ HEADERS = {"User-Agent": "Memi/1.0"}
 
 
 def get_wikipedia_image(title):
-    """Fetch the main image for a Wikipedia article."""
+    """Fetch the main image for a Wikipedia article via the pageimages API."""
     resp = requests.get(
-        "https://en.wikipedia.org/api/rest_v1/page/summary/" + title,
+        "https://en.wikipedia.org/w/api.php",
+        params={
+            "action": "query",
+            "titles": title,
+            "prop": "pageimages",
+            "pithumbsize": 800,
+            "format": "json",
+        },
         headers=HEADERS,
         timeout=10,
     )
     if resp.status_code != 200:
         return None
-    data = resp.json()
-    thumbnail = data.get("thumbnail", {})
-    return {
-        "name": data.get("title", title),
-        "image": thumbnail.get("source"),
-    }
+    pages = resp.json().get("query", {}).get("pages", {})
+    for page in pages.values():
+        thumb = page.get("thumbnail", {}).get("source")
+        if thumb:
+            return {
+                "name": page.get("title", title),
+                "image": thumb,
+            }
+    return None
 
 
 def get_country_shape(country):
