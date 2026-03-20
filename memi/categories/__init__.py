@@ -5,6 +5,7 @@ CATEGORIES = {
     "animals:mammals": animals.MAMMALS,
     "animals:birds": animals.BIRDS,
     "animals:reptiles": animals.REPTILES,
+    "animals:amphibians": animals.AMPHIBIANS,
     "animals:marine": animals.MARINE,
     "animals:insects": animals.INSECTS,
     "people:all": people.ALL,

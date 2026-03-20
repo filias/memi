@@ -156,17 +156,34 @@ REPTILES = [
     "American alligator", "Chinese alligator",
     "Caiman", "Black caiman", "Spectacled caiman",
     "Dwarf crocodile", "False gharial",
-    # Amphibians
-    "Axolotl", "Poison dart frog", "Red-eyed tree frog",
-    "Golden poison frog", "Blue poison dart frog",
-    "Strawberry poison-dart frog", "Glass frog", "Tree frog",
-    "Pac-Man frog", "Tomato frog", "Goliath frog",
-    "African bullfrog", "Cane toad", "Fire-bellied toad",
-    "Surinam toad", "Midwife toad",
-    "Fire salamander", "Tiger salamander", "Spotted salamander",
-    "Giant salamander", "Hellbender", "Newt",
+]
+
+AMPHIBIANS = [
+    # Frogs
+    "Poison dart frog", "Red-eyed tree frog", "Golden poison frog",
+    "Blue poison dart frog", "Strawberry poison-dart frog",
+    "Glass frog", "Tree frog", "Pac-Man frog", "Tomato frog",
+    "Goliath frog", "African bullfrog", "Cane toad",
+    "Fire-bellied toad", "Surinam toad", "Midwife toad",
+    "Darwin's frog", "Wallace's flying frog", "Mantella",
+    "Poison frog", "Bull frog", "Spring peeper",
+    "Wood frog", "Leopard frog", "Green tree frog",
+    "White's tree frog", "Waxy monkey tree frog",
+    "Amazon milk frog", "Vietnamese mossy frog",
+    "Purple frog", "Rain frog", "Spadefoot toad",
+    "Harlequin toad", "Golden toad", "Natterjack toad",
+    "Common toad", "Oriental fire-bellied toad",
+    # Salamanders & newts
+    "Axolotl", "Fire salamander", "Tiger salamander",
+    "Spotted salamander", "Giant salamander",
+    "Japanese giant salamander", "Chinese giant salamander",
+    "Hellbender", "Mudpuppy", "Eastern newt",
     "Red-spotted newt", "Great crested newt", "Alpine newt",
-    "Caecilian", "Olm",
+    "Palmate newt", "Smooth newt", "Marbled newt",
+    "Red-backed salamander", "Slimy salamander",
+    "Cave salamander", "Spring salamander", "Olm",
+    # Caecilians
+    "Caecilian",
 ]
 
 MARINE = [
@@ -279,4 +296,4 @@ INSECTS = [
     "Woodlouse", "Silverfish", "Earwig",
 ]
 
-ALL = MAMMALS + BIRDS + REPTILES + MARINE + INSECTS
+ALL = MAMMALS + BIRDS + REPTILES + AMPHIBIANS + MARINE + INSECTS
