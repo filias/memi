@@ -17,7 +17,7 @@ CATEGORIES = {
     "people:leaders": people.LEADERS,
     "people:actors": people.ACTORS,
     "people:athletes": people.ATHLETES,
-    "logos": logos.ALL,
+    # "logos": logos.ALL,  # TODO: find symbol-only logos without text
     "countries:capitals": countries.ALL,
     "countries:flags": countries.ALL,
     "countries:shapes": countries.ALL,
