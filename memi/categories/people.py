@@ -243,4 +243,49 @@ LEADERS = [
     "Joan of Arc",
 ]
 
-ALL = SCIENTISTS + EXPLORERS + ARTISTS + MUSICIANS + WRITERS + LEADERS
+ACTORS = [
+    # Classic Hollywood
+    "Charlie Chaplin", "Buster Keaton", "Greta Garbo",
+    "Marlene Dietrich", "Humphrey Bogart", "Ingrid Bergman",
+    "James Cagney", "Bette Davis", "Katharine Hepburn",
+    "Cary Grant", "Grace Kelly", "Audrey Hepburn",
+    "Marilyn Monroe", "James Dean", "Marlon Brando",
+    "Elizabeth Taylor", "Paul Newman", "Sidney Poitier",
+    "Gregory Peck", "Rita Hayworth", "Lauren Bacall",
+    "Vivien Leigh", "Clark Gable", "Fred Astaire",
+    "Ginger Rogers", "Gene Kelly", "Judy Garland",
+    "Shirley Temple", "Joan Crawford", "Orson Welles",
+    # Modern legends
+    "Robert De Niro", "Al Pacino", "Jack Nicholson",
+    "Meryl Streep", "Dustin Hoffman", "Robert Redford",
+    "Jane Fonda", "Clint Eastwood", "Morgan Freeman",
+    "Anthony Hopkins", "Jodie Foster", "Sean Connery",
+    "Michael Caine", "Helen Mirren", "Judi Dench",
+    "Ian McKellen", "Patrick Stewart", "Maggie Smith",
+    "Denzel Washington", "Samuel L. Jackson", "Tom Hanks",
+    "Robin Williams", "Harrison Ford", "Sigourney Weaver",
+    # International cinema
+    "Toshiro Mifune", "Marcello Mastroianni", "Sophia Loren",
+    "Alain Delon", "Jean-Paul Belmondo", "Catherine Deneuve",
+    "Isabelle Huppert", "Gong Li", "Tony Leung Chiu-wai",
+    "Amitabh Bachchan", "Shah Rukh Khan", "Rajinikanth",
+    "Omar Sharif", "Max von Sydow", "Liv Ullmann",
+    "Juliette Binoche", "Penélope Cruz", "Javier Bardem",
+    "Roberto Benigni", "Gael García Bernal",
+    # Contemporary
+    "Leonardo DiCaprio", "Brad Pitt", "Cate Blanchett",
+    "Nicole Kidman", "Kate Winslet", "Daniel Day-Lewis",
+    "Joaquin Phoenix", "Natalie Portman", "Viola Davis",
+    "Frances McDormand", "Tilda Swinton", "Christoph Waltz",
+    "Mads Mikkelsen", "Song Kang-ho",
+    # Comedy
+    "Buster Keaton", "Harold Lloyd", "Peter Sellers",
+    "John Cleese", "Rowan Atkinson", "Steve Martin",
+    "Bill Murray", "Eddie Murphy", "Jim Carrey",
+    "Whoopi Goldberg", "Lucille Ball",
+    # Directors who also acted
+    "Alfred Hitchcock", "Woody Allen", "Orson Welles",
+    "Charlie Chaplin", "Clint Eastwood",
+]
+
+ALL = SCIENTISTS + EXPLORERS + ARTISTS + MUSICIANS + WRITERS + LEADERS + ACTORS

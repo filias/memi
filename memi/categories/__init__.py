@@ -15,6 +15,7 @@ CATEGORIES = {
     "people:musicians": people.MUSICIANS,
     "people:writers": people.WRITERS,
     "people:leaders": people.LEADERS,
+    "people:actors": people.ACTORS,
     "countries:flags": countries.ALL,
     "countries:shapes": countries.ALL,
     "plants:all": plants.ALL,
