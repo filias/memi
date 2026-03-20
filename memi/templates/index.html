@@ -234,11 +234,15 @@
             loadNew();
         }
 
+        const singleSelectParents = ['countries'];
+        let currentParent = null;
+
         function toggleSubmenu(parent) {
             const main = document.getElementById('main-categories');
             const submenu = document.getElementById('submenu');
             const buttons = document.getElementById('submenu-buttons');
             selectedCategories = [];
+            currentParent = parent;
 
             buttons.innerHTML = '';
             for (const sub of subcategories[parent]) {
@@ -254,16 +258,30 @@
         }
 
         function toggleSubcategory(key, btn) {
+            const isSingleSelect = singleSelectParents.includes(currentParent);
             const wasEmpty = selectedCategories.length === 0;
             const idx = selectedCategories.indexOf(key);
-            if (idx === -1) {
-                selectedCategories.push(key);
+
+            if (isSingleSelect) {
+                // Deselect all others
+                document.querySelectorAll('#submenu-buttons button').forEach(b => b.classList.remove('active'));
+                if (idx !== -1) {
+                    selectedCategories = [];
+                    return;
+                }
+                selectedCategories = [key];
                 btn.classList.add('active');
             } else {
-                selectedCategories.splice(idx, 1);
-                btn.classList.remove('active');
+                if (idx === -1) {
+                    selectedCategories.push(key);
+                    btn.classList.add('active');
+                } else {
+                    selectedCategories.splice(idx, 1);
+                    btn.classList.remove('active');
+                }
             }
-            if (wasEmpty && selectedCategories.length > 0) {
+
+            if (selectedCategories.length > 0 && (wasEmpty || isSingleSelect)) {
                 loadNew();
             }
         }
