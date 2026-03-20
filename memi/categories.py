@@ -41,53 +41,69 @@ COUNTRIES = [
     "Vietnam", "Yemen", "Zambia", "Zimbabwe",
 ]
 
+MAMMALS = [
+    "Lion", "Elephant", "Giraffe", "Tiger", "Panda", "Koala",
+    "Zebra", "Cheetah", "Gorilla", "Wolf", "Jaguar", "Orangutan",
+    "Orca", "Hedgehog", "Platypus", "Lemur", "Hyena", "Lynx",
+    "Capybara", "Armadillo", "Tapir", "Wolverine", "Porcupine",
+    "Moose", "Bison", "Gazelle", "Impala", "Wildebeest",
+    "Wombat", "Quokka", "Red panda", "Arctic fox", "Fennec fox",
+    "Mandrill", "Bonobo", "Gibbon", "Anteater", "Pangolin",
+    "Hippopotamus", "Rhinoceros", "Kangaroo", "Sloth",
+    "Dolphin", "Polar bear", "Snow leopard", "Red fox",
+    "Meerkat", "Otter", "Badger", "Beaver", "Chipmunk",
+    "Raccoon", "Opossum", "Manatee", "Narwhal", "Beluga whale",
+    "Humpback whale", "Blue whale", "Sperm whale", "Walrus",
+    "Sea lion", "Dugong", "Okapi", "Aardvark", "Chinchilla",
+    "Ferret", "Mink", "Yak", "Water buffalo", "Gnu",
+    "Kudu", "Oryx", "Ibex", "Chamois", "Dik-dik",
+    "Echidna", "Tasmanian devil", "Numbat", "Sugar glider",
+    "Flying fox", "Fruit bat", "Vampire bat",
+]
+
+BIRDS = [
+    "Flamingo", "Peacock", "Bald eagle", "Pelican", "Toucan",
+    "Albatross", "Hummingbird", "Kingfisher", "Owl", "Parrot",
+    "Swan", "Crane (bird)", "Penguin", "Ostrich", "Emu",
+    "Cassowary", "Kiwi (bird)", "Puffin", "Robin (bird)",
+    "Blue jay", "Cardinal (bird)", "Woodpecker", "Hornbill",
+    "Secretary bird", "Shoebill", "Harpy eagle", "Condor",
+    "Vulture", "Falcon", "Hawk", "Osprey", "Snowy owl",
+    "Cockatoo", "Macaw", "Lorikeet", "Kookaburra",
+    "Magpie", "Raven", "Crow", "Starling", "Swallow",
+]
+
+REPTILES = [
+    "Iguana", "Komodo dragon", "Cobra", "Rattlesnake", "Chameleon",
+    "Sea turtle", "Axolotl", "Gecko", "Tortoise", "Crocodile",
+    "Alligator", "Tuatara", "Gila monster", "Frilled-neck lizard",
+    "Green tree python", "King cobra", "Black mamba", "Anaconda",
+    "Poison dart frog", "Red-eyed tree frog", "Salamander", "Newt",
+]
+
+MARINE = [
+    "Octopus", "Jellyfish", "Starfish", "Seahorse", "Clownfish",
+    "Pufferfish", "Hammerhead shark", "Whale shark", "Manta ray",
+    "Great white shark", "Stingray", "Moray eel", "Lionfish",
+    "Nautilus", "Cuttlefish", "Sea urchin", "Lobster", "Hermit crab",
+    "Giant squid", "Blue-ringed octopus", "Coral",
+]
+
+INSECTS = [
+    "Monarch butterfly", "Ladybug", "Dragonfly", "Praying mantis",
+    "Atlas moth", "Firefly", "Scarab beetle", "Tarantula",
+    "Scorpion", "Stick insect", "Leaf insect", "Rhinoceros beetle",
+]
+
+ALL_ANIMALS = MAMMALS + BIRDS + REPTILES + MARINE + INSECTS
+
 CATEGORIES = {
-    "animals": [
-        # Mammals
-        "Lion", "Elephant", "Giraffe", "Tiger", "Panda", "Koala",
-        "Zebra", "Cheetah", "Gorilla", "Wolf", "Jaguar", "Orangutan",
-        "Orca", "Hedgehog", "Platypus", "Lemur", "Hyena", "Lynx",
-        "Capybara", "Armadillo", "Tapir", "Wolverine", "Porcupine",
-        "Moose", "Bison", "Gazelle", "Impala", "Wildebeest",
-        "Wombat", "Quokka", "Red panda", "Arctic fox", "Fennec fox",
-        "Mandrill", "Bonobo", "Gibbon", "Anteater", "Pangolin",
-        "Hippopotamus", "Rhinoceros", "Kangaroo", "Sloth",
-        "Dolphin", "Polar bear", "Snow leopard", "Red fox",
-        "Meerkat", "Otter", "Badger", "Beaver", "Chipmunk",
-        "Raccoon", "Opossum", "Manatee", "Narwhal", "Beluga whale",
-        "Humpback whale", "Blue whale", "Sperm whale", "Walrus",
-        "Sea lion", "Dugong", "Okapi", "Aardvark", "Chinchilla",
-        "Ferret", "Mink", "Yak", "Water buffalo", "Gnu",
-        "Kudu", "Oryx", "Ibex", "Chamois", "Dik-dik",
-        "Echidna", "Tasmanian devil", "Numbat", "Sugar glider",
-        "Flying fox", "Fruit bat", "Vampire bat",
-        # Birds
-        "Flamingo", "Peacock", "Bald eagle", "Pelican", "Toucan",
-        "Albatross", "Hummingbird", "Kingfisher", "Owl", "Parrot",
-        "Swan", "Crane (bird)", "Penguin", "Ostrich", "Emu",
-        "Cassowary", "Kiwi (bird)", "Puffin", "Robin (bird)",
-        "Blue jay", "Cardinal (bird)", "Woodpecker", "Hornbill",
-        "Secretary bird", "Shoebill", "Harpy eagle", "Condor",
-        "Vulture", "Falcon", "Hawk", "Osprey", "Snowy owl",
-        "Cockatoo", "Macaw", "Lorikeet", "Kookaburra",
-        "Magpie", "Raven", "Crow", "Starling", "Swallow",
-        # Reptiles & amphibians
-        "Iguana", "Komodo dragon", "Cobra", "Rattlesnake", "Chameleon",
-        "Sea turtle", "Axolotl", "Gecko", "Tortoise", "Crocodile",
-        "Alligator", "Tuatara", "Gila monster", "Frilled-neck lizard",
-        "Green tree python", "King cobra", "Black mamba", "Anaconda",
-        "Poison dart frog", "Red-eyed tree frog", "Salamander", "Newt",
-        # Marine life
-        "Octopus", "Jellyfish", "Starfish", "Seahorse", "Clownfish",
-        "Pufferfish", "Hammerhead shark", "Whale shark", "Manta ray",
-        "Great white shark", "Stingray", "Moray eel", "Lionfish",
-        "Nautilus", "Cuttlefish", "Sea urchin", "Lobster", "Hermit crab",
-        "Giant squid", "Blue-ringed octopus", "Coral",
-        # Insects & arachnids
-        "Monarch butterfly", "Ladybug", "Dragonfly", "Praying mantis",
-        "Atlas moth", "Firefly", "Scarab beetle", "Tarantula",
-        "Scorpion", "Stick insect", "Leaf insect", "Rhinoceros beetle",
-    ],
+    "animals:all": ALL_ANIMALS,
+    "animals:mammals": MAMMALS,
+    "animals:birds": BIRDS,
+    "animals:reptiles": REPTILES,
+    "animals:marine": MARINE,
+    "animals:insects": INSECTS,
     "people": [
         # Scientists
         "Albert Einstein", "Marie Curie", "Nikola Tesla", "Charles Darwin",
