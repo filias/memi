@@ -135,6 +135,50 @@
         .error {
             color: #e74c3c;
         }
+
+        .mode-toggle {
+            margin-bottom: 1rem;
+        }
+
+        .mode-toggle button {
+            padding: 0.4rem 1rem;
+            border: 2px solid #444;
+            border-radius: 2rem;
+            background: transparent;
+            color: #888;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .mode-toggle button.active {
+            border-color: #e2b714;
+            color: #e2b714;
+        }
+
+        #clue-btn {
+            padding: 0.4rem 1rem;
+            border: 2px solid #444;
+            border-radius: 2rem;
+            background: transparent;
+            color: #ccc;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        #clue-btn:hover {
+            border-color: #e2b714;
+            color: #e2b714;
+        }
+
+        .clue-letters {
+            margin-top: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 0.15em;
+            color: #e2b714;
+        }
     </style>
 </head>
 <body>
@@ -155,11 +199,19 @@
         <div id="submenu-buttons" style="display:flex; gap:0.75rem; flex-wrap:wrap; justify-content:center;"></div>
     </div>
 
+    <div class="mode-toggle">
+        <button id="clue-toggle" onclick="toggleClueMode()">clues: off</button>
+    </div>
+
     <div class="card" id="card" onclick="handleClick()">
         <span class="loading" id="status">pick a category</span>
         <img id="image" style="display:none" alt="">
         <div class="clue" id="clue"></div>
         <div class="answer" id="answer"></div>
+    </div>
+    <div id="clue-area" style="display:none; margin-top:1rem; text-align:center;">
+        <button id="clue-btn" onclick="revealLetter()">show letter</button>
+        <p id="clue-letters" class="clue-letters"></p>
     </div>
     <p class="hint" id="hint"></p>
 
@@ -167,6 +219,9 @@
         let selectedCategories = [];
         let revealed = false;
         let loaded = false;
+        let clueMode = false;
+        let currentName = '';
+        let lettersRevealed = 0;
 
         const subcategories = {{ subcategories | tojson }};
 
@@ -211,6 +266,34 @@
             if (wasEmpty && selectedCategories.length > 0) {
                 loadNew();
             }
+        }
+
+        function toggleClueMode() {
+            clueMode = !clueMode;
+            const btn = document.getElementById('clue-toggle');
+            btn.textContent = clueMode ? 'clues: on' : 'clues: off';
+            btn.classList.toggle('active', clueMode);
+            document.getElementById('clue-area').style.display = (clueMode && loaded && !revealed) ? 'block' : 'none';
+        }
+
+        function revealLetter() {
+            if (lettersRevealed >= currentName.length) return;
+            lettersRevealed++;
+            updateClueDisplay();
+        }
+
+        function updateClueDisplay() {
+            let display = '';
+            for (let i = 0; i < currentName.length; i++) {
+                if (currentName[i] === ' ') {
+                    display += '  ';
+                } else if (i < lettersRevealed) {
+                    display += currentName[i];
+                } else {
+                    display += '_';
+                }
+            }
+            document.getElementById('clue-letters').textContent = display;
         }
 
         function closeSubmenu() {
@@ -259,9 +342,18 @@
                         clue.textContent = data.clue;
                         clue.style.display = 'block';
                     }
+                    currentName = data.name;
+                    lettersRevealed = 0;
                     answer.textContent = data.name;
                     hint.textContent = 'click the image to reveal the answer';
                     loaded = true;
+                    const clueArea = document.getElementById('clue-area');
+                    if (clueMode) {
+                        updateClueDisplay();
+                        clueArea.style.display = 'block';
+                    } else {
+                        clueArea.style.display = 'none';
+                    }
                 };
             } catch (e) {
                 status.textContent = 'failed to load';
@@ -274,6 +366,7 @@
             if (!revealed) {
                 document.getElementById('card').classList.add('revealed');
                 document.getElementById('hint').textContent = 'click again for a new one';
+                document.getElementById('clue-area').style.display = 'none';
                 revealed = true;
             } else if (selectedCategories.length > 0) {
                 loadNew();
