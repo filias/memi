@@ -1,4 +1,4 @@
-from memi.categories import animals, countries, people, plants
+from memi.categories import animals, countries, logos, people, plants
 
 CATEGORIES = {
     "animals:all": animals.ALL,
@@ -17,6 +17,7 @@ CATEGORIES = {
     "people:leaders": people.LEADERS,
     "people:actors": people.ACTORS,
     "people:athletes": people.ATHLETES,
+    "logos": logos.ALL,
     "countries:capitals": countries.ALL,
     "countries:flags": countries.ALL,
     "countries:shapes": countries.ALL,
