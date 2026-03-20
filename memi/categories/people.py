@@ -539,4 +539,42 @@ ATHLETES = [
     "Ma Long", "Jan-Ove Waldner", "Deng Yaping",
 ]
 
+ATHLETE_SPORTS = {}
+_sport = None
+# Parse the ATHLETES list source to build sport mapping from comments
+import inspect as _inspect
+_src = _inspect.getsource(_inspect.getmodule(lambda: None))
+_in_athletes = False
+for _line in _src.split("\n"):
+    _stripped = _line.strip()
+    if _stripped.startswith("ATHLETES = ["):
+        _in_athletes = True
+        continue
+    if _in_athletes and _stripped == "]":
+        break
+    if not _in_athletes:
+        continue
+    if _stripped.startswith("#"):
+        _comment = _stripped.lstrip("# ").split("—")[0].split("(")[0].strip()
+        # Normalize football variants
+        if _comment.startswith("Football"):
+            _sport = "Football"
+        elif _comment.startswith("Combat"):
+            _sport = "Combat sports"
+        elif _comment.startswith("Winter"):
+            _sport = "Winter sports"
+        elif _comment.startswith("American football"):
+            _sport = "American football"
+        elif _comment.startswith("Ice hockey"):
+            _sport = "Ice hockey"
+        elif _comment.startswith("Table tennis"):
+            _sport = "Table tennis"
+        else:
+            _sport = _comment
+    elif _sport and '"' in _stripped:
+        for _part in _stripped.split('"'):
+            _part = _part.strip().rstrip(",")
+            if _part and not _part.startswith("#"):
+                ATHLETE_SPORTS[_part] = _sport
+
 ALL = SCIENTISTS + EXPLORERS + ARTISTS + MUSICIANS + WRITERS + LEADERS + ACTORS + ATHLETES

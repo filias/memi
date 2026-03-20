@@ -117,6 +117,18 @@
             transition: opacity 0.3s;
         }
 
+        .card .tag {
+            position: absolute;
+            bottom: 0.5rem;
+            right: 0.75rem;
+            background: rgba(0,0,0,0.6);
+            color: #888;
+            font-size: 0.85rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 1rem;
+            display: none;
+        }
+
         .card.revealed .answer {
             opacity: 1;
         }
@@ -208,6 +220,7 @@
         <img id="image" style="display:none" alt="">
         <div class="clue" id="clue"></div>
         <div class="answer" id="answer"></div>
+        <div class="tag" id="tag"></div>
     </div>
     <div id="clue-area" style="display:none; margin-top:1rem; text-align:center;">
         <button id="clue-btn" onclick="revealLetter()">show letter</button>
@@ -221,6 +234,7 @@
         let loaded = false;
         let clueMode = false;
         let currentName = '';
+        let currentTag = '';
         let lettersRevealed = 0;
 
         const subcategories = {{ subcategories | tojson }};
@@ -330,10 +344,14 @@
             const status = document.getElementById('status');
             const hint = document.getElementById('hint');
 
+            const tag = document.getElementById('tag');
+
             card.classList.remove('revealed');
             image.style.display = 'none';
             clue.style.display = 'none';
             clue.textContent = '';
+            tag.style.display = 'none';
+            tag.textContent = '';
             status.style.display = 'block';
             status.textContent = 'loading...';
             status.className = 'loading';
@@ -361,6 +379,7 @@
                         clue.style.display = 'block';
                     }
                     currentName = data.name;
+                    currentTag = data.tag || '';
                     lettersRevealed = 0;
                     answer.textContent = data.name;
                     hint.textContent = 'click the image to reveal the answer';
@@ -385,6 +404,11 @@
                 document.getElementById('card').classList.add('revealed');
                 document.getElementById('hint').textContent = 'click again for a new one';
                 document.getElementById('clue-area').style.display = 'none';
+                if (currentTag) {
+                    const tagEl = document.getElementById('tag');
+                    tagEl.textContent = currentTag;
+                    tagEl.style.display = 'block';
+                }
                 revealed = true;
             } else if (selectedCategories.length > 0) {
                 loadNew();

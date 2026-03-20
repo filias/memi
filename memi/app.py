@@ -6,6 +6,7 @@ from flask import Flask, jsonify, render_template, request
 
 from memi.categories import CATEGORIES
 from memi.categories.countries import CAPITALS
+from memi.categories.people import ATHLETE_SPORTS
 
 app = Flask(__name__)
 
@@ -119,12 +120,16 @@ def random_item():
     is_country = category.startswith("countries:")
     mode = category.split(":")[1] if is_country else None
 
+    is_athlete = category.startswith("people:athlete")
+
     for item in candidates:
         if is_country:
             result = get_country_item(item, mode)
         else:
             result = get_wikipedia_image(item)
         if result and result.get("image"):
+            if is_athlete and item in ATHLETE_SPORTS:
+                result["tag"] = ATHLETE_SPORTS[item]
             return jsonify(result)
 
     return jsonify({"error": "No image found"}), 404
