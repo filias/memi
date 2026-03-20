@@ -359,19 +359,23 @@
             revealed = false;
             loaded = false;
 
-            try {
-                const cats = selectedCategories.join(',');
-                const resp = await fetch(`/api/random?cats=${encodeURIComponent(cats)}`);
-                const data = await resp.json();
+            const cats = selectedCategories.join(',');
+            const maxRetries = 5;
+            for (let attempt = 0; attempt < maxRetries; attempt++) {
+                try {
+                    const resp = await fetch(`/api/random?cats=${encodeURIComponent(cats)}`);
+                    const data = await resp.json();
 
-                if (data.error) {
-                    status.textContent = data.error;
-                    status.className = 'error';
-                    return;
-                }
+                    if (data.error) continue;
 
-                image.src = data.image;
-                image.onload = () => {
+                    const loaded_ok = await new Promise(resolve => {
+                        image.onload = () => resolve(true);
+                        image.onerror = () => resolve(false);
+                        image.src = data.image;
+                    });
+
+                    if (!loaded_ok) continue;
+
                     status.style.display = 'none';
                     image.style.display = 'block';
                     if (data.clue) {
@@ -391,14 +395,21 @@
                     } else {
                         clueArea.style.display = 'none';
                     }
-                };
-            } catch (e) {
-                status.textContent = 'failed to load';
-                status.className = 'error';
+                    return;
+                } catch (e) {
+                    continue;
+                }
             }
+            status.textContent = 'no image found, click to retry';
+            status.className = 'error';
+            loaded = false;
         }
 
         function handleClick() {
+            if (!loaded && selectedCategories.length > 0) {
+                loadNew();
+                return;
+            }
             if (!loaded) return;
             if (!revealed) {
                 document.getElementById('card').classList.add('revealed');
