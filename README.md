@@ -12,7 +12,7 @@ A memory practice app. It shows you an image from Wikipedia — you think about 
 ## Run
 
 ```
-uv run python app.py
+uv run python -m memi
 ```
 
 Then open http://localhost:8080
