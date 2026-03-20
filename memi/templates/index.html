@@ -53,6 +53,18 @@
             color: #e2b714;
         }
 
+        .submenu {
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .back-btn {
+            border-color: #666 !important;
+            color: #888 !important;
+            font-size: 1.1rem !important;
+            padding: 0.4rem 0.8rem !important;
+        }
+
         .card {
             position: relative;
             width: min(500px, 90vw);
@@ -72,6 +84,11 @@
             height: 100%;
             object-fit: cover;
             display: block;
+        }
+
+        .card.contain-image img {
+            object-fit: contain;
+            padding: 2rem;
         }
 
         .card .answer {
@@ -113,10 +130,18 @@
     <h1>memi</h1>
     <p class="subtitle">practise your memory</p>
 
-    <div class="categories">
+    <div class="categories" id="main-categories">
         {% for cat in categories %}
-        <button data-key="{{ cat.key }}" onclick="selectCategory('{{ cat.key }}', this)">{{ cat.label }}</button>
+        <button onclick="selectCategory('{{ cat.key }}'); this.classList.add('active')">{{ cat.label }}</button>
         {% endfor %}
+        {% for parent, subs in subcategories.items() %}
+        <button onclick="toggleSubmenu('{{ parent }}')">{{ parent }}</button>
+        {% endfor %}
+    </div>
+
+    <div class="categories submenu" id="submenu" style="display:none">
+        <button class="back-btn" onclick="closeSubmenu()">&larr;</button>
+        <span id="submenu-buttons"></span>
     </div>
 
     <div class="card" id="card" onclick="handleClick()">
@@ -131,12 +156,40 @@
         let revealed = false;
         let loaded = false;
 
-        function selectCategory(cat, btn) {
+        const containCategories = ['countries:flags', 'countries:shapes'];
+        const subcategories = {{ subcategories | tojson }};
+
+        function selectCategory(cat) {
             currentCategory = cat;
             document.querySelectorAll('.categories button').forEach(b => {
-                b.classList.toggle('active', b === btn);
+                if (b.classList.contains('back-btn')) return;
+                b.classList.remove('active');
             });
+            const card = document.getElementById('card');
+            card.classList.toggle('contain-image', containCategories.includes(cat));
             loadNew();
+        }
+
+        function toggleSubmenu(parent) {
+            const main = document.getElementById('main-categories');
+            const submenu = document.getElementById('submenu');
+            const buttons = document.getElementById('submenu-buttons');
+
+            buttons.innerHTML = '';
+            for (const sub of subcategories[parent]) {
+                const btn = document.createElement('button');
+                btn.textContent = sub.label;
+                btn.onclick = function() { selectCategory(sub.key); this.classList.add('active'); };
+                buttons.appendChild(btn);
+            }
+
+            main.style.display = 'none';
+            submenu.style.display = 'flex';
+        }
+
+        function closeSubmenu() {
+            document.getElementById('main-categories').style.display = 'flex';
+            document.getElementById('submenu').style.display = 'none';
         }
 
         async function loadNew() {

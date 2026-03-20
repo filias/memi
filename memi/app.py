@@ -72,13 +72,14 @@ def get_country_item(country, mode):
 @app.route("/")
 def index():
     categories = []
+    subs = {}
     for key in CATEGORIES:
         if ":" in key:
             cat, mode = key.split(":", 1)
-            categories.append({"key": key, "label": f"{cat} ({mode})"})
+            subs.setdefault(cat, []).append({"key": key, "label": mode})
         else:
             categories.append({"key": key, "label": key})
-    return render_template("index.html", categories=categories)
+    return render_template("index.html", categories=categories, subcategories=subs)
 
 
 @app.route("/api/random/<path:category>")
