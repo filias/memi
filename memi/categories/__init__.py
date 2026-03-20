@@ -1,6 +1,14 @@
-from memi.categories import animals, countries, logos, people, plants
+from memi.categories import animals, characters, countries, logos, people, plants
 
 CATEGORIES = {
+    "characters:all": characters.ALL,
+    "characters:star wars": characters.STAR_WARS,
+    "characters:lord of the rings": characters.LORD_OF_THE_RINGS,
+    "characters:harry potter": characters.HARRY_POTTER,
+    "characters:disney": characters.DISNEY,
+    "characters:marvel": characters.MARVEL,
+    "characters:dc": characters.DC,
+    "characters:anime": characters.ANIME,
     "animals:all": animals.ALL,
     "animals:mammals": animals.MAMMALS,
     "animals:birds": animals.BIRDS,
