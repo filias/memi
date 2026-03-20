@@ -40,6 +40,68 @@ def get_wikipedia_image(title):
     return None
 
 
+def get_logo_image(title):
+    """Fetch the logo image for a company by searching article images."""
+    resp = requests.get(
+        "https://en.wikipedia.org/w/api.php",
+        params={
+            "action": "query",
+            "titles": title,
+            "prop": "images",
+            "imlimit": 50,
+            "format": "json",
+        },
+        headers=HEADERS,
+        timeout=10,
+    )
+    if resp.status_code != 200:
+        return None
+    pages = resp.json().get("query", {}).get("pages", {})
+    # Collect all logo images, prefer ones matching the company name
+    logo_files = []
+    name_lower = title.split("(")[0].strip().lower()
+    for page in pages.values():
+        for img in page.get("images", []):
+            fname = img["title"].lower()
+            if "logo" in fname and "commons-logo" not in fname:
+                logo_files.append(img["title"])
+    if not logo_files:
+        return None
+    # Prefer files whose name contains the company name
+    logo_file = None
+    for f in logo_files:
+        if any(word in f.lower() for word in name_lower.split() if len(word) > 2):
+            logo_file = f
+            break
+    if not logo_file:
+        logo_file = logo_files[0]
+    if not logo_file:
+        return None
+    # Get the actual image URL
+    resp2 = requests.get(
+        "https://en.wikipedia.org/w/api.php",
+        params={
+            "action": "query",
+            "titles": logo_file,
+            "prop": "imageinfo",
+            "iiprop": "url",
+            "iiurlwidth": 500,
+            "format": "json",
+        },
+        headers=HEADERS,
+        timeout=10,
+    )
+    if resp2.status_code != 200:
+        return None
+    pages2 = resp2.json().get("query", {}).get("pages", {})
+    for page in pages2.values():
+        if "imageinfo" in page:
+            thumb = page["imageinfo"][0].get("thumburl")
+            if thumb:
+                return {"name": title, "image": thumb}
+    return None
+
+
 def get_country_shape(country):
     """Fetch the orthographic projection map for a country."""
     # Most countries have a "{Country} (orthographic projection).svg" on Wikipedia
@@ -121,10 +183,13 @@ def random_item():
     mode = category.split(":")[1] if is_country else None
 
     is_athlete = category.startswith("people:athlete")
+    is_logo = category == "logos"
 
     for item in candidates:
         if is_country:
             result = get_country_item(item, mode)
+        elif is_logo:
+            result = get_logo_image(item)
         else:
             result = get_wikipedia_image(item)
         if result and result.get("image"):
