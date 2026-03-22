@@ -100,6 +100,66 @@ def get_fandom_image(title, wiki):
     return None
 
 
+def get_river_map(title):
+    """Fetch a map/basin image for a river from its Wikipedia article."""
+    resp = requests.get(
+        "https://en.wikipedia.org/w/api.php",
+        params={
+            "action": "query",
+            "titles": title,
+            "prop": "images",
+            "imlimit": 100,
+            "format": "json",
+        },
+        headers=HEADERS,
+        timeout=10,
+    )
+    if resp.status_code != 200:
+        return None
+    pages = resp.json().get("query", {}).get("pages", {})
+    map_keywords = ["map", "basin", "watershed", "course", "locator"]
+    map_files = []
+    river_name = title.split("(")[0].replace("River", "").replace("river", "").strip().lower()
+    for page in pages.values():
+        for img in page.get("images", []):
+            fname = img["title"].lower()
+            if any(kw in fname for kw in map_keywords) and "commons-logo" not in fname:
+                map_files.append(img["title"])
+    if not map_files:
+        return None
+    # Prefer files matching the river name
+    chosen = None
+    for f in map_files:
+        if any(word in f.lower() for word in river_name.split() if len(word) > 2):
+            chosen = f
+            break
+    if not chosen:
+        chosen = map_files[0]
+    # Get image URL
+    resp2 = requests.get(
+        "https://en.wikipedia.org/w/api.php",
+        params={
+            "action": "query",
+            "titles": chosen,
+            "prop": "imageinfo",
+            "iiprop": "url",
+            "iiurlwidth": 500,
+            "format": "json",
+        },
+        headers=HEADERS,
+        timeout=10,
+    )
+    if resp2.status_code != 200:
+        return None
+    pages2 = resp2.json().get("query", {}).get("pages", {})
+    for page in pages2.values():
+        if "imageinfo" in page:
+            thumb = page["imageinfo"][0].get("thumburl")
+            if thumb:
+                return {"name": title, "image": thumb}
+    return None
+
+
 def get_logo_image(title):
     """Fetch the logo image for a company by searching article images."""
     resp = requests.get(
@@ -278,12 +338,17 @@ def random_item():
     is_people = category.startswith("people:")
     people_tag = category.split(":")[1] if is_people else None
     is_logo = category == "logos"
+    is_river = category == "geography:rivers"
     fandom_wiki = FANDOM_WIKIS.get(category)
 
     for item in candidates:
         result = None
         if is_country:
             result = get_country_item(item, mode)
+        elif is_river:
+            result = get_river_map(item)
+            if not result or not result.get("image"):
+                result = get_wikipedia_image(item)
         elif is_logo:
             result = get_logo_image(item)
         elif fandom_wiki:
