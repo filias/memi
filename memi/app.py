@@ -239,7 +239,7 @@ def random_item():
     items = CATEGORIES[category]
     candidates = random.sample(items, min(10, len(items)))
 
-    is_country = category.startswith("countries:")
+    is_country = category in ("geography:flags", "geography:shapes", "geography:capitals")
     mode = category.split(":")[1] if is_country else None
 
     is_people = category.startswith("people:")
