@@ -48,6 +48,15 @@ SCIENTISTS = [
     "Wernher von Braun", "Robert Goddard",
     # Hypatia & misc
     "Hypatia",
+    # More Asian
+    "Jagadish Chandra Bose", "C. V. Raman", "Homi J. Bhabha",
+    "Meghnad Saha", "Atta-ur-Rahman", "Ibn al-Haytham",
+    "Al-Khwarizmi", "Avicenna", "Jabir ibn Hayyan",
+    # More African
+    "Cheikh Anta Diop", "Wangari Maathai", "Thomas Odhiambo",
+    "Felix Konotey-Ahulu",
+    # More Latin American
+    "Mario Molina", "Bernardo Houssay", "Carlos Chagas", "Oswaldo Cruz",
 ]
 
 EXPLORERS = [
@@ -120,6 +129,15 @@ ARTISTS = [
     "Ansel Adams", "Dorothea Lange", "Henri Cartier-Bresson",
     "Annie Leibovitz", "Robert Capa", "Diane Arbus",
     "Man Ray", "Sebastião Salgado", "Steve McCurry",
+    # More Asian
+    "Hokusai", "Hiroshige", "Xu Beihong", "Qi Baishi",
+    "Zhang Daqian", "Amrita Sher-Gil", "Raden Saleh",
+    # More African
+    "El Anatsui", "William Kentridge", "Lubaina Himid",
+    "Ibrahim El-Salahi",
+    # More Latin American
+    "Fernando Botero", "Wifredo Lam", "Tarsila do Amaral",
+    "Joaquín Torres García",
 ]
 
 MUSICIANS = [
@@ -411,6 +429,12 @@ LEADERS = [
     "Che Guevara", "Sitting Bull", "Geronimo",
     "Rigoberta Menchú", "Wangari Maathai",
     "Joan of Arc",
+    # More African
+    "Samora Machel", "Thomas Sankara", "Nnamdi Azikiwe",
+    "Kenneth Kaunda", "Leopold Sedar Senghor", "Ellen Johnson Sirleaf",
+    # More Asian
+    "Lee Kuan Yew", "Park Chung-hee", "Corazon Aquino",
+    "Benazir Bhutto", "Aung San",
 ]
 
 ACTORS = [
