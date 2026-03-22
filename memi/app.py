@@ -8,6 +8,7 @@ from flask import Flask, jsonify, render_template, request
 from memi.categories import CATEGORIES
 from memi.categories.countries import CAPITALS
 from memi.categories.monuments import LOCATIONS as MONUMENT_LOCATIONS
+from memi.categories.nature import LOCATIONS as NATURE_LOCATIONS
 from memi.categories.people import (
     ACTORS, ARTISTS, ATHLETES, ATHLETE_SPORTS, EXPLORERS,
     LEADERS, MUSICIANS, SCIENTISTS, WRITERS,
@@ -369,6 +370,8 @@ def random_item():
                     result["tag"] = people_tag
             elif category == "monuments" and item in MONUMENT_LOCATIONS:
                 result["tag"] = MONUMENT_LOCATIONS[item]
+            elif category == "nature" and item in NATURE_LOCATIONS:
+                result["tag"] = NATURE_LOCATIONS[item]
             return jsonify(result)
         else:
             _fail_logger.warning("FAILED: %s (category: %s)", item, category)

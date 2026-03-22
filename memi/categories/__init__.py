@@ -1,4 +1,4 @@
-from memi.categories import animals, characters, countries, logos, monuments, people, plants, rivers
+from memi.categories import animals, characters, countries, logos, monuments, nature, people, plants, rivers
 
 CATEGORIES = {
     "characters:all": characters.ALL,
@@ -27,6 +27,7 @@ CATEGORIES = {
     "people:athletes": people.ATHLETES,
     # "logos": logos.ALL,  # TODO: find symbol-only logos without text
     "monuments": monuments.ALL,
+    "nature": nature.ALL,
     "geography:countries:capitals": countries.ALL,
     "geography:countries:flags": countries.ALL,
     "geography:countries:shapes": countries.ALL,
