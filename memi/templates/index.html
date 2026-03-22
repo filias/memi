@@ -250,25 +250,39 @@
 
         const singleSelectParents = ['geography'];
         let currentParent = null;
+        let menuStack = []; // track navigation for back button
 
-        function toggleSubmenu(parent) {
+        function renderSubmenu(items, parent) {
             const main = document.getElementById('main-categories');
             const submenu = document.getElementById('submenu');
             const buttons = document.getElementById('submenu-buttons');
-            selectedCategories = [];
             currentParent = parent;
 
             buttons.innerHTML = '';
-            for (const sub of subcategories[parent]) {
+            for (const sub of items) {
                 const btn = document.createElement('button');
                 btn.textContent = sub.label;
-                btn.dataset.key = sub.key;
-                btn.onclick = function() { toggleSubcategory(sub.key, this); };
+                if (sub.children) {
+                    // Sub-group: clicking opens another level
+                    btn.onclick = function() {
+                        menuStack.push(items);
+                        renderSubmenu(sub.children, parent);
+                    };
+                } else {
+                    btn.dataset.key = sub.key;
+                    btn.onclick = function() { toggleSubcategory(sub.key, this); };
+                }
                 buttons.appendChild(btn);
             }
 
             main.style.display = 'none';
             submenu.style.display = 'flex';
+        }
+
+        function toggleSubmenu(parent) {
+            selectedCategories = [];
+            menuStack = [];
+            renderSubmenu(subcategories[parent], parent);
         }
 
         function toggleSubcategory(key, btn) {
@@ -277,7 +291,6 @@
             const idx = selectedCategories.indexOf(key);
 
             if (isSingleSelect) {
-                // Deselect all others
                 document.querySelectorAll('#submenu-buttons button').forEach(b => b.classList.remove('active'));
                 if (idx !== -1) {
                     selectedCategories = [];
@@ -329,9 +342,16 @@
         }
 
         function closeSubmenu() {
-            document.getElementById('main-categories').style.display = 'flex';
-            document.getElementById('submenu').style.display = 'none';
-            selectedCategories = [];
+            if (menuStack.length > 0) {
+                // Go back one level
+                const prev = menuStack.pop();
+                renderSubmenu(prev, currentParent);
+            } else {
+                // Back to main categories
+                document.getElementById('main-categories').style.display = 'flex';
+                document.getElementById('submenu').style.display = 'none';
+                selectedCategories = [];
+            }
         }
 
         async function loadNew() {

@@ -26,10 +26,10 @@ CATEGORIES = {
     "people:actors": people.ACTORS,
     "people:athletes": people.ATHLETES,
     # "logos": logos.ALL,  # TODO: find symbol-only logos without text
-    "geography:capitals": countries.ALL,
-    "geography:flags": countries.ALL,
+    "geography:countries:capitals": countries.ALL,
+    "geography:countries:flags": countries.ALL,
+    "geography:countries:shapes": countries.ALL,
     "geography:rivers": rivers.ALL,
-    "geography:shapes": countries.ALL,
     "plants:all": plants.ALL,
     "plants:flowers": plants.FLOWERS,
     "plants:trees": plants.TREES,

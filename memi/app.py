@@ -210,20 +210,53 @@ def get_country_item(country, mode):
     return None
 
 
-@app.route("/")
-def index():
+def _build_menu():
+    """Build a nested menu structure from CATEGORIES keys.
+
+    Returns (categories, subcategories) where:
+    - categories: list of top-level items with no subcategories
+    - subcategories: dict of parent -> list of children
+      Each child is either {"key": ..., "label": ...} (a leaf)
+      or {"label": ..., "children": [...]} (a sub-group)
+    """
     categories = []
     subs = {}
+
     for key in CATEGORIES:
-        if ":" in key:
-            cat, mode = key.split(":", 1)
-            subs.setdefault(cat, []).append({"key": key, "label": mode})
-        else:
+        parts = key.split(":")
+        if len(parts) == 1:
             categories.append({"key": key, "label": key})
+        elif len(parts) == 2:
+            parent, label = parts
+            subs.setdefault(parent, []).append({"key": key, "label": label})
+        elif len(parts) == 3:
+            parent, group, label = parts
+            parent_list = subs.setdefault(parent, [])
+            # Find or create the sub-group
+            sub_group = None
+            for item in parent_list:
+                if item.get("label") == group and "children" in item:
+                    sub_group = item
+                    break
+            if not sub_group:
+                sub_group = {"label": group, "children": []}
+                parent_list.append(sub_group)
+            sub_group["children"].append({"key": key, "label": label})
+
     categories.sort(key=lambda c: c["label"])
     subs = dict(sorted(subs.items()))
     for cat in subs:
-        subs[cat].sort(key=lambda s: (s["label"] != "all", s["label"]))
+        for item in subs[cat]:
+            if "children" in item:
+                item["children"].sort(key=lambda s: (s["label"] != "all", s["label"]))
+        subs[cat].sort(key=lambda s: (s.get("label", "") != "all", s.get("label", "")))
+
+    return categories, subs
+
+
+@app.route("/")
+def index():
+    categories, subs = _build_menu()
     return render_template("index.html", categories=categories, subcategories=subs)
 
 
@@ -239,8 +272,8 @@ def random_item():
     items = CATEGORIES[category]
     candidates = random.sample(items, min(10, len(items)))
 
-    is_country = category in ("geography:flags", "geography:shapes", "geography:capitals")
-    mode = category.split(":")[1] if is_country else None
+    is_country = category.startswith("geography:countries:")
+    mode = category.split(":")[-1] if is_country else None
 
     is_people = category.startswith("people:")
     people_tag = category.split(":")[1] if is_people else None
