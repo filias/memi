@@ -223,7 +223,7 @@ def index():
     categories.sort(key=lambda c: c["label"])
     subs = dict(sorted(subs.items()))
     for cat in subs:
-        subs[cat].sort(key=lambda s: s["label"])
+        subs[cat].sort(key=lambda s: (s["label"] != "all", s["label"]))
     return render_template("index.html", categories=categories, subcategories=subs)
 
 
