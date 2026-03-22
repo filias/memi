@@ -275,26 +275,25 @@ def get_country_item(country, mode):
 def _build_menu():
     """Build a nested menu structure from CATEGORIES keys.
 
-    Returns (categories, subcategories) where:
-    - categories: list of top-level items with no subcategories
+    Returns (top_level, subcategories) where:
+    - top_level: sorted list of {"label": ..., "key": ... or "has_submenu": True}
     - subcategories: dict of parent -> list of children
-      Each child is either {"key": ..., "label": ...} (a leaf)
-      or {"label": ..., "children": [...]} (a sub-group)
     """
-    categories = []
+    top_level_keys = set()
     subs = {}
 
     for key in CATEGORIES:
         parts = key.split(":")
         if len(parts) == 1:
-            categories.append({"key": key, "label": key})
+            top_level_keys.add(key)
         elif len(parts) == 2:
             parent, label = parts
+            top_level_keys.add(parent)
             subs.setdefault(parent, []).append({"key": key, "label": label})
         elif len(parts) == 3:
             parent, group, label = parts
+            top_level_keys.add(parent)
             parent_list = subs.setdefault(parent, [])
-            # Find or create the sub-group
             sub_group = None
             for item in parent_list:
                 if item.get("label") == group and "children" in item:
@@ -305,21 +304,28 @@ def _build_menu():
                 parent_list.append(sub_group)
             sub_group["children"].append({"key": key, "label": label})
 
-    categories.sort(key=lambda c: c["label"])
-    subs = dict(sorted(subs.items()))
+    # Build sorted top-level list
+    top_level = []
+    for name in sorted(top_level_keys):
+        if name in subs:
+            top_level.append({"label": name, "has_submenu": True})
+        else:
+            top_level.append({"label": name, "key": name})
+
+    # Sort subcategories
     for cat in subs:
         for item in subs[cat]:
             if "children" in item:
                 item["children"].sort(key=lambda s: (s["label"] != "all", s["label"]))
         subs[cat].sort(key=lambda s: (s.get("label", "") != "all", s.get("label", "")))
 
-    return categories, subs
+    return top_level, subs
 
 
 @app.route("/")
 def index():
-    categories, subs = _build_menu()
-    return render_template("index.html", categories=categories, subcategories=subs)
+    top_level, subs = _build_menu()
+    return render_template("index.html", top_level=top_level, subcategories=subs)
 
 
 @app.route("/api/random")

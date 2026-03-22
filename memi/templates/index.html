@@ -198,11 +198,12 @@
     <p class="subtitle">practise your memory</p>
 
     <div class="categories" id="main-categories">
-        {% for cat in categories %}
-        <button onclick="selectCategory('{{ cat.key }}'); this.classList.add('active')">{{ cat.label }}</button>
-        {% endfor %}
-        {% for parent, subs in subcategories.items() %}
-        <button onclick="toggleSubmenu('{{ parent }}')">{{ parent }}</button>
+        {% for item in top_level %}
+        {% if item.has_submenu %}
+        <button onclick="toggleSubmenu('{{ item.label }}')">{{ item.label }}</button>
+        {% else %}
+        <button onclick="selectCategory('{{ item.key }}'); this.classList.add('active')">{{ item.label }}</button>
+        {% endif %}
         {% endfor %}
     </div>
 
