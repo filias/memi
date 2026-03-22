@@ -7,7 +7,21 @@ from flask import Flask, jsonify, render_template, request
 
 from memi.categories import CATEGORIES
 from memi.categories.countries import CAPITALS
-from memi.categories.people import ATHLETE_SPORTS
+from memi.categories.people import (
+    ACTORS, ARTISTS, ATHLETES, ATHLETE_SPORTS, EXPLORERS,
+    LEADERS, MUSICIANS, SCIENTISTS, WRITERS,
+)
+
+# Reverse lookup: person name → subcategory tag
+PEOPLE_TAGS = {}
+for _tag, _items in [
+    ("scientist", SCIENTISTS), ("explorer", EXPLORERS),
+    ("artist", ARTISTS), ("musician", MUSICIANS),
+    ("writer", WRITERS), ("leader", LEADERS),
+    ("actor", ACTORS), ("athlete", ATHLETES),
+]:
+    for _name in _items:
+        PEOPLE_TAGS.setdefault(_name, _tag)
 
 app = Flask(__name__)
 
@@ -228,7 +242,8 @@ def random_item():
     is_country = category.startswith("countries:")
     mode = category.split(":")[1] if is_country else None
 
-    is_athlete = category.startswith("people:athlete")
+    is_people = category.startswith("people:")
+    people_tag = category.split(":")[1] if is_people else None
     is_logo = category == "logos"
     fandom_wiki = FANDOM_WIKIS.get(category)
 
@@ -246,8 +261,13 @@ def random_item():
             result = get_wikipedia_image(item)
 
         if result and result.get("image"):
-            if is_athlete and item in ATHLETE_SPORTS:
-                result["tag"] = ATHLETE_SPORTS[item]
+            if is_people:
+                if people_tag == "athletes" and item in ATHLETE_SPORTS:
+                    result["tag"] = ATHLETE_SPORTS[item]
+                elif people_tag == "all" and item in PEOPLE_TAGS:
+                    result["tag"] = PEOPLE_TAGS[item]
+                elif people_tag and people_tag != "all":
+                    result["tag"] = people_tag
             return jsonify(result)
         else:
             _fail_logger.warning("FAILED: %s (category: %s)", item, category)
