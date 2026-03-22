@@ -345,10 +345,6 @@ def random_item():
         result = None
         if is_country:
             result = get_country_item(item, mode)
-        elif is_river:
-            result = get_river_map(item)
-            if not result or not result.get("image"):
-                result = get_wikipedia_image(item)
         elif is_logo:
             result = get_logo_image(item)
         elif fandom_wiki:
