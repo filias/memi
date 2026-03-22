@@ -356,6 +356,10 @@ def random_item():
             result = get_wikipedia_image(item)
 
         if result and result.get("image"):
+            # Strip Wikipedia disambiguation brackets from display name
+            name = result["name"]
+            if "(" in name:
+                result["name"] = name.split("(")[0].strip()
             if is_people:
                 if people_tag == "athletes" and item in ATHLETE_SPORTS:
                     result["tag"] = ATHLETE_SPORTS[item]
