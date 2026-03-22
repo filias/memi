@@ -32,11 +32,8 @@ CATEGORIES = {
     "plants:all": plants.ALL,
     "plants:flowers": plants.FLOWERS,
     "plants:trees": plants.TREES,
-    "plants:succulents": plants.SUCCULENTS,
-    "plants:carnivorous": plants.CARNIVOROUS,
-    "plants:ferns & mosses": plants.FERNS_AND_MOSSES,
     "plants:houseplants": plants.HOUSEPLANTS,
-    "plants:unusual": plants.UNUSUAL,
+    "plants:other": plants.OTHER,
     "plants:fruits": plants.FRUITS,
     "plants:vegetables": plants.VEGETABLES,
 }
