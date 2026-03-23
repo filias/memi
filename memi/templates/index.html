@@ -237,6 +237,7 @@
         let currentName = '';
         let currentTag = '';
         let lettersRevealed = 0;
+        let seenItems = [];
 
         const subcategories = {{ subcategories | tojson }};
 
@@ -282,6 +283,7 @@
 
         function toggleSubmenu(parent) {
             selectedCategories = [];
+            seenItems = [];
             menuStack = [];
             renderSubmenu(subcategories[parent], parent);
         }
@@ -381,10 +383,11 @@
             loaded = false;
 
             const cats = selectedCategories.join(',');
+            const seenParam = seenItems.length > 0 ? `&seen=${encodeURIComponent(seenItems.join(','))}` : '';
             const maxRetries = 5;
             for (let attempt = 0; attempt < maxRetries; attempt++) {
                 try {
-                    const resp = await fetch(`/api/random?cats=${encodeURIComponent(cats)}`);
+                    const resp = await fetch(`/api/random?cats=${encodeURIComponent(cats)}${seenParam}`);
                     const data = await resp.json();
 
                     if (data.error) continue;
@@ -406,6 +409,7 @@
                     currentName = data.name;
                     currentTag = data.tag || '';
                     lettersRevealed = 0;
+                    seenItems.push(data.item || data.name);
                     answer.textContent = data.name;
                     hint.textContent = 'click the image to reveal the answer';
                     loaded = true;

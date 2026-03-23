@@ -335,10 +335,16 @@ def random_item():
     if not cat_list:
         return jsonify({"error": "Unknown category"}), 400
 
+    # Exclude recently seen items
+    seen = set(request.args.get("seen", "").split(",")) if request.args.get("seen") else set()
+
     # Pick a random category, then a random item from it
     category = random.choice(cat_list)
     items = CATEGORIES[category]
-    candidates = random.sample(items, min(10, len(items)))
+    unseen = [i for i in items if i not in seen]
+    if not unseen:
+        unseen = items  # all seen, reset
+    candidates = random.sample(unseen, min(10, len(unseen)))
 
     is_country = category.startswith("geography:countries:")
     mode = category.split(":")[-1] if is_country else None
@@ -363,6 +369,7 @@ def random_item():
             result = get_wikipedia_image(item)
 
         if result and result.get("image"):
+            result["item"] = item  # original list item for seen tracking
             # Strip Wikipedia disambiguation brackets from display name
             name = result["name"]
             if "(" in name:
