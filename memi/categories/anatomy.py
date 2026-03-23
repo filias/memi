@@ -1,31 +1,53 @@
 BONES = [
-    # Skull
-    "Frontal bone", "Parietal bone", "Temporal bone", "Occipital bone",
-    "Sphenoid bone", "Ethmoid bone", "Nasal bone", "Lacrimal bone",
-    "Zygomatic bone", "Maxilla", "Mandible", "Palatine bone",
-    "Vomer", "Inferior nasal concha", "Hyoid bone",
+    # Skull — cranial bones
+    "Ethmoid bone", "Frontal bone", "Occipital bone",
+    "Parietal bone", "Sphenoid bone", "Temporal bone",
+    # Skull — facial bones
+    "Inferior nasal concha", "Lacrimal bone", "Mandible",
+    "Maxilla", "Nasal bone", "Palatine bone",
+    "Vomer", "Zygomatic bone",
+    # Ear ossicles
+    "Incus", "Malleus", "Stapes",
+    # Throat
+    "Hyoid bone",
     # Spine
     "Atlas (anatomy)", "Axis (anatomy)", "Cervical vertebrae",
-    "Thoracic vertebrae", "Lumbar vertebrae", "Sacrum", "Coccyx",
+    "Coccyx", "Lumbar vertebrae", "Sacrum",
+    "Thoracic vertebrae",
     # Thorax
-    "Sternum", "Manubrium", "Xiphoid process",
-    "Rib", "True rib", "False rib", "Floating rib",
-    # Upper limb
-    "Clavicle", "Scapula", "Humerus", "Radius (bone)", "Ulna",
-    "Carpal bones", "Scaphoid bone", "Lunate bone", "Triquetral bone",
-    "Pisiform bone", "Trapezium (bone)", "Trapezoid bone",
-    "Capitate bone", "Hamate bone",
-    "Metacarpal bones", "Phalanx bone",
-    # Lower limb
-    "Hip bone", "Ilium (bone)", "Ischium", "Pubis (bone)",
-    "Femur", "Patella", "Tibia", "Fibula",
-    "Tarsal bones", "Calcaneus", "Talus bone", "Navicular bone",
-    "Cuboid bone", "Cuneiform bones",
-    "Metatarsal bones", "Phalanx bone",
+    "False rib", "Floating rib", "Manubrium",
+    "Rib", "Sternum", "True rib",
+    "Xiphoid process",
+    # Shoulder
+    "Clavicle", "Scapula",
+    # Upper arm
+    "Humerus",
+    # Forearm
+    "Radius (bone)", "Ulna",
+    # Wrist (carpals)
+    "Capitate bone", "Hamate bone", "Lunate bone",
+    "Pisiform bone", "Scaphoid bone", "Trapezium (bone)",
+    "Trapezoid bone", "Triquetral bone",
+    # Hand
+    "Distal phalanx", "Metacarpal bones",
+    "Middle phalanx", "Proximal phalanx",
     # Pelvis
-    "Pelvis", "Sacroiliac joint",
-    # Ear bones
-    "Malleus", "Incus", "Stapes",
+    "Acetabulum", "Hip bone", "Ilium (bone)",
+    "Ischium", "Pelvis", "Pubis (bone)",
+    # Thigh
+    "Femur",
+    # Knee
+    "Patella",
+    # Lower leg
+    "Fibula", "Tibia",
+    # Ankle (tarsals)
+    "Calcaneus", "Cuboid bone", "Intermediate cuneiform bone",
+    "Lateral cuneiform bone", "Medial cuneiform bone",
+    "Navicular bone", "Talus bone",
+    # Foot
+    "Metatarsal bones",
+    # Sesamoid
+    "Fabella", "Sesamoid bone",
 ]
 
 ALL = BONES
