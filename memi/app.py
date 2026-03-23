@@ -76,6 +76,59 @@ def get_wikipedia_image(title):
     return None
 
 
+def get_grays_anatomy_image(title):
+    """Fetch a Gray's Anatomy illustration from Wikimedia Commons."""
+    # Strip disambiguation suffixes for search
+    search_term = title.split("(")[0].strip()
+    resp = requests.get(
+        "https://commons.wikimedia.org/w/api.php",
+        params={
+            "action": "query",
+            "list": "search",
+            "srnamespace": 6,
+            "srsearch": f'"Gray\'s Anatomy" {search_term} png',
+            "srlimit": 5,
+            "format": "json",
+        },
+        headers=HEADERS,
+        timeout=10,
+    )
+    if resp.status_code != 200:
+        return None
+    results = resp.json().get("query", {}).get("search", [])
+    if not results:
+        return None
+    # Pick the best match — prefer filenames containing the bone name
+    chosen = results[0]["title"]
+    for r in results:
+        if search_term.lower().split()[0] in r["title"].lower():
+            chosen = r["title"]
+            break
+    # Get the image URL
+    resp2 = requests.get(
+        "https://commons.wikimedia.org/w/api.php",
+        params={
+            "action": "query",
+            "titles": chosen,
+            "prop": "imageinfo",
+            "iiprop": "url",
+            "iiurlwidth": 500,
+            "format": "json",
+        },
+        headers=HEADERS,
+        timeout=10,
+    )
+    if resp2.status_code != 200:
+        return None
+    pages = resp2.json().get("query", {}).get("pages", {})
+    for page in pages.values():
+        if "imageinfo" in page:
+            thumb = page["imageinfo"][0].get("thumburl")
+            if thumb:
+                return {"name": title, "image": thumb}
+    return None
+
+
 def get_fandom_image(title, wiki):
     """Fetch image from a Fandom wiki using the imageserving API."""
     # Strip Wikipedia disambiguation suffixes like "(Star Wars)" or "(character)"
@@ -353,12 +406,17 @@ def random_item():
     people_tag = category.split(":")[1] if is_people else None
     is_logo = category == "logos"
     is_river = category == "geography:rivers"
+    is_anatomy = category.startswith("anatomy:")
     fandom_wiki = FANDOM_WIKIS.get(category)
 
     for item in candidates:
         result = None
         if is_country:
             result = get_country_item(item, mode)
+        elif is_anatomy:
+            result = get_grays_anatomy_image(item)
+            if not result or not result.get("image"):
+                result = get_wikipedia_image(item)
         elif is_logo:
             result = get_logo_image(item)
         elif fandom_wiki:
