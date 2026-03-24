@@ -21,6 +21,7 @@ CATEGORIES = {
     "geography:countries:shapes": countries.ALL,
     "geography:rivers": rivers.ALL,
     # Nature
+    "nature:all": animals.ALL + plants.ALL + nature.ALL,
     "nature:animals:all": animals.ALL,
     "nature:animals:mammals": animals.MAMMALS,
     "nature:animals:birds": animals.BIRDS,
