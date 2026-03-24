@@ -1,4 +1,4 @@
-from memi.categories import anatomy, animals, characters, countries, directors, logos, monuments, movies, nature, people, plants, rivers
+from memi.categories import anatomy, animals, characters, countries, directors, logos, monuments, movies, nature, paintings, people, plants, rivers
 
 CATEGORIES = {
     # Culture
@@ -11,6 +11,8 @@ CATEGORIES = {
     "culture:characters:dc": characters.DC,
     "culture:characters:anime": characters.ANIME,
     "culture:monuments": monuments.ALL,
+    "culture:paintings:painters": paintings.PAINTERS,
+    "culture:paintings:paintings": paintings.PAINTINGS,
     "culture:movies:actors": people.ACTORS,
     "culture:movies:directors": directors.ALL,
     "culture:movies:posters": movies.ALL,
