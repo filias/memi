@@ -1,4 +1,5 @@
 import logging
+import os
 import random
 from urllib.parse import quote
 
@@ -75,6 +76,43 @@ def get_wikipedia_image(title):
                 "image": thumb,
             }
     return None
+
+
+TMDB_API_KEY = os.environ.get("TMDB_API_KEY", "")
+
+
+def get_tmdb_image(title, image_type="backdrop"):
+    """Fetch a movie image from TMDB. image_type: 'backdrop' for scenes, 'poster' for posters."""
+    if not TMDB_API_KEY:
+        return None
+    # Strip disambiguation for search
+    search_term = title.split("(")[0].strip()
+    try:
+        resp = requests.get(
+            "https://api.themoviedb.org/3/search/movie",
+            params={"query": search_term},
+            headers={"Authorization": f"Bearer {TMDB_API_KEY}"},
+            timeout=10,
+        )
+        if resp.status_code != 200:
+            return None
+        results = resp.json().get("results", [])
+        if not results:
+            return None
+        movie = results[0]
+        path = movie.get("backdrop_path") if image_type == "backdrop" else movie.get("poster_path")
+        if not path:
+            # Fallback: try the other type
+            path = movie.get("poster_path") or movie.get("backdrop_path")
+        if not path:
+            return None
+        size = "w780" if image_type == "backdrop" else "w500"
+        return {
+            "name": title,
+            "image": f"https://image.tmdb.org/t/p/{size}{path}",
+        }
+    except Exception:
+        return None
 
 
 def get_grays_anatomy_image(title):
@@ -408,12 +446,19 @@ def random_item():
     is_logo = category == "logos"
     is_river = category == "geography:rivers"
     is_anatomy = category.startswith("anatomy:")
+    is_movie = category.startswith("movies:")
+    movie_mode = category.split(":")[1] if is_movie else None
     fandom_wiki = FANDOM_WIKIS.get(category)
 
     for item in candidates:
         result = None
         if is_country:
             result = get_country_item(item, mode)
+        elif is_movie:
+            img_type = "backdrop" if movie_mode == "scenes" else "poster"
+            result = get_tmdb_image(item, img_type)
+            if not result or not result.get("image"):
+                result = get_wikipedia_image(item)
         elif is_anatomy:
             result = get_grays_anatomy_image(item)
             if not result or not result.get("image"):
@@ -440,7 +485,7 @@ def random_item():
                     result["tag"] = PEOPLE_TAGS[item]
                 elif people_tag and people_tag != "all":
                     result["tag"] = people_tag
-            elif category == "movies" and item in MOVIE_YEARS:
+            elif is_movie and item in MOVIE_YEARS:
                 result["tag"] = MOVIE_YEARS[item]
             elif category == "monuments" and item in MONUMENT_LOCATIONS:
                 result["tag"] = MONUMENT_LOCATIONS[item]
