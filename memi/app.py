@@ -496,3 +496,20 @@ def random_item():
             _fail_logger.warning("FAILED: %s (category: %s)", item, category)
 
     return jsonify({"error": "No image found"}), 404
+
+
+# Log reported items
+_report_logger = logging.getLogger("memi.reports")
+_report_handler = logging.FileHandler("reported_items.log")
+_report_handler.setFormatter(logging.Formatter("%(asctime)s %(message)s"))
+_report_logger.addHandler(_report_handler)
+_report_logger.setLevel(logging.INFO)
+
+
+@app.route("/api/report", methods=["POST"])
+def report_item():
+    data = request.json or {}
+    item = data.get("item", "unknown")
+    cats = data.get("cats", "unknown")
+    _report_logger.info("REPORTED: %s (categories: %s)", item, cats)
+    return jsonify({"ok": True})

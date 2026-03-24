@@ -6,3 +6,4 @@ venv/
 .idea/
 NOTES.md
 failed_items.log
+reported_items.log
