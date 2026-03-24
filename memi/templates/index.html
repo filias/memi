@@ -384,7 +384,12 @@
             status.textContent = 'loading...';
             status.className = 'loading';
             hint.textContent = '';
-            document.getElementById('report-btn').style.display = 'none';
+            const reportBtn = document.getElementById('report-btn');
+            reportBtn.style.display = 'none';
+            reportBtn.textContent = 'report';
+            reportBtn.disabled = false;
+            reportBtn.style.color = '#666';
+            reportBtn.style.borderColor = '#444';
             revealed = false;
             loaded = false;
 
