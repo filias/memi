@@ -9,7 +9,7 @@ CATEGORIES = {
     "characters:marvel": characters.MARVEL,
     "characters:dc": characters.DC,
     "characters:anime": characters.ANIME,
-    "anatomy:bones": anatomy.BONES,
+    # "anatomy:bones": anatomy.BONES,  # TODO: find better bone image source
     "animals:all": animals.ALL,
     "animals:mammals": animals.MAMMALS,
     "animals:birds": animals.BIRDS,
