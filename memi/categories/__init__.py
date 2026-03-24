@@ -31,11 +31,10 @@ CATEGORIES = {
     "nature:landscapes": nature.ALL,
     "nature:plants:all": plants.ALL,
     "nature:plants:flowers": plants.FLOWERS,
-    "nature:plants:trees": plants.TREES,
+    "nature:plants:fruits & vegetables": plants.FRUITS_AND_VEGETABLES,
     "nature:plants:houseplants": plants.HOUSEPLANTS,
     "nature:plants:other": plants.OTHER,
-    "nature:plants:fruits": plants.FRUITS,
-    "nature:plants:vegetables": plants.VEGETABLES,
+    "nature:plants:trees": plants.TREES,
     # People
     "people:all": people.ALL,
     "people:scientists": people.SCIENTISTS,
