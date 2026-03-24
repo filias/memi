@@ -1,0 +1,58 @@
+ALL = [
+    # American
+    "Alfred Hitchcock", "Billy Wilder", "Charles Chaplin",
+    "Clint Eastwood", "Coen brothers", "David Fincher",
+    "David Lynch", "Francis Ford Coppola", "George Lucas",
+    "Greta Gerwig", "James Cameron", "John Ford",
+    "John Huston", "Jordan Peele", "Kathryn Bigelow",
+    "Martin Scorsese", "Orson Welles", "Quentin Tarantino",
+    "Ridley Scott", "Sofia Coppola", "Spike Lee",
+    "Stanley Kubrick", "Steven Spielberg", "Tim Burton",
+    "Wes Anderson", "Woody Allen",
+    # British
+    "Christopher Nolan", "Danny Boyle", "David Lean",
+    "Edgar Wright", "Guy Ritchie", "Ken Loach",
+    "Mike Leigh", "Ridley Scott", "Sam Mendes",
+    "Steve McQueen (director)", "Terry Gilliam",
+    # French
+    "François Truffaut", "Jean-Luc Godard", "Jean Renoir",
+    "Jean-Pierre Jeunet", "Luc Besson", "Agnès Varda",
+    "Céline Sciamma", "Jacques Audiard", "Julia Ducournau",
+    # Italian
+    "Federico Fellini", "Luchino Visconti", "Michelangelo Antonioni",
+    "Paolo Sorrentino", "Pier Paolo Pasolini", "Roberto Rossellini",
+    "Sergio Leone", "Vittorio De Sica",
+    # German & Austrian
+    "Fritz Lang", "Michael Haneke", "Werner Herzog",
+    "Wim Wenders", "Rainer Werner Fassbinder",
+    "F. W. Murnau", "Florian Henckel von Donnersmarck",
+    # Scandinavian
+    "Ingmar Bergman", "Lars von Trier", "Thomas Vinterberg",
+    "Ruben Östlund",
+    # Spanish & Portuguese
+    "Luis Buñuel", "Pedro Almodóvar",
+    # Eastern European
+    "Andrei Tarkovsky", "Krzysztof Kieślowski",
+    "Roman Polanski", "Sergei Eisenstein",
+    # Japanese
+    "Akira Kurosawa", "Hayao Miyazaki", "Hirokazu Kore-eda",
+    "Isao Takahata", "Kenji Mizoguchi", "Ryūsuke Hamaguchi",
+    "Takeshi Kitano", "Yasujirō Ozu",
+    # Korean
+    "Bong Joon-ho", "Park Chan-wook",
+    # Chinese & Taiwanese
+    "Ang Lee", "Edward Yang", "Wong Kar-wai",
+    "Zhang Yimou",
+    # Indian
+    "Satyajit Ray",
+    # Latin American
+    "Alfonso Cuarón", "Alejandro González Iñárritu",
+    "Guillermo del Toro", "Fernando Meirelles",
+    "Walter Salles",
+    # Australian & New Zealand
+    "George Miller (filmmaker)", "Jane Campion",
+    "Peter Jackson", "Peter Weir", "Taika Waititi",
+    # African & Middle Eastern
+    "Asghar Farhadi", "Nuri Bilge Ceylan",
+    "Ousmane Sembène", "Yorgos Lanthimos",
+]
