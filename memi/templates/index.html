@@ -272,6 +272,8 @@
                 if (sub.children) {
                     btn.onclick = function() {
                         menuStack.push({items, group: currentGroup});
+                        selectedCategories = [];
+                        seenItems = [];
                         renderSubmenu(sub.children, sub.label);
                     };
                 } else {
