@@ -28,6 +28,7 @@ CATEGORIES = {
     "people:athletes": people.ATHLETES,
     # "logos": logos.ALL,  # TODO: find symbol-only logos without text
     "monuments": monuments.ALL,
+    "movies:actors": people.ACTORS,
     "movies:posters": movies.ALL,
     "movies:scenes": movies.ALL,
     "nature": nature.ALL,

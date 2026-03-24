@@ -454,7 +454,7 @@ def random_item():
         result = None
         if is_country:
             result = get_country_item(item, mode)
-        elif is_movie:
+        elif is_movie and movie_mode in ("scenes", "posters"):
             img_type = "backdrop" if movie_mode == "scenes" else "poster"
             result = get_tmdb_image(item, img_type)
             if not result or not result.get("image"):
