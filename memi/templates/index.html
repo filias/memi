@@ -250,25 +250,24 @@
             loadNew();
         }
 
-        const singleSelectParents = ['geography', 'movies'];
-        let currentParent = null;
-        let menuStack = []; // track navigation for back button
+        const singleSelectGroups = ['countries', 'movies'];
+        let currentGroup = null;
+        let menuStack = [];
 
-        function renderSubmenu(items, parent) {
+        function renderSubmenu(items, group) {
             const main = document.getElementById('main-categories');
             const submenu = document.getElementById('submenu');
             const buttons = document.getElementById('submenu-buttons');
-            currentParent = parent;
+            currentGroup = group;
 
             buttons.innerHTML = '';
             for (const sub of items) {
                 const btn = document.createElement('button');
                 btn.textContent = sub.label;
                 if (sub.children) {
-                    // Sub-group: clicking opens another level
                     btn.onclick = function() {
-                        menuStack.push(items);
-                        renderSubmenu(sub.children, parent);
+                        menuStack.push({items, group: currentGroup});
+                        renderSubmenu(sub.children, sub.label);
                     };
                 } else {
                     btn.dataset.key = sub.key;
@@ -289,7 +288,7 @@
         }
 
         function toggleSubcategory(key, btn) {
-            const isSingleSelect = singleSelectParents.includes(currentParent);
+            const isSingleSelect = singleSelectGroups.includes(currentGroup);
             const wasEmpty = selectedCategories.length === 0;
             const idx = selectedCategories.indexOf(key);
 
@@ -346,9 +345,8 @@
 
         function closeSubmenu() {
             if (menuStack.length > 0) {
-                // Go back one level
                 const prev = menuStack.pop();
-                renderSubmenu(prev, currentParent);
+                renderSubmenu(prev.items, prev.group);
             } else {
                 // Back to main categories
                 document.getElementById('main-categories').style.display = 'flex';

@@ -40,14 +40,14 @@ _fail_logger.setLevel(logging.WARNING)
 
 # Fandom wikis for character categories
 FANDOM_WIKIS = {
-    "characters:star wars": "starwars",
-    "characters:lord of the rings": "lotr",
-    "characters:harry potter": "harrypotter",
-    "characters:disney": "disney",
-    "characters:marvel": "marvel",
-    "characters:dc": "dc",
-    "characters:anime": None,  # no single wiki, use Wikipedia
-    "characters:all": None,
+    "culture:characters:star wars": "starwars",
+    "culture:characters:lord of the rings": "lotr",
+    "culture:characters:harry potter": "harrypotter",
+    "culture:characters:disney": "disney",
+    "culture:characters:marvel": "marvel",
+    "culture:characters:dc": "dc",
+    "culture:characters:anime": None,
+    "culture:characters:all": None,
 }
 
 
@@ -446,8 +446,8 @@ def random_item():
     is_logo = category == "logos"
     is_river = category == "geography:rivers"
     is_anatomy = category.startswith("anatomy:")
-    is_movie = category.startswith("movies:")
-    movie_mode = category.split(":")[1] if is_movie else None
+    is_movie = category.startswith("culture:movies:")
+    movie_mode = category.split(":")[-1] if is_movie else None
     fandom_wiki = FANDOM_WIKIS.get(category)
 
     for item in candidates:
@@ -487,9 +487,9 @@ def random_item():
                     result["tag"] = people_tag
             elif is_movie and item in MOVIE_YEARS:
                 result["tag"] = MOVIE_YEARS[item]
-            elif category == "monuments" and item in MONUMENT_LOCATIONS:
+            elif category == "culture:monuments" and item in MONUMENT_LOCATIONS:
                 result["tag"] = MONUMENT_LOCATIONS[item]
-            elif category == "nature" and item in NATURE_LOCATIONS:
+            elif category == "nature:landscapes" and item in NATURE_LOCATIONS:
                 result["tag"] = NATURE_LOCATIONS[item]
             return jsonify(result)
         else:
