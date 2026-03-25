@@ -13,21 +13,6 @@ from memi.categories.movies import YEARS as MOVIE_YEARS
 from memi.categories.paintings import MOVEMENT_PERIODS, PAINTING_INFO
 from memi.categories.nature import LOCATIONS as NATURE_LOCATIONS
 from memi.categories.rivers import LOCATIONS as RIVER_LOCATIONS
-from memi.categories.people import (
-    ACTORS, ARTISTS, ATHLETES, ATHLETE_SPORTS, EXPLORERS,
-    LEADERS, MUSICIANS, SCIENTISTS, WRITERS,
-)
-
-# Reverse lookup: person name → subcategory tag
-PEOPLE_TAGS = {}
-for _tag, _items in [
-    ("scientist", SCIENTISTS), ("explorer", EXPLORERS),
-    ("artist", ARTISTS), ("musician", MUSICIANS),
-    ("writer", WRITERS), ("leader", LEADERS),
-    ("actor", ACTORS), ("athlete", ATHLETES),
-]:
-    for _name in _items:
-        PEOPLE_TAGS.setdefault(_name, _tag)
 
 app = Flask(__name__)
 
@@ -51,6 +36,21 @@ FANDOM_WIKIS = {
     "culture:characters:anime": None,
     "culture:characters:all": None,
 }
+
+
+def get_wikipedia_description(title):
+    """Fetch the short description for a Wikipedia article (e.g. 'German physicist (1879-1955)')."""
+    try:
+        resp = requests.get(
+            "https://en.wikipedia.org/api/rest_v1/page/summary/" + title,
+            headers=HEADERS,
+            timeout=5,
+        )
+        if resp.status_code == 200:
+            return resp.json().get("description", "")
+    except Exception:
+        pass
+    return ""
 
 
 def get_wikipedia_image(title):
@@ -443,8 +443,7 @@ def random_item():
     is_country = category.startswith("geography:countries:")
     mode = category.split(":")[-1] if is_country else None
 
-    is_people = category.startswith("people:")
-    people_tag = category.split(":")[1] if is_people else None
+    is_people = category.startswith("people:") or category in ("culture:movies:actors", "culture:movies:directors")
     is_logo = category == "logos"
     is_river = category == "geography:rivers"
     is_anatomy = category.startswith("anatomy:")
@@ -481,12 +480,9 @@ def random_item():
             if "(" in name:
                 result["name"] = name.split("(")[0].strip()
             if is_people:
-                if people_tag == "athletes" and item in ATHLETE_SPORTS:
-                    result["tag"] = ATHLETE_SPORTS[item]
-                elif people_tag == "all" and item in PEOPLE_TAGS:
-                    result["tag"] = PEOPLE_TAGS[item]
-                elif people_tag and people_tag != "all":
-                    result["tag"] = people_tag
+                desc = get_wikipedia_description(item)
+                if desc:
+                    result["tag"] = desc
             elif category == "culture:paintings:movements" and item in MOVEMENT_PERIODS:
                 result["tag"] = MOVEMENT_PERIODS[item]
             elif category == "culture:paintings:paintings" and item in PAINTING_INFO:
