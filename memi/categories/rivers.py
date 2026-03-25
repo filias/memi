@@ -2,7 +2,7 @@ LOCATIONS = {
     # Europe
     "Arno": "Italy",
     "Clyde (river)": "Scotland",
-    "Danube": "Germany → Austria → Hungary → Romania",
+    "Danube": "Germany → Austria → Slovakia → Hungary → Serbia → Romania",
     "Danube Delta": "Romania",
     "Dnieper": "Russia → Belarus → Ukraine",
     "Don (river)": "Russia",
