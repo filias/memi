@@ -47,7 +47,11 @@
             transition: all 0.2s;
         }
 
-        .categories button:hover,
+        .categories button:hover:not(.active) {
+            border-color: #888;
+            color: #eee;
+        }
+
         .categories button.active {
             border-color: #e2b714;
             color: #e2b714;
