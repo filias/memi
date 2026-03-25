@@ -10,7 +10,7 @@ from memi.categories import CATEGORIES
 from memi.categories.countries import CAPITALS
 from memi.categories.monuments import LOCATIONS as MONUMENT_LOCATIONS
 from memi.categories.movies import YEARS as MOVIE_YEARS
-from memi.categories.paintings import PAINTING_INFO
+from memi.categories.paintings import MOVEMENT_PERIODS, PAINTING_INFO
 from memi.categories.nature import LOCATIONS as NATURE_LOCATIONS
 from memi.categories.rivers import LOCATIONS as RIVER_LOCATIONS
 from memi.categories.people import (
@@ -487,6 +487,8 @@ def random_item():
                     result["tag"] = PEOPLE_TAGS[item]
                 elif people_tag and people_tag != "all":
                     result["tag"] = people_tag
+            elif category == "culture:paintings:movements" and item in MOVEMENT_PERIODS:
+                result["tag"] = MOVEMENT_PERIODS[item]
             elif category == "culture:paintings:paintings" and item in PAINTING_INFO:
                 result["tag"] = PAINTING_INFO[item]
             elif is_movie and item in MOVIE_YEARS:

@@ -11,6 +11,7 @@ CATEGORIES = {
     "culture:characters:dc": characters.DC,
     "culture:characters:anime": characters.ANIME,
     "culture:monuments": monuments.ALL,
+    "culture:paintings:movements": paintings.MOVEMENTS,
     "culture:paintings:painters": paintings.PAINTERS,
     "culture:paintings:paintings": paintings.PAINTINGS,
     "culture:movies:actors": people.ACTORS,
