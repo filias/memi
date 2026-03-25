@@ -482,6 +482,7 @@ def random_item():
             if is_people:
                 desc = get_wikipedia_description(item)
                 if desc:
+                    desc = desc.replace("(born ", "(").replace("(", "").replace(")", "")
                     result["tag"] = desc
             elif category == "culture:paintings:movements" and item in MOVEMENT_PERIODS:
                 result["tag"] = MOVEMENT_PERIODS[item]
