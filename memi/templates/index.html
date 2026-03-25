@@ -131,6 +131,13 @@
             font-weight: bold;
             padding: 0.4rem 0.9rem;
             border-radius: 1rem;
+        }
+
+        .card .tag .tag-dates {
+            color: #90cea1;
+            font-weight: normal;
+            font-style: italic;
+            margin-left: 0.3rem;
             display: none;
         }
 
@@ -478,7 +485,13 @@
                 document.getElementById('clue-area').style.display = 'none';
                 if (currentTag) {
                     const tagEl = document.getElementById('tag');
-                    tagEl.textContent = currentTag;
+                    // Split dates from text (dates look like "1879–1955" or "1981" at the end)
+                    const dateMatch = currentTag.match(/^(.*?)(\d{3,4}[–—-]?\d{0,4})\s*$/);
+                    if (dateMatch) {
+                        tagEl.innerHTML = dateMatch[1].trim() + ' <span class="tag-dates">' + dateMatch[2] + '</span>';
+                    } else {
+                        tagEl.textContent = currentTag;
+                    }
                     tagEl.style.display = 'block';
                 }
                 revealed = true;
