@@ -255,7 +255,7 @@
             loadNew();
         }
 
-        const singleSelectGroups = ['countries', 'movies'];
+        const singleSelectGroups = ['countries', 'movies', 'paintings'];
         let currentGroup = null;
         let menuStack = [];
 
@@ -351,14 +351,14 @@
         }
 
         function closeSubmenu() {
+            selectedCategories = [];
+            seenItems = [];
             if (menuStack.length > 0) {
                 const prev = menuStack.pop();
                 renderSubmenu(prev.items, prev.group);
             } else {
-                // Back to main categories
                 document.getElementById('main-categories').style.display = 'flex';
                 document.getElementById('submenu').style.display = 'none';
-                selectedCategories = [];
             }
         }
 
