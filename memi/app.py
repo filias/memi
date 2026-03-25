@@ -12,6 +12,7 @@ from memi.categories.monuments import LOCATIONS as MONUMENT_LOCATIONS
 from memi.categories.movies import YEARS as MOVIE_YEARS
 from memi.categories.paintings import PAINTING_INFO
 from memi.categories.nature import LOCATIONS as NATURE_LOCATIONS
+from memi.categories.rivers import LOCATIONS as RIVER_LOCATIONS
 from memi.categories.people import (
     ACTORS, ARTISTS, ATHLETES, ATHLETE_SPORTS, EXPLORERS,
     LEADERS, MUSICIANS, SCIENTISTS, WRITERS,
@@ -492,6 +493,8 @@ def random_item():
                 result["tag"] = MOVIE_YEARS[item]
             elif category == "culture:monuments" and item in MONUMENT_LOCATIONS:
                 result["tag"] = MONUMENT_LOCATIONS[item]
+            elif category == "geography:rivers" and item in RIVER_LOCATIONS:
+                result["tag"] = RIVER_LOCATIONS[item]
             elif category == "nature:landscapes" and item in NATURE_LOCATIONS:
                 result["tag"] = NATURE_LOCATIONS[item]
             return jsonify(result)
