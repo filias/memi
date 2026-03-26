@@ -532,7 +532,8 @@ def random_item():
                 result["tag"] = SPACE_LOCATIONS[item]
             elif category.startswith("nature:animals:") or category.startswith("nature:plants:"):
                 sci_name = get_scientific_name(item)
-                if sci_name:
+                display_name = result["name"].lower()
+                if sci_name and sci_name.lower() != display_name:
                     result["tag"] = sci_name
             elif category == "nature:landscapes" and item in NATURE_LOCATIONS:
                 result["tag"] = NATURE_LOCATIONS[item]
