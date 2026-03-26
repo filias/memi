@@ -12,6 +12,7 @@ from memi.categories.monuments import LOCATIONS as MONUMENT_LOCATIONS
 from memi.categories.movies import YEARS as MOVIE_YEARS
 from memi.categories.paintings import MOVEMENT_PERIODS, PAINTING_INFO
 from memi.categories.nature import LOCATIONS as NATURE_LOCATIONS
+from memi.categories.space import LOCATIONS as SPACE_LOCATIONS
 from memi.categories.rivers import LOCATIONS as RIVER_LOCATIONS
 
 app = Flask(__name__)
@@ -494,6 +495,8 @@ def random_item():
                 result["tag"] = MONUMENT_LOCATIONS[item]
             elif category == "geography:rivers" and item in RIVER_LOCATIONS:
                 result["tag"] = RIVER_LOCATIONS[item]
+            elif category == "nature:space" and item in SPACE_LOCATIONS:
+                result["tag"] = SPACE_LOCATIONS[item]
             elif category == "nature:landscapes" and item in NATURE_LOCATIONS:
                 result["tag"] = NATURE_LOCATIONS[item]
             return jsonify(result)
