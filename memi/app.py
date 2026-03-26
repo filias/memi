@@ -54,6 +54,39 @@ def get_wikipedia_description(title):
     return ""
 
 
+def get_scientific_name(title):
+    """Fetch the scientific/taxon name from Wikidata for a plant or animal."""
+    try:
+        resp = requests.get(
+            "https://en.wikipedia.org/w/api.php",
+            params={"action": "query", "titles": title, "prop": "pageprops", "format": "json"},
+            headers=HEADERS,
+            timeout=5,
+        )
+        if resp.status_code != 200:
+            return ""
+        pages = resp.json().get("query", {}).get("pages", {})
+        wikidata_id = ""
+        for p in pages.values():
+            wikidata_id = p.get("pageprops", {}).get("wikibase_item", "")
+        if not wikidata_id:
+            return ""
+        resp2 = requests.get(
+            "https://www.wikidata.org/w/api.php",
+            params={"action": "wbgetclaims", "entity": wikidata_id, "property": "P225", "format": "json"},
+            headers=HEADERS,
+            timeout=5,
+        )
+        if resp2.status_code != 200:
+            return ""
+        claims = resp2.json().get("claims", {}).get("P225", [])
+        if claims:
+            return claims[0]["mainsnak"]["datavalue"]["value"]
+    except Exception:
+        pass
+    return ""
+
+
 def get_wikipedia_image(title):
     """Fetch the main image for a Wikipedia article via the pageimages API."""
     resp = requests.get(
@@ -497,6 +530,10 @@ def random_item():
                 result["tag"] = RIVER_LOCATIONS[item]
             elif category == "nature:space" and item in SPACE_LOCATIONS:
                 result["tag"] = SPACE_LOCATIONS[item]
+            elif category.startswith("nature:animals:") or category.startswith("nature:plants:"):
+                sci_name = get_scientific_name(item)
+                if sci_name:
+                    result["tag"] = sci_name
             elif category == "nature:landscapes" and item in NATURE_LOCATIONS:
                 result["tag"] = NATURE_LOCATIONS[item]
             return jsonify(result)
