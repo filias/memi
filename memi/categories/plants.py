@@ -48,13 +48,13 @@ TREES = [
     "Japanese maple", "Linden", "Magnolia", "Maple",
     "Oak", "Pear tree", "Poplar", "Red maple",
     "Rowan", "Sassafras", "Silver birch", "Sugar maple",
-    "Sweetgum", "Sycamore", "Tulip tree", "Walnut",
+    "Sweetgum", "Sycamore", "Tulip tree", "Walnut tree",
     "Weeping willow", "Willow",
     # Broadleaf evergreen
     "Avocado tree", "Bay laurel", "Citrus", "Cocoa tree",
-    "Coffee plant", "Eucalyptus", "Fig tree", "Holly",
+    "Eucalyptus", "Fig tree", "Holly",
     "Laurel", "Live oak", "Mango tree", "Olive tree",
-    "Rubber tree", "Tea plant",
+    "Rubber tree",
     # Conifers
     "Araucaria", "Cedar", "Cypress", "Douglas fir",
     "Fir", "Hemlock (tree)", "Juniper", "Kauri",
@@ -67,7 +67,7 @@ TREES = [
     # Tropical trees
     "Acacia", "Banyan", "Baobab", "Boab",
     "Breadfruit", "Coconut palm", "Date palm", "Dragon blood tree",
-    "Durian tree", "Ebony", "Flame tree", "Frangipani",
+    "Durian tree", "Ebony", "Flame tree",
     "Jacaranda", "Jackfruit tree", "Joshua tree", "Kapok",
     "Mahogany", "Mangrove", "Mimosa tree", "Moringa",
     "Neem tree", "Palm tree", "Papaya tree", "Rosewood",
@@ -75,7 +75,7 @@ TREES = [
     # Fruit trees
     "Apricot tree", "Guava tree", "Lemon tree", "Lime tree",
     "Lychee tree", "Orange tree", "Peach tree", "Persimmon tree",
-    "Plum tree", "Pomegranate", "Starfruit tree",
+    "Plum tree", "Pomegranate tree", "Starfruit tree",
 ]
 
 SUCCULENTS = [
