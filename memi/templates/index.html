@@ -525,7 +525,7 @@
                 revealed = false;
             }
 
-            const usesTmdb = selectedCategories.some(c => c.includes('movies:posters') || c.includes('movies:scenes'));
+            const usesTmdb = selectedCategories.some(c => c.includes('movies:posters') || c.includes('movies:scenes') || c.includes('tv shows:scenes'));
             document.getElementById('tmdb-footer').style.display = usesTmdb ? 'block' : 'none';
 
             const clueArea = document.getElementById('clue-area');

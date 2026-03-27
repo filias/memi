@@ -10,6 +10,7 @@ from memi.categories import CATEGORIES
 from memi.categories.countries import CAPITALS
 from memi.categories.monuments import LOCATIONS as MONUMENT_LOCATIONS
 from memi.categories.movies import YEARS as MOVIE_YEARS
+from memi.categories.tvshows import YEARS as TV_YEARS
 from memi.categories.paintings import MOVEMENT_PERIODS, PAINTING_INFO
 from memi.categories.nature import LOCATIONS as NATURE_LOCATIONS
 from memi.categories.space import LOCATIONS as SPACE_LOCATIONS
@@ -140,6 +141,38 @@ def get_tmdb_image(title, image_type="backdrop"):
         if not path:
             # Fallback: try the other type
             path = movie.get("poster_path") or movie.get("backdrop_path")
+        if not path:
+            return None
+        size = "w780" if image_type == "backdrop" else "w500"
+        return {
+            "name": title,
+            "image": f"https://image.tmdb.org/t/p/{size}{path}",
+        }
+    except Exception:
+        return None
+
+
+def get_tmdb_tv_image(title, image_type="backdrop"):
+    """Fetch a TV show image from TMDB."""
+    if not TMDB_API_KEY:
+        return None
+    search_term = title.split("(")[0].strip()
+    try:
+        resp = requests.get(
+            "https://api.themoviedb.org/3/search/tv",
+            params={"query": search_term},
+            headers={"Authorization": f"Bearer {TMDB_API_KEY}"},
+            timeout=10,
+        )
+        if resp.status_code != 200:
+            return None
+        results = resp.json().get("results", [])
+        if not results:
+            return None
+        show = results[0]
+        path = show.get("backdrop_path") if image_type == "backdrop" else show.get("poster_path")
+        if not path:
+            path = show.get("poster_path") or show.get("backdrop_path")
         if not path:
             return None
         size = "w780" if image_type == "backdrop" else "w500"
@@ -483,12 +516,17 @@ def random_item():
     is_anatomy = category.startswith("anatomy:")
     is_movie = category.startswith("culture:movies:")
     movie_mode = category.split(":")[-1] if is_movie else None
+    is_tv = category == "culture:tv shows:scenes"
     fandom_wiki = FANDOM_WIKIS.get(category)
 
     for item in candidates:
         result = None
         if is_country:
             result = get_country_item(item, mode)
+        elif is_tv:
+            result = get_tmdb_tv_image(item, "backdrop")
+            if not result or not result.get("image"):
+                result = get_wikipedia_image(item)
         elif is_movie and movie_mode in ("scenes", "posters"):
             img_type = "backdrop" if movie_mode == "scenes" else "poster"
             result = get_tmdb_image(item, img_type)
@@ -522,6 +560,8 @@ def random_item():
                 result["tag"] = MOVEMENT_PERIODS[item]
             elif category == "culture:paintings:paintings" and item in PAINTING_INFO:
                 result["tag"] = PAINTING_INFO[item]
+            elif is_tv and item in TV_YEARS:
+                result["tag"] = TV_YEARS[item]
             elif is_movie and item in MOVIE_YEARS:
                 result["tag"] = MOVIE_YEARS[item]
             elif category == "culture:monuments" and item in MONUMENT_LOCATIONS:
