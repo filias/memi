@@ -599,20 +599,15 @@
             if (!revealed) {
                 document.getElementById('answer').textContent = currentName;
                 document.getElementById('card').classList.add('revealed');
-                document.getElementById('hint').textContent = 'click to hide answer';
+                document.getElementById('hint').textContent = 'click again for a new one';
                 document.getElementById('clue-area').style.display = 'none';
                 if (currentTag) {
                     showTag(document.getElementById('tag'));
                 }
                 revealed = true;
                 if (history[historyIndex]) history[historyIndex].revealed = true;
-            } else {
-                document.getElementById('card').classList.remove('revealed');
-                document.getElementById('answer').textContent = '';
-                document.getElementById('tag').style.display = 'none';
-                document.getElementById('hint').textContent = 'click the image to reveal the answer';
-                revealed = false;
-                if (history[historyIndex]) history[historyIndex].revealed = false;
+            } else if (selectedCategories.length > 0) {
+                loadNew();
             }
         }
     </script>
