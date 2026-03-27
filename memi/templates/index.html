@@ -481,7 +481,6 @@
             const status = document.getElementById('status');
             const hint = document.getElementById('hint');
 
-            card.classList.remove('revealed');
             status.style.display = 'none';
             image.src = data.image;
             image.style.display = 'block';
@@ -495,10 +494,7 @@
             currentItem = data.item || data.name;
             currentCats = selectedCategories.join(',');
             lettersRevealed = 0;
-            answer.textContent = data.name;
-            hint.textContent = 'click the image to reveal the answer';
             loaded = true;
-            revealed = false;
 
             const reportBtn = document.getElementById('report-btn');
             reportBtn.style.display = 'inline-block';
@@ -510,6 +506,23 @@
             const tag = document.getElementById('tag');
             tag.style.display = 'none';
             tag.textContent = '';
+
+            if (data.revealed) {
+                // Already revealed — show answer and tag immediately
+                card.classList.add('revealed');
+                answer.textContent = data.name;
+                hint.textContent = 'click again for a new one';
+                revealed = true;
+                if (currentTag) {
+                    showTag(tag);
+                }
+            } else {
+                // Not yet revealed
+                card.classList.remove('revealed');
+                answer.textContent = data.name;
+                hint.textContent = 'click the image to reveal the answer';
+                revealed = false;
+            }
 
             const usesTmdb = selectedCategories.some(c => c.includes('movies:posters') || c.includes('movies:scenes'));
             document.getElementById('tmdb-footer').style.display = usesTmdb ? 'block' : 'none';
@@ -546,6 +559,21 @@
             }
         }
 
+        function showTag(tagEl) {
+            const dateMatch = currentTag.match(/^(.*?)(\d{3,4}[–—-]?\d{0,4})\s*$/);
+            const sciMatch = currentTag.match(/^[A-Z][a-z]+(\s[a-z]+)?$/);
+            if (dateMatch && dateMatch[1].trim()) {
+                tagEl.innerHTML = dateMatch[1].trim() + ' <span class="tag-dates">' + dateMatch[2] + '</span>';
+            } else if (dateMatch) {
+                tagEl.textContent = dateMatch[2];
+            } else if (sciMatch) {
+                tagEl.innerHTML = '<em class="tag-dates">' + currentTag + '</em>';
+            } else {
+                tagEl.textContent = currentTag;
+            }
+            tagEl.style.display = 'block';
+        }
+
         async function reportItem() {
             const btn = document.getElementById('report-btn');
             btn.textContent = 'reported';
@@ -572,24 +600,10 @@
                 document.getElementById('hint').textContent = 'click again for a new one';
                 document.getElementById('clue-area').style.display = 'none';
                 if (currentTag) {
-                    const tagEl = document.getElementById('tag');
-                    // Split dates from text (dates look like "1879–1955" or "1981" at the end)
-                    const dateMatch = currentTag.match(/^(.*?)(\d{3,4}[–—-]?\d{0,4})\s*$/);
-                    const sciMatch = currentTag.match(/^[A-Z][a-z]+(\s[a-z]+)?$/);
-                    if (dateMatch && dateMatch[1].trim()) {
-                        // Text + date: yellow text, green italic date
-                        tagEl.innerHTML = dateMatch[1].trim() + ' <span class="tag-dates">' + dateMatch[2] + '</span>';
-                    } else if (dateMatch) {
-                        // Date only: show in yellow bold (no special styling)
-                        tagEl.textContent = dateMatch[2];
-                    } else if (sciMatch) {
-                        tagEl.innerHTML = '<em class="tag-dates">' + currentTag + '</em>';
-                    } else {
-                        tagEl.textContent = currentTag;
-                    }
-                    tagEl.style.display = 'block';
+                    showTag(document.getElementById('tag'));
                 }
                 revealed = true;
+                if (history[historyIndex]) history[historyIndex].revealed = true;
             } else if (selectedCategories.length > 0) {
                 loadNew();
             }
