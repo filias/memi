@@ -507,19 +507,20 @@
             tag.style.display = 'none';
             tag.textContent = '';
 
+            // Always start with answer hidden
+            card.classList.remove('revealed');
+            answer.textContent = '';
+
             if (data.revealed) {
-                // Already revealed — show answer and tag immediately
-                card.classList.add('revealed');
-                answer.textContent = data.name;
+                // Already revealed — show answer and tag after a frame
+                requestAnimationFrame(() => {
+                    answer.textContent = data.name;
+                    card.classList.add('revealed');
+                    if (currentTag) showTag(tag);
+                });
                 hint.textContent = 'click again for a new one';
                 revealed = true;
-                if (currentTag) {
-                    showTag(tag);
-                }
             } else {
-                // Not yet revealed
-                card.classList.remove('revealed');
-                answer.textContent = data.name;
                 hint.textContent = 'click the image to reveal the answer';
                 revealed = false;
             }
@@ -596,6 +597,7 @@
             }
             if (!loaded) return;
             if (!revealed) {
+                document.getElementById('answer').textContent = currentName;
                 document.getElementById('card').classList.add('revealed');
                 document.getElementById('hint').textContent = 'click again for a new one';
                 document.getElementById('clue-area').style.display = 'none';
