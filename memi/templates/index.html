@@ -70,6 +70,27 @@
             padding: 0.4rem 0.8rem !important;
         }
 
+        .card-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-arrow {
+            background: transparent;
+            border: none;
+            color: #444;
+            font-size: 3rem;
+            cursor: pointer;
+            padding: 0 0.5rem;
+            transition: color 0.2s;
+            user-select: none;
+        }
+
+        .nav-arrow:hover {
+            color: #e2b714;
+        }
+
         .card {
             position: relative;
             width: min(500px, 90vw);
@@ -229,12 +250,16 @@
         <button id="clue-toggle" onclick="toggleClueMode()">clues: off</button>
     </div>
 
-    <div class="card" id="card" onclick="handleClick()">
-        <span class="loading" id="status">pick a category</span>
-        <img id="image" style="display:none" alt="">
-        <div class="clue" id="clue"></div>
-        <div class="answer" id="answer"></div>
-        <div class="tag" id="tag"></div>
+    <div class="card-row">
+        <button class="nav-arrow" id="nav-prev" onclick="navigatePrev()" style="visibility:hidden;">&lsaquo;</button>
+        <div class="card" id="card" onclick="handleClick()">
+            <span class="loading" id="status">pick a category</span>
+            <img id="image" style="display:none" alt="">
+            <div class="clue" id="clue"></div>
+            <div class="answer" id="answer"></div>
+            <div class="tag" id="tag"></div>
+        </div>
+        <button class="nav-arrow" id="nav-next" onclick="navigateNext()" style="visibility:hidden;">&rsaquo;</button>
     </div>
     <div id="clue-area" style="display:none; margin-top:1rem; text-align:center;">
         <button id="clue-btn" onclick="revealLetter()">show letter</button>
@@ -256,6 +281,8 @@
         let currentCats = '';
         let lettersRevealed = 0;
         let seenItems = [];
+        let history = [];
+        let historyIndex = -1;
 
         const subcategories = {{ subcategories | tojson }};
 
@@ -287,6 +314,7 @@
                         menuStack.push({items, group: currentGroup});
                         selectedCategories = [];
                         seenItems = [];
+                        history = []; historyIndex = -1;
                         renderSubmenu(sub.children, sub.label);
                     };
                 } else {
@@ -303,6 +331,7 @@
         function toggleSubmenu(parent) {
             selectedCategories = [];
             seenItems = [];
+            history = []; historyIndex = -1;
             menuStack = [];
             renderSubmenu(subcategories[parent], parent);
         }
@@ -366,6 +395,7 @@
         function closeSubmenu() {
             selectedCategories = [];
             seenItems = [];
+            history = []; historyIndex = -1;
             if (menuStack.length > 0) {
                 const prev = menuStack.pop();
                 renderSubmenu(prev.items, prev.group);
@@ -424,31 +454,14 @@
 
                     if (!loaded_ok) continue;
 
-                    status.style.display = 'none';
-                    image.style.display = 'block';
-                    if (data.clue) {
-                        clue.textContent = data.clue;
-                        clue.style.display = 'block';
+                    // Save to history
+                    if (historyIndex < history.length - 1) {
+                        history = history.slice(0, historyIndex + 1);
                     }
-                    currentName = data.name;
-                    currentTag = data.tag || '';
-                    lettersRevealed = 0;
-                    currentItem = data.item || data.name;
-                    currentCats = cats;
-                    seenItems.push(currentItem);
-                    document.getElementById('report-btn').style.display = 'inline-block';
-                    const usesTmdb = selectedCategories.some(c => c.includes('movies:posters') || c.includes('movies:scenes'));
-                    document.getElementById('tmdb-footer').style.display = usesTmdb ? 'block' : 'none';
-                    answer.textContent = data.name;
-                    hint.textContent = 'click the image to reveal the answer';
-                    loaded = true;
-                    const clueArea = document.getElementById('clue-area');
-                    if (clueMode) {
-                        updateClueDisplay();
-                        clueArea.style.display = 'block';
-                    } else {
-                        clueArea.style.display = 'none';
-                    }
+                    history.push(data);
+                    historyIndex = history.length - 1;
+                    seenItems.push(data.item || data.name);
+                    showCurrentItem();
                     return;
                 } catch (e) {
                     continue;
@@ -457,6 +470,80 @@
             status.textContent = 'no image found, click to retry';
             status.className = 'error';
             loaded = false;
+        }
+
+        function showCurrentItem() {
+            const data = history[historyIndex];
+            const card = document.getElementById('card');
+            const image = document.getElementById('image');
+            const clue = document.getElementById('clue');
+            const answer = document.getElementById('answer');
+            const status = document.getElementById('status');
+            const hint = document.getElementById('hint');
+
+            card.classList.remove('revealed');
+            status.style.display = 'none';
+            image.src = data.image;
+            image.style.display = 'block';
+            clue.style.display = 'none';
+            if (data.clue) {
+                clue.textContent = data.clue;
+                clue.style.display = 'block';
+            }
+            currentName = data.name;
+            currentTag = data.tag || '';
+            currentItem = data.item || data.name;
+            currentCats = selectedCategories.join(',');
+            lettersRevealed = 0;
+            answer.textContent = data.name;
+            hint.textContent = 'click the image to reveal the answer';
+            loaded = true;
+            revealed = false;
+
+            const reportBtn = document.getElementById('report-btn');
+            reportBtn.style.display = 'inline-block';
+            reportBtn.textContent = 'report';
+            reportBtn.disabled = false;
+            reportBtn.style.color = '#666';
+            reportBtn.style.borderColor = '#444';
+
+            const tag = document.getElementById('tag');
+            tag.style.display = 'none';
+            tag.textContent = '';
+
+            const usesTmdb = selectedCategories.some(c => c.includes('movies:posters') || c.includes('movies:scenes'));
+            document.getElementById('tmdb-footer').style.display = usesTmdb ? 'block' : 'none';
+
+            const clueArea = document.getElementById('clue-area');
+            if (clueMode) {
+                updateClueDisplay();
+                clueArea.style.display = 'block';
+            } else {
+                clueArea.style.display = 'none';
+            }
+
+            updateNavArrows();
+        }
+
+        function updateNavArrows() {
+            document.getElementById('nav-prev').style.visibility = historyIndex > 0 ? 'visible' : 'hidden';
+            document.getElementById('nav-next').style.visibility = loaded ? 'visible' : 'hidden';
+        }
+
+        function navigatePrev() {
+            if (historyIndex > 0) {
+                historyIndex--;
+                showCurrentItem();
+            }
+        }
+
+        function navigateNext() {
+            if (historyIndex < history.length - 1) {
+                historyIndex++;
+                showCurrentItem();
+            } else if (selectedCategories.length > 0) {
+                loadNew();
+            }
         }
 
         async function reportItem() {
