@@ -4,6 +4,7 @@ import random
 from flask import Flask, jsonify, render_template, request
 
 from memi.categories import CATEGORIES
+from memi.categories.animals import CLASSES as ANIMAL_CLASSES
 from memi.categories.countries import CONTINENTS
 from memi.categories.monuments import LOCATIONS as MONUMENT_LOCATIONS
 from memi.categories.movies import YEARS as MOVIE_YEARS
@@ -13,6 +14,7 @@ from memi.categories.nature import LOCATIONS as NATURE_LOCATIONS
 from memi.categories.space import LOCATIONS as SPACE_LOCATIONS
 from memi.categories.rivers import LOCATIONS as RIVER_LOCATIONS
 from memi.logic.images import (
+    get_bone_image,
     get_country_item,
     get_fandom_image,
     get_grays_anatomy_image,
@@ -93,6 +95,16 @@ def random_item():
         if not items:
             return jsonify({"error": "No countries for selected continents"}), 400
 
+    # Filter by animal classes if provided
+    classes_param = request.args.get("classes", "")
+    if classes_param and category == "nature:animals":
+        allowed = set()
+        for c in classes_param.split(","):
+            allowed.update(ANIMAL_CLASSES.get(c, []))
+        items = [i for i in items if i in allowed]
+        if not items:
+            return jsonify({"error": "No animals for selected classes"}), 400
+
     unseen = [i for i in items if i not in seen]
     if not unseen:
         unseen = items  # all seen, reset
@@ -100,6 +112,7 @@ def random_item():
 
     is_country = category.startswith("geography:countries:")
     mode = category.split(":")[-1] if is_country else None
+    is_bones = category == "nature:bones"
 
     is_people = category.startswith("people:") or category in (
         "culture:movies:actors",
@@ -114,7 +127,9 @@ def random_item():
 
     for item in candidates:
         result = None
-        if is_country:
+        if is_bones:
+            result = get_bone_image(item)
+        elif is_country:
             result = get_country_item(item, mode)
         elif is_tv:
             result = get_tmdb_tv_image(item, "backdrop")

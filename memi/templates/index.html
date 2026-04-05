@@ -33,6 +33,14 @@
         <button onclick="toggleContinent('europe', this)">europe</button>
         <button onclick="toggleContinent('oceania', this)">oceania</button>
     </div>
+    <div class="continent-filter" id="animal-class-filter">
+        <button onclick="toggleAnimalClass('mammals', this)">mammals</button>
+        <button onclick="toggleAnimalClass('birds', this)">birds</button>
+        <button onclick="toggleAnimalClass('reptiles', this)">reptiles</button>
+        <button onclick="toggleAnimalClass('amphibians', this)">amphibians</button>
+        <button onclick="toggleAnimalClass('marine', this)">marine</button>
+        <button onclick="toggleAnimalClass('insects', this)">insects</button>
+    </div>
     <div class="card" id="card" onclick="handleClick()">
         <span class="loading" id="status">pick a category</span>
         <img id="image" style="display:none" alt="">

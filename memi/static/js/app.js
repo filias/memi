@@ -9,6 +9,7 @@ let currentCats = '';
 let lettersRevealed = 0;
 let seenItems = [];
 let selectedContinents = [];
+let selectedAnimalClasses = [];
 
 const subcategories = JSON.parse(document.getElementById('subcategories-data').textContent);
 
@@ -18,7 +19,7 @@ function selectCategory(cat) {
         if (b.classList.contains('back-btn')) return;
         b.classList.remove('active');
     });
-    updateContinentFilter();
+    updateFilters();
     loadNew();
 }
 
@@ -85,7 +86,7 @@ function toggleSubcategory(key, btn) {
         }
     }
 
-    updateContinentFilter();
+    updateFilters();
     if (selectedCategories.length > 0 && (wasEmpty || isSingleSelect)) {
         loadNew();
     }
@@ -122,7 +123,7 @@ function updateClueDisplay() {
 function closeSubmenu() {
     selectedCategories = [];
     seenItems = [];
-    updateContinentFilter();
+    updateFilters();
     if (menuStack.length > 0) {
         const prev = menuStack.pop();
         renderSubmenu(prev.items, prev.group);
@@ -136,8 +137,13 @@ function isCountryCategory() {
     return selectedCategories.some(c => c.startsWith('geography:countries:'));
 }
 
-function updateContinentFilter() {
+function isAnimalCategory() {
+    return selectedCategories.includes('nature:animals');
+}
+
+function updateFilters() {
     document.getElementById('continent-filter').style.display = isCountryCategory() ? 'flex' : 'none';
+    document.getElementById('animal-class-filter').style.display = isAnimalCategory() ? 'flex' : 'none';
 }
 
 function toggleContinent(continent, btn) {
@@ -147,6 +153,19 @@ function toggleContinent(continent, btn) {
         btn.classList.add('active');
     } else {
         selectedContinents.splice(idx, 1);
+        btn.classList.remove('active');
+    }
+    seenItems = [];
+    if (loaded || selectedCategories.length > 0) loadNew();
+}
+
+function toggleAnimalClass(cls, btn) {
+    const idx = selectedAnimalClasses.indexOf(cls);
+    if (idx === -1) {
+        selectedAnimalClasses.push(cls);
+        btn.classList.add('active');
+    } else {
+        selectedAnimalClasses.splice(idx, 1);
         btn.classList.remove('active');
     }
     seenItems = [];
@@ -187,11 +206,12 @@ async function loadNew() {
     const cats = selectedCategories.join(',');
     const seenParam = seenItems.length > 0 ? `&seen=${encodeURIComponent(seenItems.join(','))}` : '';
     const continentsParam = selectedContinents.length > 0 ? `&continents=${encodeURIComponent(selectedContinents.join(','))}` : '';
-    updateContinentFilter();
+    const classesParam = selectedAnimalClasses.length > 0 ? `&classes=${encodeURIComponent(selectedAnimalClasses.join(','))}` : '';
+    updateFilters();
     const maxRetries = 5;
     for (let attempt = 0; attempt < maxRetries; attempt++) {
         try {
-            const resp = await fetch(`/api/random?cats=${encodeURIComponent(cats)}${seenParam}${continentsParam}`);
+            const resp = await fetch(`/api/random?cats=${encodeURIComponent(cats)}${seenParam}${continentsParam}${classesParam}`);
             const data = await resp.json();
 
             if (data.error) continue;

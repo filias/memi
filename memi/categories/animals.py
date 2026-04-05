@@ -869,3 +869,12 @@ INSECTS = [
 ]
 
 ALL = MAMMALS + BIRDS + REPTILES + AMPHIBIANS + MARINE + INSECTS
+
+CLASSES = {
+    "mammals": MAMMALS,
+    "birds": BIRDS,
+    "reptiles": REPTILES,
+    "amphibians": AMPHIBIANS,
+    "marine": MARINE,
+    "insects": INSECTS,
+}

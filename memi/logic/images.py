@@ -6,6 +6,7 @@ from memi.categories.countries import CAPITALS
 
 HEADERS = {"User-Agent": "Memi/1.0"}
 TMDB_API_KEY = os.environ.get("TMDB_API_KEY", "")
+BONES_API_URL = os.environ.get("BONES_API_URL", "http://127.0.0.1:8081")
 
 
 def get_wikipedia_image(title):
@@ -379,3 +380,24 @@ def get_country_item(country, mode):
     else:
         return get_country_shape(country)
     return None
+
+
+def get_bone_image(bone_id):
+    """Fetch a bone image from the Bones API."""
+    try:
+        resp = requests.get(
+            f"{BONES_API_URL}/bones/{bone_id}",
+            timeout=10,
+        )
+        if resp.status_code != 200:
+            return None
+        data = resp.json()
+        if not data.get("has_image"):
+            return None
+        return {
+            "name": data["name"],
+            "image": f"{BONES_API_URL}{data['image']}",
+            "tag": data.get("region", ""),
+        }
+    except Exception:
+        return None

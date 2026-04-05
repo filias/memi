@@ -1,5 +1,6 @@
 from memi.categories import (
     animals,
+    bones,
     characters,
     countries,
     directors,
@@ -39,14 +40,9 @@ CATEGORIES = {
     "geography:countries:shapes": countries.ALL,
     "geography:rivers": rivers.ALL,
     # Nature
-    "nature:all": animals.ALL + plants.ALL + nature.ALL + space.ALL,
-    "nature:animals:all": animals.ALL,
-    "nature:animals:mammals": animals.MAMMALS,
-    "nature:animals:birds": animals.BIRDS,
-    "nature:animals:reptiles": animals.REPTILES,
-    "nature:animals:amphibians": animals.AMPHIBIANS,
-    "nature:animals:marine": animals.MARINE,
-    "nature:animals:insects": animals.INSECTS,
+    "nature:all": animals.ALL + plants.ALL + nature.ALL + space.ALL + bones.ALL,
+    "nature:animals": animals.ALL,
+    "nature:bones": bones.ALL,
     "nature:landscapes": nature.ALL,
     "nature:plants:all": plants.ALL,
     "nature:plants:flowers": plants.FLOWERS,
@@ -66,6 +62,5 @@ CATEGORIES = {
     "people:actors": people.ACTORS,
     "people:athletes": people.ATHLETES,
     # Disabled
-    # "anatomy:bones": anatomy.BONES,  # TODO: find better bone image source
     # "logos": logos.ALL,  # TODO: find symbol-only logos without text
 }
