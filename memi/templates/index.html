@@ -193,7 +193,7 @@
         }
 
         .mode-toggle {
-            margin-bottom: 1rem;
+            margin-top: 1rem;
         }
 
         .mode-toggle button {
@@ -270,10 +270,6 @@
         <div id="submenu-buttons" style="display:flex; gap:0.75rem; flex-wrap:wrap; justify-content:center;"></div>
     </div>
 
-    <div class="mode-toggle">
-        <button id="clue-toggle" onclick="toggleClueMode()">clues: off</button>
-    </div>
-
     <div class="continent-filter" id="continent-filter">
         <button onclick="toggleContinent('africa', this)">africa</button>
         <button onclick="toggleContinent('america', this)">america</button>
@@ -288,7 +284,10 @@
         <div class="answer" id="answer"></div>
         <div class="tag" id="tag"></div>
     </div>
-    <div id="clue-area" style="display:none; margin-top:1rem; text-align:center;">
+    <div class="mode-toggle">
+        <button id="clue-toggle" onclick="toggleClueMode()">clues: off</button>
+    </div>
+    <div id="clue-area" style="display:none; text-align:center;">
         <button id="clue-btn" onclick="revealLetter()">show letter</button>
         <p id="clue-letters" class="clue-letters"></p>
     </div>
