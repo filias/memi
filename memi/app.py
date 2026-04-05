@@ -6,9 +6,12 @@ from flask import Flask, Response, jsonify, render_template, request
 
 from memi.categories import CATEGORIES
 from memi.categories.animals import CLASSES as ANIMAL_CLASSES
-from memi.categories.countries import CONTINENTS
-from memi.categories.people import ROLES as PEOPLE_ROLES
+from memi.categories.countries import CONTINENTS as COUNTRY_CONTINENTS
+from memi.categories.monuments import CONTINENTS as MONUMENT_CONTINENTS
 from memi.categories.monuments import LOCATIONS as MONUMENT_LOCATIONS
+from memi.categories.nature import CONTINENTS as LANDSCAPE_CONTINENTS
+from memi.categories.people import ROLES as PEOPLE_ROLES
+from memi.categories.rivers import CONTINENTS as RIVER_CONTINENTS
 from memi.categories.movies import YEARS as MOVIE_YEARS
 from memi.categories.tvshows import YEARS as TV_YEARS
 from memi.categories.paintings import MOVEMENT_PERIODS, PAINTING_INFO
@@ -88,15 +91,25 @@ def random_item():
     category = random.choice(cat_list)
     items = CATEGORIES[category]
 
-    # Filter by continents if provided (countries only)
+    # Filter by continents if provided
     continents_param = request.args.get("continents", "")
-    if continents_param and category.startswith("geography:countries:"):
-        allowed = set()
-        for c in continents_param.split(","):
-            allowed.update(CONTINENTS.get(c, []))
-        items = [i for i in items if i in allowed]
-        if not items:
-            return jsonify({"error": "No countries for selected continents"}), 400
+    if continents_param:
+        continent_map = None
+        if category.startswith("geography:countries:"):
+            continent_map = COUNTRY_CONTINENTS
+        elif category == "culture:monuments":
+            continent_map = MONUMENT_CONTINENTS
+        elif category == "nature:landscapes":
+            continent_map = LANDSCAPE_CONTINENTS
+        elif category == "geography:rivers":
+            continent_map = RIVER_CONTINENTS
+        if continent_map:
+            allowed = set()
+            for c in continents_param.split(","):
+                allowed.update(continent_map.get(c, []))
+            items = [i for i in items if i in allowed]
+            if not items:
+                return jsonify({"error": "No items for selected continents"}), 400
 
     # Filter by animal classes if provided
     classes_param = request.args.get("classes", "")

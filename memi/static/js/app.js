@@ -135,8 +135,13 @@ function closeSubmenu() {
     }
 }
 
-function isCountryCategory() {
-    return selectedCategories.some(c => c.startsWith('geography:countries:'));
+function hasContinentFilter() {
+    return selectedCategories.some(c =>
+        c.startsWith('geography:countries:') ||
+        c === 'culture:monuments' ||
+        c === 'nature:landscapes' ||
+        c === 'geography:rivers'
+    );
 }
 
 function isAnimalCategory() {
@@ -148,7 +153,7 @@ function isPeopleCategory() {
 }
 
 function updateFilters() {
-    document.getElementById('continent-filter').style.display = isCountryCategory() ? 'flex' : 'none';
+    document.getElementById('continent-filter').style.display = hasContinentFilter() ? 'flex' : 'none';
     document.getElementById('animal-class-filter').style.display = isAnimalCategory() ? 'flex' : 'none';
     document.getElementById('people-role-filter').style.display = isPeopleCategory() ? 'flex' : 'none';
 }
