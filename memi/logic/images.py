@@ -382,9 +382,12 @@ def get_country_item(country, mode):
         if result:
             currency = CURRENCIES.get(country, "Unknown")
             result["clue"] = country
-            result["name"] = currency
-            # Fetch coin/note image from Wikipedia
             currency_name = currency.split("(")[0].strip()
+            result["name"] = currency_name
+            # Show currency code as tag
+            if "(" in currency:
+                result["tag"] = currency.split("(")[1].rstrip(")")
+            # Fetch coin/note image from Wikipedia
             img = get_wikipedia_image(currency_name)
             if img and img.get("image"):
                 result["reveal_image"] = img["image"]
