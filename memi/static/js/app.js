@@ -4,6 +4,7 @@ let loaded = false;
 let clueMode = false;
 let currentName = '';
 let currentTag = '';
+let currentRevealImage = '';
 let currentItem = '';
 let currentCats = '';
 let lettersRevealed = 0;
@@ -209,6 +210,7 @@ async function loadNew() {
     clue.textContent = '';
     tag.style.display = 'none';
     tag.textContent = '';
+    document.getElementById('reveal-image').style.display = 'none';
     status.style.display = 'block';
     status.textContent = 'loading...';
     status.className = 'loading';
@@ -255,6 +257,7 @@ async function loadNew() {
             }
             currentName = data.name;
             currentTag = data.tag || '';
+            currentRevealImage = data.reveal_image || '';
             currentItem = data.item || data.name;
             currentCats = selectedCategories.join(',');
             lettersRevealed = 0;
@@ -328,6 +331,11 @@ function handleClick() {
         document.getElementById('clue-area').style.display = 'none';
         if (currentTag) {
             showTag(document.getElementById('tag'));
+        }
+        if (currentRevealImage) {
+            const revealImg = document.getElementById('reveal-image');
+            revealImg.src = currentRevealImage;
+            revealImg.style.display = 'block';
         }
         revealed = true;
     } else if (selectedCategories.length > 0) {
