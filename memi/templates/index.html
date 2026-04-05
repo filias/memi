@@ -70,24 +70,37 @@
             padding: 0.4rem 0.8rem !important;
         }
 
-        .card-row {
+        .card-area {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 1rem;
         }
 
-        .nav-arrow {
+        .continent-filter {
+            display: none;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .continent-filter button {
+            padding: 0.4rem 0.8rem;
+            border: 2px solid #444;
+            border-radius: 2rem;
             background: transparent;
-            border: none;
-            color: #444;
-            font-size: 3rem;
+            color: #888;
+            font-size: 0.8rem;
             cursor: pointer;
-            padding: 0 0.5rem;
-            transition: color 0.2s;
-            user-select: none;
+            transition: all 0.2s;
+            white-space: nowrap;
         }
 
-        .nav-arrow:hover {
+        .continent-filter button:hover:not(.active) {
+            border-color: #888;
+            color: #eee;
+        }
+
+        .continent-filter button.active {
+            border-color: #e2b714;
             color: #e2b714;
         }
 
@@ -250,16 +263,21 @@
         <button id="clue-toggle" onclick="toggleClueMode()">clues: off</button>
     </div>
 
-    <div class="card-row">
-        <button class="nav-arrow" id="nav-prev" onclick="navigatePrev()" style="visibility:hidden;">&lsaquo;</button>
-        <div class="card" id="card" onclick="handleClick()">
-            <span class="loading" id="status">pick a category</span>
-            <img id="image" style="display:none" alt="">
-            <div class="clue" id="clue"></div>
-            <div class="answer" id="answer"></div>
-            <div class="tag" id="tag"></div>
-        </div>
-        <button class="nav-arrow" id="nav-next" onclick="navigateNext()" style="visibility:hidden;">&rsaquo;</button>
+    <div class="card-area">
+    <div class="continent-filter" id="continent-filter">
+        <button onclick="toggleContinent('africa', this)">africa</button>
+        <button onclick="toggleContinent('america', this)">america</button>
+        <button onclick="toggleContinent('asia', this)">asia</button>
+        <button onclick="toggleContinent('europe', this)">europe</button>
+        <button onclick="toggleContinent('oceania', this)">oceania</button>
+    </div>
+    <div class="card" id="card" onclick="handleClick()">
+        <span class="loading" id="status">pick a category</span>
+        <img id="image" style="display:none" alt="">
+        <div class="clue" id="clue"></div>
+        <div class="answer" id="answer"></div>
+        <div class="tag" id="tag"></div>
+    </div>
     </div>
     <div id="clue-area" style="display:none; margin-top:1rem; text-align:center;">
         <button id="clue-btn" onclick="revealLetter()">show letter</button>
@@ -281,8 +299,7 @@
         let currentCats = '';
         let lettersRevealed = 0;
         let seenItems = [];
-        let history = [];
-        let historyIndex = -1;
+        let selectedContinents = [];
 
         const subcategories = {{ subcategories | tojson }};
 
@@ -292,6 +309,7 @@
                 if (b.classList.contains('back-btn')) return;
                 b.classList.remove('active');
             });
+            updateContinentFilter();
             loadNew();
         }
 
@@ -314,7 +332,7 @@
                         menuStack.push({items, group: currentGroup});
                         selectedCategories = [];
                         seenItems = [];
-                        history = []; historyIndex = -1;
+
                         renderSubmenu(sub.children, sub.label);
                     };
                 } else {
@@ -331,7 +349,6 @@
         function toggleSubmenu(parent) {
             selectedCategories = [];
             seenItems = [];
-            history = []; historyIndex = -1;
             menuStack = [];
             renderSubmenu(subcategories[parent], parent);
         }
@@ -359,6 +376,7 @@
                 }
             }
 
+            updateContinentFilter();
             if (selectedCategories.length > 0 && (wasEmpty || isSingleSelect)) {
                 loadNew();
             }
@@ -395,7 +413,7 @@
         function closeSubmenu() {
             selectedCategories = [];
             seenItems = [];
-            history = []; historyIndex = -1;
+            updateContinentFilter();
             if (menuStack.length > 0) {
                 const prev = menuStack.pop();
                 renderSubmenu(prev.items, prev.group);
@@ -403,6 +421,27 @@
                 document.getElementById('main-categories').style.display = 'flex';
                 document.getElementById('submenu').style.display = 'none';
             }
+        }
+
+        function isCountryCategory() {
+            return selectedCategories.some(c => c.startsWith('geography:countries:'));
+        }
+
+        function updateContinentFilter() {
+            document.getElementById('continent-filter').style.display = isCountryCategory() ? 'flex' : 'none';
+        }
+
+        function toggleContinent(continent, btn) {
+            const idx = selectedContinents.indexOf(continent);
+            if (idx === -1) {
+                selectedContinents.push(continent);
+                btn.classList.add('active');
+            } else {
+                selectedContinents.splice(idx, 1);
+                btn.classList.remove('active');
+            }
+            seenItems = [];
+            if (loaded || selectedCategories.length > 0) loadNew();
         }
 
         async function loadNew() {
@@ -438,10 +477,12 @@
 
             const cats = selectedCategories.join(',');
             const seenParam = seenItems.length > 0 ? `&seen=${encodeURIComponent(seenItems.join(','))}` : '';
+            const continentsParam = selectedContinents.length > 0 ? `&continents=${encodeURIComponent(selectedContinents.join(','))}` : '';
+            updateContinentFilter();
             const maxRetries = 5;
             for (let attempt = 0; attempt < maxRetries; attempt++) {
                 try {
-                    const resp = await fetch(`/api/random?cats=${encodeURIComponent(cats)}${seenParam}`);
+                    const resp = await fetch(`/api/random?cats=${encodeURIComponent(cats)}${seenParam}${continentsParam}`);
                     const data = await resp.json();
 
                     if (data.error) continue;
@@ -454,14 +495,34 @@
 
                     if (!loaded_ok) continue;
 
-                    // Save to history
-                    if (historyIndex < history.length - 1) {
-                        history = history.slice(0, historyIndex + 1);
-                    }
-                    history.push(data);
-                    historyIndex = history.length - 1;
                     seenItems.push(data.item || data.name);
-                    showCurrentItem();
+
+                    status.style.display = 'none';
+                    image.style.display = 'block';
+                    clue.style.display = 'none';
+                    if (data.clue) {
+                        clue.textContent = data.clue;
+                        clue.style.display = 'block';
+                    }
+                    currentName = data.name;
+                    currentTag = data.tag || '';
+                    currentItem = data.item || data.name;
+                    currentCats = selectedCategories.join(',');
+                    lettersRevealed = 0;
+                    loaded = true;
+                    hint.textContent = 'click the image to reveal the answer';
+
+                    const usesTmdb = selectedCategories.some(c => c.includes('movies:posters') || c.includes('movies:scenes') || c.includes('tv shows:scenes'));
+                    document.getElementById('tmdb-footer').style.display = usesTmdb ? 'block' : 'none';
+
+                    const clueArea = document.getElementById('clue-area');
+                    if (clueMode) {
+                        updateClueDisplay();
+                        clueArea.style.display = 'block';
+                    } else {
+                        clueArea.style.display = 'none';
+                    }
+
                     return;
                 } catch (e) {
                     continue;
@@ -470,94 +531,6 @@
             status.textContent = 'no image found, click to retry';
             status.className = 'error';
             loaded = false;
-        }
-
-        function showCurrentItem() {
-            const data = history[historyIndex];
-            const card = document.getElementById('card');
-            const image = document.getElementById('image');
-            const clue = document.getElementById('clue');
-            const answer = document.getElementById('answer');
-            const status = document.getElementById('status');
-            const hint = document.getElementById('hint');
-
-            status.style.display = 'none';
-            image.src = data.image;
-            image.style.display = 'block';
-            clue.style.display = 'none';
-            if (data.clue) {
-                clue.textContent = data.clue;
-                clue.style.display = 'block';
-            }
-            currentName = data.name;
-            currentTag = data.tag || '';
-            currentItem = data.item || data.name;
-            currentCats = selectedCategories.join(',');
-            lettersRevealed = 0;
-            loaded = true;
-
-            const reportBtn = document.getElementById('report-btn');
-            reportBtn.style.display = 'inline-block';
-            reportBtn.textContent = 'report';
-            reportBtn.disabled = false;
-            reportBtn.style.color = '#666';
-            reportBtn.style.borderColor = '#444';
-
-            const tag = document.getElementById('tag');
-            tag.style.display = 'none';
-            tag.textContent = '';
-
-            // Always start with answer hidden
-            card.classList.remove('revealed');
-            answer.textContent = '';
-
-            if (data.revealed) {
-                // Already revealed — show answer and tag after a frame
-                requestAnimationFrame(() => {
-                    answer.textContent = data.name;
-                    card.classList.add('revealed');
-                    if (currentTag) showTag(tag);
-                });
-                hint.textContent = 'click again for a new one';
-                revealed = true;
-            } else {
-                hint.textContent = 'click the image to reveal the answer';
-                revealed = false;
-            }
-
-            const usesTmdb = selectedCategories.some(c => c.includes('movies:posters') || c.includes('movies:scenes') || c.includes('tv shows:scenes'));
-            document.getElementById('tmdb-footer').style.display = usesTmdb ? 'block' : 'none';
-
-            const clueArea = document.getElementById('clue-area');
-            if (clueMode) {
-                updateClueDisplay();
-                clueArea.style.display = 'block';
-            } else {
-                clueArea.style.display = 'none';
-            }
-
-            updateNavArrows();
-        }
-
-        function updateNavArrows() {
-            document.getElementById('nav-prev').style.visibility = historyIndex > 0 ? 'visible' : 'hidden';
-            document.getElementById('nav-next').style.visibility = loaded ? 'visible' : 'hidden';
-        }
-
-        function navigatePrev() {
-            if (historyIndex > 0) {
-                historyIndex--;
-                showCurrentItem();
-            }
-        }
-
-        function navigateNext() {
-            if (historyIndex < history.length - 1) {
-                historyIndex++;
-                showCurrentItem();
-            } else if (selectedCategories.length > 0) {
-                loadNew();
-            }
         }
 
         function showTag(tagEl) {
@@ -605,7 +578,6 @@
                     showTag(document.getElementById('tag'));
                 }
                 revealed = true;
-                if (history[historyIndex]) history[historyIndex].revealed = true;
             } else if (selectedCategories.length > 0) {
                 loadNew();
             }
