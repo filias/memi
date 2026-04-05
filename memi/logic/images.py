@@ -2,7 +2,7 @@ import os
 
 import requests
 
-from memi.categories.countries import CAPITALS
+from memi.categories.countries import CAPITALS, CURRENCIES
 
 HEADERS = {"User-Agent": "Memi/1.0"}
 TMDB_API_KEY = os.environ.get("TMDB_API_KEY", "")
@@ -376,6 +376,13 @@ def get_country_item(country, mode):
             capital = CAPITALS.get(country, "Unknown")
             result["clue"] = country
             result["name"] = capital
+            return result
+    elif mode == "currencies":
+        result = get_country_shape(country)
+        if result:
+            currency = CURRENCIES.get(country, "Unknown")
+            result["clue"] = country
+            result["name"] = currency
             return result
     else:
         return get_country_shape(country)

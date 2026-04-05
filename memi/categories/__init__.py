@@ -36,6 +36,7 @@ CATEGORIES = {
     "culture:tv shows:scenes": tvshows.ALL,
     # Geography
     "geography:countries:capitals": countries.ALL,
+    "geography:countries:currencies": countries.ALL,
     "geography:countries:flags": countries.ALL,
     "geography:countries:shapes": countries.ALL,
     "geography:rivers": rivers.ALL,
