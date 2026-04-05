@@ -242,7 +242,9 @@ async function loadNew() {
             hint.textContent = 'click the image to reveal the answer';
 
             const usesTmdb = selectedCategories.some(c => c.includes('movies:posters') || c.includes('movies:scenes') || c.includes('tv shows:scenes'));
+            const usesBones = selectedCategories.includes('nature:bones');
             document.getElementById('tmdb-footer').style.display = usesTmdb ? 'block' : 'none';
+            document.getElementById('eskeletons-footer').style.display = usesBones ? 'block' : 'none';
 
             const clueArea = document.getElementById('clue-area');
             if (clueMode) {
