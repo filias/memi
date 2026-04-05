@@ -73,7 +73,11 @@ def random_item():
         return jsonify({"error": "Unknown category"}), 400
 
     # Exclude recently seen items
-    seen = set(request.args.get("seen", "").split(",")) if request.args.get("seen") else set()
+    seen = (
+        set(request.args.get("seen", "").split(","))
+        if request.args.get("seen")
+        else set()
+    )
 
     # Pick a random category, then a random item from it
     category = random.choice(cat_list)
@@ -97,7 +101,10 @@ def random_item():
     is_country = category.startswith("geography:countries:")
     mode = category.split(":")[-1] if is_country else None
 
-    is_people = category.startswith("people:") or category in ("culture:movies:actors", "culture:movies:directors")
+    is_people = category.startswith("people:") or category in (
+        "culture:movies:actors",
+        "culture:movies:directors",
+    )
     is_logo = category == "logos"
     is_movie = category.startswith("culture:movies:")
     movie_mode = category.split(":")[-1] if is_movie else None
@@ -155,7 +162,9 @@ def random_item():
                 result["tag"] = RIVER_LOCATIONS[item]
             elif category == "nature:space" and item in SPACE_LOCATIONS:
                 result["tag"] = SPACE_LOCATIONS[item]
-            elif category.startswith("nature:animals:") or category.startswith("nature:plants:"):
+            elif category.startswith("nature:animals:") or category.startswith(
+                "nature:plants:"
+            ):
                 sci_name = get_scientific_name(item)
                 display_name = result["name"].lower()
                 if sci_name and sci_name.lower() != display_name:

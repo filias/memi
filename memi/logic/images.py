@@ -49,7 +49,12 @@ def get_scientific_name(title):
     try:
         resp = requests.get(
             "https://en.wikipedia.org/w/api.php",
-            params={"action": "query", "titles": title, "prop": "pageprops", "format": "json"},
+            params={
+                "action": "query",
+                "titles": title,
+                "prop": "pageprops",
+                "format": "json",
+            },
             headers=HEADERS,
             timeout=5,
         )
@@ -63,7 +68,12 @@ def get_scientific_name(title):
             return ""
         resp2 = requests.get(
             "https://www.wikidata.org/w/api.php",
-            params={"action": "wbgetclaims", "entity": wikidata_id, "property": "P225", "format": "json"},
+            params={
+                "action": "wbgetclaims",
+                "entity": wikidata_id,
+                "property": "P225",
+                "format": "json",
+            },
             headers=HEADERS,
             timeout=5,
         )
@@ -94,7 +104,11 @@ def get_tmdb_image(title, image_type="backdrop"):
         if not results:
             return None
         movie = results[0]
-        path = movie.get("backdrop_path") if image_type == "backdrop" else movie.get("poster_path")
+        path = (
+            movie.get("backdrop_path")
+            if image_type == "backdrop"
+            else movie.get("poster_path")
+        )
         if not path:
             path = movie.get("poster_path") or movie.get("backdrop_path")
         if not path:
@@ -122,7 +136,11 @@ def get_tmdb_tv_image(title, image_type="backdrop"):
         if not results:
             return None
         show = results[0]
-        path = show.get("backdrop_path") if image_type == "backdrop" else show.get("poster_path")
+        path = (
+            show.get("backdrop_path")
+            if image_type == "backdrop"
+            else show.get("poster_path")
+        )
         if not path:
             path = show.get("poster_path") or show.get("backdrop_path")
         if not path:
@@ -220,7 +238,9 @@ def get_river_map(title):
     pages = resp.json().get("query", {}).get("pages", {})
     map_keywords = ["map", "basin", "watershed", "course", "locator"]
     map_files = []
-    river_name = title.split("(")[0].replace("River", "").replace("river", "").strip().lower()
+    river_name = (
+        title.split("(")[0].replace("River", "").replace("river", "").strip().lower()
+    )
     for page in pages.values():
         for img in page.get("images", []):
             fname = img["title"].lower()

@@ -13,9 +13,9 @@ SECRET = os.environ["WEBHOOK_SECRET"]
 
 
 def verify_signature(payload, signature):
-    expected = "sha256=" + hmac.new(
-        SECRET.encode(), payload, hashlib.sha256
-    ).hexdigest()
+    expected = (
+        "sha256=" + hmac.new(SECRET.encode(), payload, hashlib.sha256).hexdigest()
+    )
     return hmac.compare_digest(expected, signature)
 
 
