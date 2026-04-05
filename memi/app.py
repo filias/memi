@@ -1,7 +1,8 @@
 import logging
 import random
 
-from flask import Flask, jsonify, render_template, request
+import requests as http_requests
+from flask import Flask, Response, jsonify, render_template, request
 
 from memi.categories import CATEGORIES
 from memi.categories.animals import CLASSES as ANIMAL_CLASSES
@@ -14,6 +15,7 @@ from memi.categories.nature import LOCATIONS as NATURE_LOCATIONS
 from memi.categories.space import LOCATIONS as SPACE_LOCATIONS
 from memi.categories.rivers import LOCATIONS as RIVER_LOCATIONS
 from memi.logic.images import (
+    BONES_API_URL,
     get_bone_image,
     get_country_item,
     get_fandom_image,
@@ -191,6 +193,34 @@ def random_item():
             _fail_logger.warning("FAILED: %s (category: %s)", item, category)
 
     return jsonify({"error": "No image found"}), 404
+
+
+@app.route("/api/bones/image/<bone_id>")
+def bones_image(bone_id):
+    """Proxy bone images from the Bones API."""
+    try:
+        resp = http_requests.get(
+            f"{BONES_API_URL}/bones/{bone_id}",
+            timeout=10,
+        )
+        if resp.status_code != 200:
+            return "Not found", 404
+        data = resp.json()
+        image_path = data.get("image")
+        if not image_path:
+            return "Not found", 404
+        img_resp = http_requests.get(
+            f"{BONES_API_URL}{image_path}",
+            timeout=10,
+        )
+        if img_resp.status_code != 200:
+            return "Not found", 404
+        return Response(
+            img_resp.content,
+            content_type=img_resp.headers.get("content-type", "image/jpeg"),
+        )
+    except Exception:
+        return "Not found", 404
 
 
 @app.route("/api/report", methods=["POST"])

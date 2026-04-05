@@ -396,7 +396,7 @@ def get_bone_image(bone_id):
             return None
         return {
             "name": data["name"],
-            "image": f"{BONES_API_URL}{data['image']}",
+            "image": f"/api/bones/image/{bone_id}",
             "tag": data.get("region", ""),
         }
     except Exception:
