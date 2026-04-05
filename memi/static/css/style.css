@@ -1,0 +1,244 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: system-ui, sans-serif;
+    background: #1a1a2e;
+    color: #eee;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    margin: 2rem 0 0.5rem;
+    font-size: 2.5rem;
+    letter-spacing: 0.1em;
+}
+
+.subtitle {
+    color: #888;
+    margin-bottom: 1.5rem;
+}
+
+.categories {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.categories button {
+    padding: 0.5rem 1.2rem;
+    border: 2px solid #444;
+    border-radius: 2rem;
+    background: transparent;
+    color: #ccc;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.categories button:hover:not(.active) {
+    border-color: #888;
+    color: #eee;
+}
+
+.categories button.active {
+    border-color: #e2b714;
+    color: #e2b714;
+}
+
+.submenu {
+    gap: 0.75rem;
+    align-items: center;
+    padding: 0.5rem 1rem;
+}
+
+.back-btn {
+    border-color: #666 !important;
+    color: #888 !important;
+    font-size: 1.1rem !important;
+    padding: 0.4rem 0.8rem !important;
+}
+
+.continent-filter {
+    display: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.continent-filter button {
+    padding: 0.4rem 0.8rem;
+    border: 2px solid #444;
+    border-radius: 2rem;
+    background: transparent;
+    color: #888;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.continent-filter button:hover:not(.active) {
+    border-color: #888;
+    color: #eee;
+}
+
+.continent-filter button.active {
+    border-color: #e2b714;
+    color: #e2b714;
+}
+
+.card {
+    position: relative;
+    width: min(500px, 90vw);
+    aspect-ratio: 1;
+    border-radius: 1rem;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    background: #16213e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 1rem;
+    display: block;
+}
+
+.card .clue {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.6);
+    color: #e2b714;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 0.75rem;
+    display: none;
+}
+
+.card .answer {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.card .tag {
+    position: absolute;
+    bottom: 0.75rem;
+    right: 0.75rem;
+    background: rgba(0,0,0,0.85);
+    color: #e2b714;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 0.4rem 0.9rem;
+    border-radius: 1rem;
+    z-index: 10;
+}
+
+.card .tag .tag-dates {
+    color: #90cea1;
+    font-weight: normal;
+    font-style: italic;
+    margin-left: 0.3rem;
+    display: none;
+}
+
+.card.revealed .answer {
+    opacity: 1;
+}
+
+.hint {
+    margin-top: 1rem;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.loading {
+    color: #888;
+    font-size: 1.2rem;
+}
+
+.error {
+    color: #e74c3c;
+}
+
+.mode-toggle {
+    margin-top: 1rem;
+}
+
+.mode-toggle button {
+    padding: 0.4rem 1rem;
+    border: 2px solid #444;
+    border-radius: 2rem;
+    background: transparent;
+    color: #888;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.mode-toggle button.active {
+    border-color: #e2b714;
+    color: #e2b714;
+}
+
+#clue-btn {
+    padding: 0.4rem 1rem;
+    border: 2px solid #444;
+    border-radius: 2rem;
+    background: transparent;
+    color: #ccc;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#clue-btn:hover {
+    border-color: #e2b714;
+    color: #e2b714;
+}
+
+.clue-letters {
+    margin-top: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 0.15em;
+    color: #e2b714;
+}
+
+.about-link {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    color: #666;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.about-link:hover {
+    color: #e2b714;
+}
