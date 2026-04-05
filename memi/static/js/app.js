@@ -10,6 +10,7 @@ let lettersRevealed = 0;
 let seenItems = [];
 let selectedContinents = [];
 let selectedAnimalClasses = [];
+let selectedPeopleRoles = [];
 
 const subcategories = JSON.parse(document.getElementById('subcategories-data').textContent);
 
@@ -141,9 +142,14 @@ function isAnimalCategory() {
     return selectedCategories.includes('nature:animals');
 }
 
+function isPeopleCategory() {
+    return selectedCategories.includes('humans:people');
+}
+
 function updateFilters() {
     document.getElementById('continent-filter').style.display = isCountryCategory() ? 'flex' : 'none';
     document.getElementById('animal-class-filter').style.display = isAnimalCategory() ? 'flex' : 'none';
+    document.getElementById('people-role-filter').style.display = isPeopleCategory() ? 'flex' : 'none';
 }
 
 function toggleContinent(continent, btn) {
@@ -166,6 +172,19 @@ function toggleAnimalClass(cls, btn) {
         btn.classList.add('active');
     } else {
         selectedAnimalClasses.splice(idx, 1);
+        btn.classList.remove('active');
+    }
+    seenItems = [];
+    if (loaded || selectedCategories.length > 0) loadNew();
+}
+
+function togglePeopleRole(role, btn) {
+    const idx = selectedPeopleRoles.indexOf(role);
+    if (idx === -1) {
+        selectedPeopleRoles.push(role);
+        btn.classList.add('active');
+    } else {
+        selectedPeopleRoles.splice(idx, 1);
         btn.classList.remove('active');
     }
     seenItems = [];
@@ -207,11 +226,12 @@ async function loadNew() {
     const seenParam = seenItems.length > 0 ? `&seen=${encodeURIComponent(seenItems.join(','))}` : '';
     const continentsParam = selectedContinents.length > 0 ? `&continents=${encodeURIComponent(selectedContinents.join(','))}` : '';
     const classesParam = selectedAnimalClasses.length > 0 ? `&classes=${encodeURIComponent(selectedAnimalClasses.join(','))}` : '';
+    const rolesParam = selectedPeopleRoles.length > 0 ? `&roles=${encodeURIComponent(selectedPeopleRoles.join(','))}` : '';
     updateFilters();
     const maxRetries = 5;
     for (let attempt = 0; attempt < maxRetries; attempt++) {
         try {
-            const resp = await fetch(`/api/random?cats=${encodeURIComponent(cats)}${seenParam}${continentsParam}${classesParam}`);
+            const resp = await fetch(`/api/random?cats=${encodeURIComponent(cats)}${seenParam}${continentsParam}${classesParam}${rolesParam}`);
             const data = await resp.json();
 
             if (data.error) continue;
@@ -242,7 +262,7 @@ async function loadNew() {
             hint.textContent = 'click the image to reveal the answer';
 
             const usesTmdb = selectedCategories.some(c => c.includes('movies:posters') || c.includes('movies:scenes') || c.includes('tv shows:scenes'));
-            const usesBones = selectedCategories.includes('nature:bones');
+            const usesBones = selectedCategories.includes('humans:bones');
             document.getElementById('tmdb-footer').style.display = usesTmdb ? 'block' : 'none';
             document.getElementById('eskeletons-footer').style.display = usesBones ? 'block' : 'none';
 

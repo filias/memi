@@ -1737,3 +1737,14 @@ for _line in _src.split("\n"):
 ALL = (
     SCIENTISTS + EXPLORERS + ARTISTS + MUSICIANS + WRITERS + LEADERS + ACTORS + ATHLETES
 )
+
+ROLES = {
+    "scientists": SCIENTISTS,
+    "explorers": EXPLORERS,
+    "artists": ARTISTS,
+    "musicians": MUSICIANS,
+    "writers": WRITERS,
+    "leaders": LEADERS,
+    "actors": ACTORS,
+    "athletes": ATHLETES,
+}

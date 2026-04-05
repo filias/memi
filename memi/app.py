@@ -7,6 +7,7 @@ from flask import Flask, Response, jsonify, render_template, request
 from memi.categories import CATEGORIES
 from memi.categories.animals import CLASSES as ANIMAL_CLASSES
 from memi.categories.countries import CONTINENTS
+from memi.categories.people import ROLES as PEOPLE_ROLES
 from memi.categories.monuments import LOCATIONS as MONUMENT_LOCATIONS
 from memi.categories.movies import YEARS as MOVIE_YEARS
 from memi.categories.tvshows import YEARS as TV_YEARS
@@ -107,6 +108,16 @@ def random_item():
         if not items:
             return jsonify({"error": "No animals for selected classes"}), 400
 
+    # Filter by people roles if provided
+    roles_param = request.args.get("roles", "")
+    if roles_param and category == "humans:people":
+        allowed = set()
+        for r in roles_param.split(","):
+            allowed.update(PEOPLE_ROLES.get(r, []))
+        items = [i for i in items if i in allowed]
+        if not items:
+            return jsonify({"error": "No people for selected roles"}), 400
+
     unseen = [i for i in items if i not in seen]
     if not unseen:
         unseen = items  # all seen, reset
@@ -114,9 +125,9 @@ def random_item():
 
     is_country = category.startswith("geography:countries:")
     mode = category.split(":")[-1] if is_country else None
-    is_bones = category == "nature:bones"
+    is_bones = category == "humans:bones"
 
-    is_people = category.startswith("people:") or category in (
+    is_people = category == "humans:people" or category in (
         "culture:movies:actors",
         "culture:movies:directors",
     )

@@ -39,10 +39,12 @@ CATEGORIES = {
     "geography:countries:flags": countries.ALL,
     "geography:countries:shapes": countries.ALL,
     "geography:rivers": rivers.ALL,
+    # Humans
+    "humans:bones": bones.ALL,
+    "humans:people": people.ALL,
     # Nature
-    "nature:all": animals.ALL + plants.ALL + nature.ALL + space.ALL + bones.ALL,
+    "nature:all": animals.ALL + plants.ALL + nature.ALL + space.ALL,
     "nature:animals": animals.ALL,
-    "nature:bones": bones.ALL,
     "nature:landscapes": nature.ALL,
     "nature:plants:all": plants.ALL,
     "nature:plants:flowers": plants.FLOWERS,
@@ -51,16 +53,6 @@ CATEGORIES = {
     "nature:plants:other": plants.OTHER,
     "nature:plants:trees": plants.TREES,
     "nature:space": space.ALL,
-    # People
-    "people:all": people.ALL,
-    "people:scientists": people.SCIENTISTS,
-    "people:explorers": people.EXPLORERS,
-    "people:artists": people.ARTISTS,
-    "people:musicians": people.MUSICIANS,
-    "people:writers": people.WRITERS,
-    "people:leaders": people.LEADERS,
-    "people:actors": people.ACTORS,
-    "people:athletes": people.ATHLETES,
     # Disabled
     # "logos": logos.ALL,  # TODO: find symbol-only logos without text
 }
