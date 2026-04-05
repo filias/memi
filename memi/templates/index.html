@@ -70,16 +70,13 @@
             padding: 0.4rem 0.8rem !important;
         }
 
-        .card-area {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
         .continent-filter {
             display: none;
-            flex-direction: column;
+            flex-direction: row;
+            flex-wrap: wrap;
             gap: 0.4rem;
+            justify-content: center;
+            margin-bottom: 1rem;
         }
 
         .continent-filter button {
@@ -263,7 +260,6 @@
         <button id="clue-toggle" onclick="toggleClueMode()">clues: off</button>
     </div>
 
-    <div class="card-area">
     <div class="continent-filter" id="continent-filter">
         <button onclick="toggleContinent('africa', this)">africa</button>
         <button onclick="toggleContinent('america', this)">america</button>
@@ -277,7 +273,6 @@
         <div class="clue" id="clue"></div>
         <div class="answer" id="answer"></div>
         <div class="tag" id="tag"></div>
-    </div>
     </div>
     <div id="clue-area" style="display:none; margin-top:1rem; text-align:center;">
         <button id="clue-btn" onclick="revealLetter()">show letter</button>
