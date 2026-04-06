@@ -445,3 +445,31 @@ def get_bone_image(bone_id):
         }
     except Exception:
         return None
+
+
+def get_album_cover(album_name, artist_name):
+    """Fetch an album cover from MusicBrainz / Cover Art Archive."""
+    try:
+        resp = requests.get(
+            "https://musicbrainz.org/ws/2/release-group/",
+            params={
+                "query": f'releasegroup:"{album_name}" AND artist:"{artist_name}"',
+                "fmt": "json",
+                "limit": 1,
+            },
+            headers=HEADERS,
+            timeout=10,
+        )
+        if resp.status_code != 200:
+            return None
+        groups = resp.json().get("release-groups", [])
+        if not groups:
+            return None
+        mbid = groups[0]["id"]
+        cover_url = f"https://coverartarchive.org/release-group/{mbid}/front-500"
+        check = requests.head(cover_url, timeout=10, allow_redirects=True)
+        if check.status_code == 200:
+            return {"name": album_name, "image": cover_url}
+    except Exception:
+        pass
+    return None

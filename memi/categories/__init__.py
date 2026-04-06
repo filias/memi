@@ -1,4 +1,5 @@
 from memi.categories import (
+    albums,
     animals,
     bones,
     characters,
@@ -34,6 +35,7 @@ CATEGORIES = {
     "culture:movies:directors": directors.ALL,
     "culture:movies:posters": movies.ALL,
     "culture:movies:scenes": movies.ALL,
+    "culture:music:albums": albums.ALL,
     "culture:tv shows:scenes": tvshows.ALL,
     # Geography
     "geography:countries:capitals": countries.ALL,

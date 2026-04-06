@@ -5,6 +5,8 @@ import requests as http_requests
 from flask import Flask, Response, jsonify, render_template, request
 
 from memi.categories import CATEGORIES
+from memi.categories.albums import ARTISTS as ALBUM_ARTISTS
+from memi.categories.albums import YEARS as ALBUM_YEARS
 from memi.categories.animals import CLASSES as ANIMAL_CLASSES
 from memi.categories.countries import CONTINENTS as COUNTRY_CONTINENTS
 from memi.categories.monuments import CONTINENTS as MONUMENT_CONTINENTS
@@ -22,6 +24,7 @@ from memi.categories.roadsigns import COMMONS_FILES as SIGN_FILES
 from memi.categories.roadsigns import REGIONS as SIGN_REGIONS
 from memi.logic.images import (
     BONES_API_URL,
+    get_album_cover,
     get_bone_image,
     get_commons_file_image,
     get_country_item,
@@ -143,6 +146,7 @@ def random_item():
     mode = category.split(":")[-1] if is_country else None
     is_bones = category == "humans:bones"
     is_road_signs = category == "geography:road signs"
+    is_albums = category == "culture:music:albums"
 
     is_people = category == "humans:people" or category in (
         "culture:movies:actors",
@@ -157,7 +161,10 @@ def random_item():
 
     for item in candidates:
         result = None
-        if is_bones:
+        if is_albums:
+            artist = ALBUM_ARTISTS.get(item, "")
+            result = get_album_cover(item, artist)
+        elif is_bones:
             result = get_bone_image(item)
         elif is_road_signs:
             commons_file = SIGN_FILES.get(item)
@@ -220,6 +227,8 @@ def random_item():
                 result["tag"] = NATURE_LOCATIONS[item]
             elif is_road_signs and item in SIGN_REGIONS and SIGN_REGIONS[item]:
                 result["tag"] = SIGN_REGIONS[item]
+            elif is_albums and item in ALBUM_ARTISTS:
+                result["tag"] = f"{ALBUM_ARTISTS[item]} {ALBUM_YEARS.get(item, '')}"
             if is_road_signs:
                 result["name"] = item
             return jsonify(result)
