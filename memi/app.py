@@ -18,6 +18,8 @@ from memi.categories.paintings import MOVEMENT_PERIODS, PAINTING_INFO
 from memi.categories.nature import LOCATIONS as NATURE_LOCATIONS
 from memi.categories.space import LOCATIONS as SPACE_LOCATIONS
 from memi.categories.rivers import LOCATIONS as RIVER_LOCATIONS
+from memi.categories.roadsigns import REGIONS as SIGN_REGIONS
+from memi.categories.roadsigns import WIKIPEDIA as SIGN_WIKIPEDIA
 from memi.logic.images import (
     BONES_API_URL,
     get_bone_image,
@@ -139,6 +141,7 @@ def random_item():
     is_country = category.startswith("geography:countries:")
     mode = category.split(":")[-1] if is_country else None
     is_bones = category == "humans:bones"
+    is_road_signs = category == "geography:road signs"
 
     is_people = category == "humans:people" or category in (
         "culture:movies:actors",
@@ -155,6 +158,9 @@ def random_item():
         result = None
         if is_bones:
             result = get_bone_image(item)
+        elif is_road_signs:
+            wiki_title = SIGN_WIKIPEDIA.get(item, item)
+            result = get_wikipedia_image(wiki_title)
         elif is_country:
             result = get_country_item(item, mode)
         elif is_tv:
@@ -203,15 +209,17 @@ def random_item():
                 result["tag"] = RIVER_LOCATIONS[item]
             elif category == "nature:space" and item in SPACE_LOCATIONS:
                 result["tag"] = SPACE_LOCATIONS[item]
-            elif category.startswith("nature:animals:") or category.startswith(
-                "nature:plants:"
-            ):
+            elif category == "nature:animals" or category.startswith("nature:plants:"):
                 sci_name = get_scientific_name(item)
                 display_name = result["name"].lower()
                 if sci_name and sci_name.lower() != display_name:
                     result["tag"] = sci_name
             elif category == "nature:landscapes" and item in NATURE_LOCATIONS:
                 result["tag"] = NATURE_LOCATIONS[item]
+            elif is_road_signs and item in SIGN_REGIONS and SIGN_REGIONS[item]:
+                result["tag"] = SIGN_REGIONS[item]
+            if is_road_signs:
+                result["name"] = item
             return jsonify(result)
         else:
             _fail_logger.warning("FAILED: %s (category: %s)", item, category)

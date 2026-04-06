@@ -11,6 +11,7 @@ from memi.categories import (
     people,
     plants,
     rivers,
+    roadsigns,
     space,
     tvshows,
 )
@@ -40,6 +41,7 @@ CATEGORIES = {
     "geography:countries:flags": countries.ALL,
     "geography:countries:shapes": countries.ALL,
     "geography:rivers": rivers.ALL,
+    "geography:road signs": roadsigns.ALL,
     # Humans
     "humans:bones": bones.ALL,
     "humans:people": people.ALL,
