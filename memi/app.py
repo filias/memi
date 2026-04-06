@@ -9,6 +9,7 @@ from memi.categories.albums import ARTISTS as ALBUM_ARTISTS
 from memi.categories.albums import MBIDS as ALBUM_MBIDS
 from memi.categories.albums import YEARS as ALBUM_YEARS
 from memi.categories.animals import CLASSES as ANIMAL_CLASSES
+from memi.categories.dinosaurs import ALL as DINOSAUR_LIST
 from memi.categories.countries import CONTINENTS as COUNTRY_CONTINENTS
 from memi.categories.monuments import CONTINENTS as MONUMENT_CONTINENTS
 from memi.categories.monuments import LOCATIONS as MONUMENT_LOCATIONS
@@ -27,6 +28,7 @@ from memi.logic.images import (
     BONES_API_URL,
     get_album_cover,
     get_bone_image,
+    get_dino_image,
     get_commons_file_image,
     get_country_item,
     get_fandom_image,
@@ -190,6 +192,10 @@ def random_item():
             result = get_logo_image(item)
         elif fandom_wiki:
             result = get_fandom_image(item, fandom_wiki)
+            if not result or not result.get("image"):
+                result = get_wikipedia_image(item)
+        elif item in DINOSAUR_LIST:
+            result = get_dino_image(item)
             if not result or not result.get("image"):
                 result = get_wikipedia_image(item)
         else:

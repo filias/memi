@@ -9,6 +9,37 @@ TMDB_API_KEY = os.environ.get("TMDB_API_KEY", "")
 BONES_API_URL = os.environ.get("BONES_API_URL", "http://127.0.0.1:8081")
 
 
+def get_dino_image(name):
+    """Search Wikimedia Commons for a dinosaur life restoration/reconstruction."""
+    resp = requests.get(
+        "https://commons.wikimedia.org/w/api.php",
+        params={
+            "action": "query",
+            "list": "search",
+            "srnamespace": 6,
+            "srsearch": f"{name} restoration OR reconstruction OR paleoart",
+            "srlimit": 10,
+            "format": "json",
+        },
+        headers=HEADERS,
+        timeout=10,
+    )
+    if resp.status_code != 200:
+        return None
+    results = resp.json().get("query", {}).get("search", [])
+    name_lower = name.lower().split()[0]
+    skip = ["skeleton", "skull", "fossil", "bone", "tooth", "mount", "cast"]
+    chosen = None
+    for r in results:
+        title = r["title"].lower()
+        if name_lower in title and not any(bad in title for bad in skip):
+            chosen = r["title"]
+            break
+    if not chosen:
+        return None
+    return get_commons_file_image(chosen.replace("File:", ""))
+
+
 def get_commons_file_image(filename):
     """Get a thumbnail URL for a specific Wikimedia Commons file."""
     resp = requests.get(
