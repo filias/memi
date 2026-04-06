@@ -6,6 +6,7 @@ from flask import Flask, Response, jsonify, render_template, request
 
 from memi.categories import CATEGORIES
 from memi.categories.albums import ARTISTS as ALBUM_ARTISTS
+from memi.categories.albums import MBIDS as ALBUM_MBIDS
 from memi.categories.albums import YEARS as ALBUM_YEARS
 from memi.categories.animals import CLASSES as ANIMAL_CLASSES
 from memi.categories.countries import CONTINENTS as COUNTRY_CONTINENTS
@@ -162,8 +163,8 @@ def random_item():
     for item in candidates:
         result = None
         if is_albums:
-            artist = ALBUM_ARTISTS.get(item, "")
-            result = get_album_cover(item, artist)
+            mbid = ALBUM_MBIDS.get(item)
+            result = get_album_cover(item, mbid)
         elif is_bones:
             result = get_bone_image(item)
         elif is_road_signs:
