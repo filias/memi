@@ -1,4 +1,5 @@
 import os
+import time
 
 import requests
 
@@ -8,8 +9,34 @@ HEADERS = {"User-Agent": "Memi/1.0 (https://memi.click; memi@memi.click)"}
 TMDB_API_KEY = os.environ.get("TMDB_API_KEY", "")
 BONES_API_URL = os.environ.get("BONES_API_URL", "http://127.0.0.1:8081")
 
+# Simple in-memory cache: {key: (result, timestamp)}
+_cache = {}
+_CACHE_TTL = 3600  # 1 hour
+
+
+def _cached(key, fn):
+    """Return cached result or call fn() and cache it."""
+    now = time.time()
+    if key in _cache:
+        result, ts = _cache[key]
+        if now - ts < _CACHE_TTL:
+            return dict(result) if isinstance(result, dict) else result
+    result = fn()
+    _cache[key] = (result, now)
+    # Evict old entries periodically
+    if len(_cache) > 5000:
+        cutoff = now - _CACHE_TTL
+        to_delete = [k for k, (_, ts) in _cache.items() if ts < cutoff]
+        for k in to_delete:
+            del _cache[k]
+    return result
+
 
 def get_dino_image(name):
+    return _cached(f"dino:{name}", lambda: _fetch_dino_image(name))
+
+
+def _fetch_dino_image(name):
     """Search Wikimedia Commons for a dinosaur life restoration/reconstruction."""
     resp = requests.get(
         "https://commons.wikimedia.org/w/api.php",
@@ -44,6 +71,10 @@ def get_dino_image(name):
 
 
 def get_commons_file_image(filename):
+    return _cached(f"commons:{filename}", lambda: _fetch_commons_file_image(filename))
+
+
+def _fetch_commons_file_image(filename):
     """Get a thumbnail URL for a specific Wikimedia Commons file."""
     resp = requests.get(
         "https://commons.wikimedia.org/w/api.php",
@@ -71,6 +102,10 @@ def get_commons_file_image(filename):
 
 
 def get_wikipedia_image(title):
+    return _cached(f"wp_img:{title}", lambda: _fetch_wikipedia_image(title))
+
+
+def _fetch_wikipedia_image(title):
     resp = requests.get(
         "https://en.wikipedia.org/w/api.php",
         params={
@@ -94,6 +129,10 @@ def get_wikipedia_image(title):
 
 
 def get_wikipedia_description(title):
+    return _cached(f"wp_desc:{title}", lambda: _fetch_wikipedia_description(title))
+
+
+def _fetch_wikipedia_description(title):
     try:
         resp = requests.get(
             "https://en.wikipedia.org/api/rest_v1/page/summary/" + title,
@@ -108,6 +147,10 @@ def get_wikipedia_description(title):
 
 
 def get_scientific_name(title):
+    return _cached(f"sci:{title}", lambda: _fetch_scientific_name(title))
+
+
+def _fetch_scientific_name(title):
     try:
         resp = requests.get(
             "https://en.wikipedia.org/w/api.php",
@@ -150,6 +193,12 @@ def get_scientific_name(title):
 
 
 def get_tmdb_image(title, image_type="backdrop"):
+    return _cached(
+        f"tmdb:{title}:{image_type}", lambda: _fetch_tmdb_image(title, image_type)
+    )
+
+
+def _fetch_tmdb_image(title, image_type="backdrop"):
     if not TMDB_API_KEY:
         return None
     search_term = title.split("(")[0].strip()
@@ -182,6 +231,12 @@ def get_tmdb_image(title, image_type="backdrop"):
 
 
 def get_tmdb_tv_image(title, image_type="backdrop"):
+    return _cached(
+        f"tmdb_tv:{title}:{image_type}", lambda: _fetch_tmdb_tv_image(title, image_type)
+    )
+
+
+def _fetch_tmdb_tv_image(title, image_type="backdrop"):
     if not TMDB_API_KEY:
         return None
     search_term = title.split("(")[0].strip()
@@ -263,6 +318,10 @@ def get_grays_anatomy_image(title):
 
 
 def get_fandom_image(title, wiki):
+    return _cached(f"fandom:{wiki}:{title}", lambda: _fetch_fandom_image(title, wiki))
+
+
+def _fetch_fandom_image(title, wiki):
     clean = title.split("(")[0].strip().replace(" ", "_")
     try:
         resp = requests.get(
@@ -402,6 +461,10 @@ def get_logo_image(title):
 
 
 def get_country_shape(country):
+    return _cached(f"shape:{country}", lambda: _fetch_country_shape(country))
+
+
+def _fetch_country_shape(country):
     filename = f"File:{country} (orthographic projection).svg"
     resp = requests.get(
         "https://en.wikipedia.org/w/api.php",

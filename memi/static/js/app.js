@@ -271,8 +271,10 @@ async function loadNew() {
 
             const usesTmdb = selectedCategories.some(c => c.includes('movies:posters') || c.includes('movies:scenes') || c.includes('tv shows:scenes'));
             const usesBones = selectedCategories.includes('humans:bones');
+            const usesAlbums = selectedCategories.includes('culture:music:albums');
             document.getElementById('tmdb-footer').style.display = usesTmdb ? 'block' : 'none';
             document.getElementById('eskeletons-footer').style.display = usesBones ? 'block' : 'none';
+            document.getElementById('musicbrainz-footer').style.display = usesAlbums ? 'block' : 'none';
 
             const clueArea = document.getElementById('clue-area');
             if (clueMode) {
