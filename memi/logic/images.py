@@ -215,6 +215,8 @@ def get_fandom_image(title, wiki):
         data = resp.json()
         image_url = data.get("image", {}).get("imageserving")
         if image_url:
+            # Strip revision params to avoid Fandom hotlink protection
+            image_url = image_url.split("/revision/")[0]
             return {"name": title, "image": image_url}
     except Exception:
         pass
