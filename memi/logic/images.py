@@ -37,7 +37,10 @@ def get_dino_image(name):
             break
     if not chosen:
         return None
-    return get_commons_file_image(chosen.replace("File:", ""))
+    result = get_commons_file_image(chosen.replace("File:", ""))
+    if result:
+        result["name"] = name
+    return result
 
 
 def get_commons_file_image(filename):
