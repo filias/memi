@@ -1,3 +1,5 @@
+from memi.categories.dinosaurs import ALL as DINOSAURS
+
 MAMMALS = [
     # Big cats
     "Black-footed cat",
@@ -1087,7 +1089,15 @@ CAT_BREEDS = [
 ]
 
 ALL = (
-    MAMMALS + BIRDS + REPTILES + AMPHIBIANS + MARINE + INSECTS + DOG_BREEDS + CAT_BREEDS
+    MAMMALS
+    + BIRDS
+    + REPTILES
+    + AMPHIBIANS
+    + MARINE
+    + INSECTS
+    + DOG_BREEDS
+    + CAT_BREEDS
+    + DINOSAURS
 )
 
 CLASSES = {
@@ -1099,4 +1109,5 @@ CLASSES = {
     "insects": INSECTS,
     "dogs": DOG_BREEDS,
     "cats": CAT_BREEDS,
+    "dinosaurs": DINOSAURS,
 }
