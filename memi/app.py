@@ -18,11 +18,12 @@ from memi.categories.paintings import MOVEMENT_PERIODS, PAINTING_INFO
 from memi.categories.nature import LOCATIONS as NATURE_LOCATIONS
 from memi.categories.space import LOCATIONS as SPACE_LOCATIONS
 from memi.categories.rivers import LOCATIONS as RIVER_LOCATIONS
+from memi.categories.roadsigns import COMMONS_FILES as SIGN_FILES
 from memi.categories.roadsigns import REGIONS as SIGN_REGIONS
-from memi.categories.roadsigns import WIKIPEDIA as SIGN_WIKIPEDIA
 from memi.logic.images import (
     BONES_API_URL,
     get_bone_image,
+    get_commons_file_image,
     get_country_item,
     get_fandom_image,
     get_grays_anatomy_image,
@@ -159,8 +160,9 @@ def random_item():
         if is_bones:
             result = get_bone_image(item)
         elif is_road_signs:
-            wiki_title = SIGN_WIKIPEDIA.get(item, item)
-            result = get_wikipedia_image(wiki_title)
+            commons_file = SIGN_FILES.get(item)
+            if commons_file:
+                result = get_commons_file_image(commons_file)
         elif is_country:
             result = get_country_item(item, mode)
         elif is_tv:

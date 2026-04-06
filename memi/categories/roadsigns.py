@@ -1,64 +1,39 @@
-"""Road signs from around the world."""
+"""Road signs from around the world. Images sourced from Wikimedia Commons SVGs."""
 
-# Each sign: (display_name, wikipedia_article, region_tag)
-# region_tag is shown after reveal; empty string for international signs
-
+# Each sign: (display_name, commons_file, region_tag)
+# region_tag shown after reveal; empty string for international signs
 SIGNS = [
     # International / Vienna Convention
-    ("Stop sign", "Stop sign", ""),
-    ("Yield / Give way", "Yield sign", ""),
-    ("No entry", "No entry sign", ""),
-    ("Pedestrian crossing", "Pedestrian crossing", ""),
-    ("Speed limit", "Speed limit", ""),
-    ("Level crossing", "Level crossing", ""),
-    ("One-way traffic", "One-way traffic", ""),
-    ("Road works", "Road works", ""),
-    ("Roundabout", "Roundabout", ""),
-    ("No parking", "Parking", ""),
-    # Signs with own articles
-    ("Crossbuck (railroad)", "Crossbuck", "USA"),
-    ("School zone", "School zone", ""),
-    ("Zebra crossing", "Zebra crossing", "UK"),
-    ("Pelican crossing", "Pelican crossing", "UK"),
-    ("National speed limit", "National speed limit", "UK"),
-    ("Autobahn", "Autobahn", "Germany"),
-    ("Wildlife crossing", "Wildlife crossing", ""),
-    # Animal warnings (distinctive & fun)
-    ("Moose warning", "Road signs in Sweden", "Scandinavia"),
-    ("Kangaroo warning", "Road signs in Australia", "Australia"),
-    ("Koala warning", "Road signs in Australia", "Australia"),
-    ("Wombat warning", "Road signs in Australia", "Australia"),
-    ("Elephant warning", "Road signs in Thailand", "Thailand"),
-    ("Camel warning", "Road signs in Israel", "Israel"),
-    ("Deer crossing", "Road signs in the United States", "USA"),
-    ("Penguin warning", "Road signs in New Zealand", "New Zealand"),
-    # European
-    ("Priority road", "Priority signs", "Europe"),
-    ("End of speed limit", "Comparison of European road signs", "Europe"),
-    ("No overtaking", "Comparison of European road signs", "Europe"),
-    ("Built-up area entry", "Comparison of European road signs", "Europe"),
-    # Japan (uniquely shaped)
-    ("Stop / 止まれ", "Road signs in Japan", "Japan"),
-    # USA specific
-    ("Interstate highway shield", "Interstate Highway System", "USA"),
-    ("US Route shield", "United States Numbered Highway System", "USA"),
-    ("Do not enter", "Road signs in the United States", "USA"),
-    ("Wrong way", "Road signs in the United States", "USA"),
-    ("No turn on red", "Road signs in the United States", "USA"),
-    ("Four-way stop", "Road signs in the United States", "USA"),
-    ("Railroad advance warning", "Railroad crossing", "USA"),
-    ("Construction zone", "Road signs in the United States", "USA"),
-    # Various countries
-    ("Pare / Stop", "Road signs in Brazil", "Brazil"),
-    ("Bilingual stop/arrêt", "Road signs in Canada", "Canada"),
-    ("Road train warning", "Road signs in Australia", "Australia"),
-    ("Give way", "Road signs in Australia", "Australia"),
-    ("Tope / Speed bump", "Road signs in Mexico", "Mexico"),
-    ("Kiwi crossing", "Road signs in New Zealand", "New Zealand"),
+    ("Stop", "Vienna Convention road sign B2a.svg", ""),
+    ("Yield / Give way", "Vienna Convention road sign B1-V1.svg", ""),
+    ("No entry", "Vienna Convention road sign C3a-V3-1.svg", ""),
+    ("Speed limit 30", "Vienna Convention road sign C14-V1-30.svg", ""),
+    ("Speed limit 50", "Vienna Convention road sign C14-V1-50.svg", ""),
+    ("Speed limit 60", "Vienna Convention road sign C14-V1-60.svg", ""),
+    ("Pedestrian crossing", "Vienna Convention road sign Aa-21a-V1.svg", ""),
+    ("Roundabout", "Vienna Convention road sign D3a.svg", ""),
+    ("No parking", "Vienna Convention road sign C18-V1.svg", ""),
+    ("No overtaking", "Vienna Convention road sign C13aa-V1.svg", ""),
+    ("Priority road", "Vienna Convention road sign B3-V1.svg", ""),
+    ("One way", "Vienna Convention road sign E3b-V2.svg", ""),
+    ("Road works", "Vienna Convention road sign Aa-16-V1.svg", ""),
+    ("Level crossing", "Vienna Convention road sign A-28a-V1-1.svg", ""),
+    ("Falling rocks", "Vienna Convention road sign Aa-11a-V1.svg", ""),
+    ("Dead end", "Vienna Convention road sign G13.svg", ""),
+    ("Pedestrian crossing info", "Vienna Convention road sign E12aa-V4.svg", ""),
+    # Country-specific
+    ("Kangaroo warning", "Australia road sign W5-29.svg", "Australia"),
+    ("Moose warning", "Sweden road sign A19-1.svg", "Sweden"),
+    ("Deer crossing", "MUTCD W11-3.svg", "USA"),
+    ("Elephant crossing", "Thailand road sign ต-ระวังช้างป่า.svg", "Thailand"),
+    ("Camel crossing", "SA road sign - Camels crossing.svg", "Saudi Arabia"),
+    ("Stop / 止まれ", "Japan road sign 330-B.svg", "Japan"),
+    ("No entry", "Japan road sign 303.svg", "Japan"),
+    ("Interstate highway", "I-blank (1957).svg", "USA"),
+    ("Railroad crossbuck", "American Crossbuck (MUTCD R15-1).svg", "USA"),
+    ("National speed limit", "UK traffic sign 671.svg", "UK"),
 ]
 
 ALL = [s[0] for s in SIGNS]
-
-# Lookup dicts
-WIKIPEDIA = {s[0]: s[1] for s in SIGNS}
+COMMONS_FILES = {s[0]: s[1] for s in SIGNS}
 REGIONS = {s[0]: s[2] for s in SIGNS}

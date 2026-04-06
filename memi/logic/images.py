@@ -9,6 +9,33 @@ TMDB_API_KEY = os.environ.get("TMDB_API_KEY", "")
 BONES_API_URL = os.environ.get("BONES_API_URL", "http://127.0.0.1:8081")
 
 
+def get_commons_file_image(filename):
+    """Get a thumbnail URL for a specific Wikimedia Commons file."""
+    resp = requests.get(
+        "https://commons.wikimedia.org/w/api.php",
+        params={
+            "action": "query",
+            "titles": f"File:{filename}",
+            "prop": "imageinfo",
+            "iiprop": "url",
+            "iiurlwidth": 400,
+            "format": "json",
+        },
+        headers=HEADERS,
+        timeout=10,
+    )
+    if resp.status_code != 200:
+        return None
+    pages = resp.json().get("query", {}).get("pages", {})
+    for page in pages.values():
+        if "imageinfo" in page:
+            info = page["imageinfo"][0]
+            thumb = info.get("thumburl") or info.get("url")
+            if thumb:
+                return {"name": filename, "image": thumb}
+    return None
+
+
 def get_wikipedia_image(title):
     resp = requests.get(
         "https://en.wikipedia.org/w/api.php",
