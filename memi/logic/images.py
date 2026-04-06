@@ -4,7 +4,7 @@ import requests
 
 from memi.categories.countries import CAPITALS, CURRENCIES
 
-HEADERS = {"User-Agent": "Memi/1.0"}
+HEADERS = {"User-Agent": "Memi/1.0 (https://memi.click; memi@memi.click)"}
 TMDB_API_KEY = os.environ.get("TMDB_API_KEY", "")
 BONES_API_URL = os.environ.get("BONES_API_URL", "http://127.0.0.1:8081")
 
