@@ -4,6 +4,7 @@ import time
 import requests
 
 from memi.categories.countries import CAPITALS, CURRENCIES
+from memi.categories.usstates import ABBREVIATIONS as STATE_ABBREVS
 from memi.categories.usstates import CAPITALS as STATE_CAPITALS
 
 HEADERS = {"User-Agent": "Memi/1.0 (https://memi.click; memi@memi.click)"}
@@ -524,6 +525,14 @@ def get_country_item(country, mode):
     return None
 
 
+def _get_state_map(state):
+    """Fetch the locator map for a US state from Wikimedia Commons."""
+    abbr = STATE_ABBREVS.get(state)
+    if not abbr:
+        return None
+    return get_commons_file_image(f"Map of USA {abbr}.svg")
+
+
 def get_state_item(state, mode):
     """Fetch a US state image based on mode (flags, shapes, or capitals)."""
     clean_name = state.split("(")[0].strip()
@@ -533,7 +542,7 @@ def get_state_item(state, mode):
             result["name"] = clean_name
             return result
     elif mode == "capitals":
-        result = get_wikipedia_image(state)
+        result = _get_state_map(state)
         if result:
             capital = STATE_CAPITALS.get(state, "Unknown")
             result["clue"] = clean_name
@@ -541,7 +550,7 @@ def get_state_item(state, mode):
             return result
     else:
         # shapes
-        result = get_wikipedia_image(state)
+        result = _get_state_map(state)
         if result:
             result["name"] = clean_name
             return result
