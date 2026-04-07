@@ -5,6 +5,7 @@ from memi.categories import (
     characters,
     countries,
     directors,
+    instruments,
     monuments,
     movies,
     nature,
@@ -15,6 +16,7 @@ from memi.categories import (
     roadsigns,
     space,
     tvshows,
+    usstates,
 )
 
 CATEGORIES = {
@@ -35,6 +37,7 @@ CATEGORIES = {
     "culture:movies:directors": directors.ALL,
     "culture:movies:posters": movies.ALL,
     "culture:movies:scenes": movies.ALL,
+    "culture:instruments": instruments.ALL,
     "culture:music:albums": albums.ALL,
     "culture:tv shows:scenes": tvshows.ALL,
     # Geography
@@ -44,6 +47,9 @@ CATEGORIES = {
     "geography:countries:shapes": countries.ALL,
     "geography:rivers": rivers.ALL,
     "geography:road signs": roadsigns.ALL,
+    "geography:us states:capitals": usstates.ALL,
+    "geography:us states:flags": usstates.ALL,
+    "geography:us states:shapes": usstates.ALL,
     # Humans
     "humans:bones": bones.ALL,
     "humans:people": people.ALL,

@@ -12,6 +12,7 @@ let seenItems = [];
 let selectedContinents = [];
 let selectedAnimalClasses = [];
 let selectedPeopleRoles = [];
+let selectedInstrumentFamilies = [];
 
 const subcategories = JSON.parse(document.getElementById('subcategories-data').textContent);
 
@@ -25,7 +26,7 @@ function selectCategory(cat) {
     loadNew();
 }
 
-const singleSelectGroups = ['countries', 'movies', 'paintings'];
+const singleSelectGroups = ['countries', 'movies', 'paintings', 'us states'];
 let currentGroup = null;
 let menuStack = [];
 
@@ -144,6 +145,10 @@ function hasContinentFilter() {
     );
 }
 
+function hasStateRegionFilter() {
+    return selectedCategories.some(c => c.startsWith('geography:us states:'));
+}
+
 function isAnimalCategory() {
     return selectedCategories.includes('nature:animals');
 }
@@ -152,10 +157,16 @@ function isPeopleCategory() {
     return selectedCategories.includes('humans:people');
 }
 
+function isInstrumentCategory() {
+    return selectedCategories.includes('culture:instruments');
+}
+
 function updateFilters() {
     document.getElementById('continent-filter').style.display = hasContinentFilter() ? 'flex' : 'none';
+    document.getElementById('state-region-filter').style.display = hasStateRegionFilter() ? 'flex' : 'none';
     document.getElementById('animal-class-filter').style.display = isAnimalCategory() ? 'flex' : 'none';
     document.getElementById('people-role-filter').style.display = isPeopleCategory() ? 'flex' : 'none';
+    document.getElementById('instrument-family-filter').style.display = isInstrumentCategory() ? 'flex' : 'none';
 }
 
 function toggleContinent(continent, btn) {
@@ -178,6 +189,19 @@ function toggleAnimalClass(cls, btn) {
         btn.classList.add('active');
     } else {
         selectedAnimalClasses.splice(idx, 1);
+        btn.classList.remove('active');
+    }
+    seenItems = [];
+    if (loaded || selectedCategories.length > 0) loadNew();
+}
+
+function toggleInstrumentFamily(family, btn) {
+    const idx = selectedInstrumentFamilies.indexOf(family);
+    if (idx === -1) {
+        selectedInstrumentFamilies.push(family);
+        btn.classList.add('active');
+    } else {
+        selectedInstrumentFamilies.splice(idx, 1);
         btn.classList.remove('active');
     }
     seenItems = [];
@@ -234,11 +258,12 @@ async function loadNew() {
     const continentsParam = selectedContinents.length > 0 ? `&continents=${encodeURIComponent(selectedContinents.join(','))}` : '';
     const classesParam = selectedAnimalClasses.length > 0 ? `&classes=${encodeURIComponent(selectedAnimalClasses.join(','))}` : '';
     const rolesParam = selectedPeopleRoles.length > 0 ? `&roles=${encodeURIComponent(selectedPeopleRoles.join(','))}` : '';
+    const familiesParam = selectedInstrumentFamilies.length > 0 ? `&families=${encodeURIComponent(selectedInstrumentFamilies.join(','))}` : '';
     updateFilters();
     const maxRetries = 5;
     for (let attempt = 0; attempt < maxRetries; attempt++) {
         try {
-            const resp = await fetch(`/api/random?cats=${encodeURIComponent(cats)}${seenParam}${continentsParam}${classesParam}${rolesParam}`);
+            const resp = await fetch(`/api/random?cats=${encodeURIComponent(cats)}${seenParam}${continentsParam}${classesParam}${rolesParam}${familiesParam}`);
             const data = await resp.json();
 
             if (data.error) continue;

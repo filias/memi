@@ -54,6 +54,21 @@
         <button onclick="togglePeopleRole('actors', this)">actors</button>
         <button onclick="togglePeopleRole('athletes', this)">athletes</button>
     </div>
+    <div class="continent-filter" id="instrument-family-filter">
+        <button onclick="toggleInstrumentFamily('strings', this)">strings</button>
+        <button onclick="toggleInstrumentFamily('woodwinds', this)">woodwinds</button>
+        <button onclick="toggleInstrumentFamily('brass', this)">brass</button>
+        <button onclick="toggleInstrumentFamily('percussion', this)">percussion</button>
+        <button onclick="toggleInstrumentFamily('keyboards', this)">keyboards</button>
+        <button onclick="toggleInstrumentFamily('other', this)">other</button>
+    </div>
+    <div class="continent-filter" id="state-region-filter">
+        <button onclick="toggleContinent('northeast', this)">northeast</button>
+        <button onclick="toggleContinent('southeast', this)">southeast</button>
+        <button onclick="toggleContinent('midwest', this)">midwest</button>
+        <button onclick="toggleContinent('west', this)">west</button>
+        <button onclick="toggleContinent('southwest', this)">southwest</button>
+    </div>
     <div class="card" id="card" onclick="handleClick()">
         <span class="loading" id="status">pick a category</span>
         <img id="image" style="display:none" alt="">

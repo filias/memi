@@ -4,6 +4,7 @@ import time
 import requests
 
 from memi.categories.countries import CAPITALS, CURRENCIES
+from memi.categories.usstates import CAPITALS as STATE_CAPITALS
 
 HEADERS = {"User-Agent": "Memi/1.0 (https://memi.click; memi@memi.click)"}
 TMDB_API_KEY = os.environ.get("TMDB_API_KEY", "")
@@ -520,6 +521,30 @@ def get_country_item(country, mode):
             return result
     else:
         return get_country_shape(country)
+    return None
+
+
+def get_state_item(state, mode):
+    """Fetch a US state image based on mode (flags, shapes, or capitals)."""
+    clean_name = state.split("(")[0].strip()
+    if mode == "flags":
+        result = get_wikipedia_image("Flag of " + clean_name)
+        if result and result["image"]:
+            result["name"] = clean_name
+            return result
+    elif mode == "capitals":
+        result = get_wikipedia_image(state)
+        if result:
+            capital = STATE_CAPITALS.get(state, "Unknown")
+            result["clue"] = clean_name
+            result["name"] = capital
+            return result
+    else:
+        # shapes
+        result = get_wikipedia_image(state)
+        if result:
+            result["name"] = clean_name
+            return result
     return None
 
 

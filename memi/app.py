@@ -10,6 +10,7 @@ from memi.categories.albums import MBIDS as ALBUM_MBIDS
 from memi.categories.albums import YEARS as ALBUM_YEARS
 from memi.categories.animals import CLASSES as ANIMAL_CLASSES
 from memi.categories.dinosaurs import ALL as DINOSAUR_LIST
+from memi.categories.instruments import FAMILIES as INSTRUMENT_FAMILIES
 from memi.categories.countries import CONTINENTS as COUNTRY_CONTINENTS
 from memi.categories.monuments import CONTINENTS as MONUMENT_CONTINENTS
 from memi.categories.monuments import LOCATIONS as MONUMENT_LOCATIONS
@@ -24,11 +25,13 @@ from memi.categories.space import LOCATIONS as SPACE_LOCATIONS
 from memi.categories.rivers import LOCATIONS as RIVER_LOCATIONS
 from memi.categories.roadsigns import COMMONS_FILES as SIGN_FILES
 from memi.categories.roadsigns import REGIONS as SIGN_REGIONS
+from memi.categories.usstates import REGIONS as STATE_REGIONS
 from memi.logic.images import (
     BONES_API_URL,
     get_album_cover,
     get_bone_image,
     get_dino_image,
+    get_state_item,
     get_commons_file_image,
     get_country_item,
     get_fandom_image,
@@ -140,13 +143,33 @@ def random_item():
         if not items:
             return jsonify({"error": "No people for selected roles"}), 400
 
+    # Filter by instrument families if provided
+    families_param = request.args.get("families", "")
+    if families_param and category == "culture:instruments":
+        allowed = set()
+        for f in families_param.split(","):
+            allowed.update(INSTRUMENT_FAMILIES.get(f, []))
+        items = [i for i in items if i in allowed]
+        if not items:
+            return jsonify({"error": "No instruments for selected families"}), 400
+
+    # Filter by US state regions if provided
+    if continents_param and category.startswith("geography:us states:"):
+        allowed = set()
+        for r in continents_param.split(","):
+            allowed.update(STATE_REGIONS.get(r, []))
+        items = [i for i in items if i in allowed]
+        if not items:
+            return jsonify({"error": "No states for selected regions"}), 400
+
     unseen = [i for i in items if i not in seen]
     if not unseen:
         unseen = items  # all seen, reset
     candidates = random.sample(unseen, min(10, len(unseen)))
 
     is_country = category.startswith("geography:countries:")
-    mode = category.split(":")[-1] if is_country else None
+    is_us_state = category.startswith("geography:us states:")
+    mode = category.split(":")[-1] if (is_country or is_us_state) else None
     is_bones = category == "humans:bones"
     is_road_signs = category == "geography:road signs"
     is_albums = category == "culture:music:albums"
@@ -173,6 +196,8 @@ def random_item():
             commons_file = SIGN_FILES.get(item)
             if commons_file:
                 result = get_commons_file_image(commons_file)
+        elif is_us_state:
+            result = get_state_item(item, mode)
         elif is_country:
             result = get_country_item(item, mode)
         elif is_tv:
