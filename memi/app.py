@@ -69,14 +69,15 @@ _report_handler.setFormatter(logging.Formatter("%(asctime)s %(message)s"))
 _report_logger.addHandler(_report_handler)
 _report_logger.setLevel(logging.INFO)
 
-# Load reported items to exclude from rotation
-_reported_items = set()
+# Load excluded items (approved reports)
+EXCLUDED_FILE = "excluded_items.txt"
+_excluded_items = set()
 try:
-    with open("reported_items.log") as f:
+    with open(EXCLUDED_FILE) as f:
         for line in f:
-            if "REPORTED:" in line:
-                item = line.split("REPORTED:")[1].split("(categories:")[0].strip()
-                _reported_items.add(item)
+            line = line.strip()
+            if line:
+                _excluded_items.add(line)
 except FileNotFoundError:
     pass
 
@@ -217,7 +218,7 @@ def random_item():
         if not items:
             return jsonify({"error": "No states for selected regions"}), 400
 
-    items = [i for i in items if i not in _reported_items]
+    items = [i for i in items if i not in _excluded_items]
     unseen = [i for i in items if i not in seen]
     if not unseen:
         unseen = items  # all seen, reset
@@ -304,9 +305,14 @@ def random_item():
                 if desc:
                     desc = desc.replace("(born ", "(").replace("(", "").replace(")", "")
                     result["tag"] = desc
-            elif category == "culture:art:paintings:movements" and item in MOVEMENT_PERIODS:
+            elif (
+                category == "culture:art:paintings:movements"
+                and item in MOVEMENT_PERIODS
+            ):
                 result["tag"] = MOVEMENT_PERIODS[item]
-            elif category == "culture:art:paintings:paintings" and item in PAINTING_INFO:
+            elif (
+                category == "culture:art:paintings:paintings" and item in PAINTING_INFO
+            ):
                 result["tag"] = PAINTING_INFO[item]
             elif is_tv and item in TV_YEARS:
                 result["tag"] = TV_YEARS[item]
@@ -378,5 +384,53 @@ def report_item():
     item = data.get("item", "unknown")
     cats = data.get("cats", "unknown")
     _report_logger.info("REPORTED: %s (categories: %s)", item, cats)
-    _reported_items.add(item)
+    return jsonify({"ok": True})
+
+
+@app.route("/review")
+def review_reports():
+    """Review page for reported items."""
+    pending = []
+    seen = set()
+    try:
+        with open("reported_items.log") as f:
+            for line in f:
+                if "REPORTED:" in line:
+                    item = line.split("REPORTED:")[1].split("(categories:")[0].strip()
+                    cats = line.split("(categories:")[1].rstrip(")\n").strip()
+                    ts = line.split(" REPORTED:")[0].strip()
+                    if item not in seen:
+                        seen.add(item)
+                        status = "excluded" if item in _excluded_items else "pending"
+                        pending.append(
+                            {"item": item, "cats": cats, "time": ts, "status": status}
+                        )
+    except FileNotFoundError:
+        pass
+    return render_template("review.html", reports=pending)
+
+
+@app.route("/api/review/exclude", methods=["POST"])
+def exclude_item():
+    """Approve a report — exclude item from rotation."""
+    data = request.json or {}
+    item = data.get("item", "")
+    if item:
+        _excluded_items.add(item)
+        with open(EXCLUDED_FILE, "a") as f:
+            f.write(item + "\n")
+    return jsonify({"ok": True})
+
+
+@app.route("/api/review/restore", methods=["POST"])
+def restore_item():
+    """Dismiss a report — restore item to rotation."""
+    data = request.json or {}
+    item = data.get("item", "")
+    if item:
+        _excluded_items.discard(item)
+        # Rewrite file without this item
+        with open(EXCLUDED_FILE, "w") as f:
+            for i in _excluded_items:
+                f.write(i + "\n")
     return jsonify({"ok": True})
