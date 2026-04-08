@@ -1,5 +1,6 @@
 import logging
 import random
+import subprocess
 
 import requests as http_requests
 from flask import Flask, Response, jsonify, render_template, request
@@ -90,11 +91,26 @@ FANDOM_WIKIS = {
 
 app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 86400  # 1 day for static files
 
+# Git commit hash for version display
+try:
+    GIT_VERSION = (
+        subprocess.check_output(
+            ["git", "rev-parse", "--short", "HEAD"],
+            stderr=subprocess.DEVNULL,
+        )
+        .decode()
+        .strip()
+    )
+except Exception:
+    GIT_VERSION = "dev"
+
 
 @app.route("/")
 def index():
     top_level, subs = build_menu()
-    return render_template("index.html", top_level=top_level, subcategories=subs)
+    return render_template(
+        "index.html", top_level=top_level, subcategories=subs, version=GIT_VERSION
+    )
 
 
 @app.route("/about")
