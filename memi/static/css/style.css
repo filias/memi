@@ -2,8 +2,8 @@
 
 body {
     font-family: system-ui, sans-serif;
-    background: #232530;
-    color: #e8e6e3;
+    background: #f5f3ef;
+    color: #2c2c2c;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -14,11 +14,11 @@ h1 {
     margin: 2rem 0 0.5rem;
     font-size: 2.5rem;
     letter-spacing: 0.1em;
-    color: #f0ece2;
+    color: #1a1a1a;
 }
 
 .subtitle {
-    color: #9a9a9a;
+    color: #888;
     margin-bottom: 1.5rem;
 }
 
@@ -32,23 +32,23 @@ h1 {
 
 .categories button {
     padding: 0.5rem 1.2rem;
-    border: 2px solid #4a4a5a;
+    border: 2px solid #ccc;
     border-radius: 2rem;
     background: transparent;
-    color: #b8b8c0;
+    color: #555;
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.2s;
 }
 
 .categories button:hover:not(.active) {
-    border-color: #8a8a9a;
-    color: #e8e6e3;
+    border-color: #999;
+    color: #222;
 }
 
 .categories button.active {
-    border-color: #d4a843;
-    color: #d4a843;
+    border-color: #b8860b;
+    color: #b8860b;
 }
 
 .submenu {
@@ -58,8 +58,8 @@ h1 {
 }
 
 .back-btn {
-    border-color: #6a6a7a !important;
-    color: #9a9a9a !important;
+    border-color: #aaa !important;
+    color: #888 !important;
     font-size: 1.1rem !important;
     padding: 0.4rem 0.8rem !important;
 }
@@ -75,10 +75,10 @@ h1 {
 
 .continent-filter button {
     padding: 0.4rem 0.8rem;
-    border: 2px solid #4a4a5a;
+    border: 2px solid #ccc;
     border-radius: 2rem;
     background: transparent;
-    color: #9a9a9a;
+    color: #777;
     font-size: 0.8rem;
     cursor: pointer;
     transition: all 0.2s;
@@ -86,13 +86,13 @@ h1 {
 }
 
 .continent-filter button:hover:not(.active) {
-    border-color: #8a8a9a;
-    color: #e8e6e3;
+    border-color: #999;
+    color: #333;
 }
 
 .continent-filter button.active {
-    border-color: #d4a843;
-    color: #d4a843;
+    border-color: #b8860b;
+    color: #b8860b;
 }
 
 .card {
@@ -102,8 +102,8 @@ h1 {
     border-radius: 1rem;
     overflow: hidden;
     cursor: pointer;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-    background: #2c2e3a;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    background: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -118,7 +118,7 @@ h1 {
 }
 
 .card.light-bg {
-    background: #e8e8e8;
+    background: #f0f0f0;
 }
 
 .card .clue {
@@ -127,7 +127,7 @@ h1 {
     left: 0;
     right: 0;
     background: rgba(0,0,0,0.6);
-    color: #d4a843;
+    color: #f0c040;
     font-size: 1.3rem;
     font-weight: bold;
     text-align: center;
@@ -138,7 +138,8 @@ h1 {
 .card .answer {
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.75);
+    background: rgba(0,0,0,0.72);
+    color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -154,8 +155,8 @@ h1 {
     position: absolute;
     bottom: 0.75rem;
     right: 0.75rem;
-    background: rgba(0,0,0,0.85);
-    color: #d4a843;
+    background: rgba(0,0,0,0.8);
+    color: #f0c040;
     font-size: 1.1rem;
     font-weight: bold;
     padding: 0.4rem 0.9rem;
@@ -191,54 +192,54 @@ h1 {
 
 .hint {
     margin-top: 1rem;
-    color: #8a8a9a;
+    color: #888;
     font-size: 0.9rem;
 }
 
 .loading {
-    color: #9a9a9a;
+    color: #999;
     font-size: 1.2rem;
 }
 
 .error {
-    color: #e74c3c;
+    color: #d44;
 }
 
 .bottom-btn {
     padding: 0.3rem 0.8rem;
-    border: 1px solid #4a4a5a;
+    border: 1px solid #ccc;
     border-radius: 2rem;
     background: transparent;
-    color: #8a8a9a;
+    color: #888;
     font-size: 0.75rem;
     cursor: pointer;
     transition: all 0.2s;
 }
 
 .bottom-btn:hover {
-    border-color: #8a8a9a;
-    color: #c0c0c0;
+    border-color: #999;
+    color: #555;
 }
 
 .bottom-btn.active {
-    border-color: #d4a843;
-    color: #d4a843;
+    border-color: #b8860b;
+    color: #b8860b;
 }
 
 #clue-btn {
     padding: 0.4rem 1rem;
-    border: 2px solid #4a4a5a;
+    border: 2px solid #ccc;
     border-radius: 2rem;
     background: transparent;
-    color: #b8b8c0;
+    color: #666;
     font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.2s;
 }
 
 #clue-btn:hover {
-    border-color: #d4a843;
-    color: #d4a843;
+    border-color: #b8860b;
+    color: #b8860b;
 }
 
 .clue-letters {
@@ -246,19 +247,19 @@ h1 {
     font-size: 1.5rem;
     font-weight: bold;
     letter-spacing: 0.15em;
-    color: #d4a843;
+    color: #b8860b;
 }
 
 .about-link {
     position: absolute;
     top: 1rem;
     right: 1.5rem;
-    color: #8a8a9a;
+    color: #999;
     text-decoration: none;
     font-size: 0.9rem;
     transition: color 0.2s;
 }
 
 .about-link:hover {
-    color: #d4a843;
+    color: #b8860b;
 }
