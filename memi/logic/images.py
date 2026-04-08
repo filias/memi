@@ -72,6 +72,37 @@ def _fetch_dino_image(name):
     return result
 
 
+def get_wikipedia_file_image(filename):
+    """Get a thumbnail URL for a file hosted on English Wikipedia (fair use)."""
+    return _cached(f"wp_file:{filename}", lambda: _fetch_wikipedia_file_image(filename))
+
+
+def _fetch_wikipedia_file_image(filename):
+    resp = requests.get(
+        "https://en.wikipedia.org/w/api.php",
+        params={
+            "action": "query",
+            "titles": f"File:{filename}",
+            "prop": "imageinfo",
+            "iiprop": "url",
+            "iiurlwidth": 500,
+            "format": "json",
+        },
+        headers=HEADERS,
+        timeout=10,
+    )
+    if resp.status_code != 200:
+        return None
+    pages = resp.json().get("query", {}).get("pages", {})
+    for page in pages.values():
+        if "imageinfo" in page:
+            info = page["imageinfo"][0]
+            thumb = info.get("thumburl") or info.get("url")
+            if thumb:
+                return {"name": filename, "image": thumb}
+    return None
+
+
 def get_commons_file_image(filename):
     return _cached(f"commons:{filename}", lambda: _fetch_commons_file_image(filename))
 

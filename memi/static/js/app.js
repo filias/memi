@@ -29,7 +29,7 @@ function selectCategory(cat) {
     loadNew();
 }
 
-const singleSelectGroups = ['countries', 'movies', 'paintings', 'us states'];
+const singleSelectGroups = ['countries', 'movies', 'paintings', 'us states', 'sports'];
 let currentGroup = null;
 let menuStack = [];
 

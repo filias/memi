@@ -15,6 +15,7 @@ from memi.categories import (
     rivers,
     roadsigns,
     space,
+    sports,
     tvshows,
     usstates,
 )
@@ -39,6 +40,9 @@ CATEGORIES = {
     "culture:movies:scenes": movies.ALL,
     "culture:instruments": instruments.ALL,
     "culture:music:albums": albums.ALL,
+    "culture:sports:olympics": sports.OLYMPICS_ALL,
+    "culture:sports:fifa world cup": sports.WORLD_CUPS_ALL,
+    "culture:sports:uefa euro": sports.EUROS_ALL,
     "culture:tv shows:scenes": tvshows.ALL,
     # Geography
     "geography:countries:capitals": countries.ALL,

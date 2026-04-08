@@ -29,11 +29,15 @@ from memi.categories.space import LOCATIONS as SPACE_LOCATIONS
 from memi.categories.rivers import LOCATIONS as RIVER_LOCATIONS
 from memi.categories.roadsigns import COMMONS_FILES as SIGN_FILES
 from memi.categories.roadsigns import REGIONS as SIGN_REGIONS
+from memi.categories.sports import IMAGE_FILES as SPORT_IMAGE_FILES
+from memi.categories.sports import TAGS as SPORT_TAGS
+from memi.categories.sports import WIKIPEDIA as SPORT_WIKIPEDIA
 from memi.categories.usstates import REGIONS as STATE_REGIONS
 from memi.logic.images import (
     BONES_API_URL,
     get_album_cover,
     get_bone_image,
+    get_wikipedia_file_image,
     get_dino_image,
     get_state_item,
     get_commons_file_image,
@@ -225,6 +229,7 @@ def random_item():
     is_bones = category == "humans:bones"
     is_road_signs = category == "geography:road signs"
     is_albums = category == "culture:music:albums"
+    is_sports = category.startswith("culture:sports:")
 
     is_people = category == "humans:people" or category in (
         "culture:movies:actors",
@@ -242,6 +247,13 @@ def random_item():
         if is_albums:
             mbid = ALBUM_MBIDS.get(item)
             result = get_album_cover(item, mbid)
+        elif is_sports:
+            image_file = SPORT_IMAGE_FILES.get(item)
+            if image_file:
+                result = get_wikipedia_file_image(image_file)
+            if not result or not result.get("image"):
+                wiki = SPORT_WIKIPEDIA.get(item, item)
+                result = get_wikipedia_image(wiki)
         elif is_bones:
             result = get_bone_image(item)
         elif is_road_signs:
@@ -317,6 +329,10 @@ def random_item():
                 result["tag"] = SIGN_REGIONS[item]
             elif is_albums and item in ALBUM_ARTISTS:
                 result["tag"] = f"{ALBUM_ARTISTS[item]} {ALBUM_YEARS.get(item, '')}"
+            elif is_sports and item in SPORT_TAGS:
+                result["tag"] = SPORT_TAGS[item]
+            if is_sports:
+                result["name"] = item
             if is_road_signs:
                 result["name"] = item
             return jsonify(result)
