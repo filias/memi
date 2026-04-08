@@ -116,6 +116,10 @@ h1 {
     display: block;
 }
 
+.card.light-bg {
+    background: #e8e8e8;
+}
+
 .card .clue {
     position: absolute;
     bottom: 0;

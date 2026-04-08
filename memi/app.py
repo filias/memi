@@ -335,6 +335,8 @@ def random_item():
                 result["name"] = item
             if is_road_signs:
                 result["name"] = item
+            if is_sports or is_road_signs:
+                result["light_bg"] = True
             return jsonify(result)
         else:
             _fail_logger.warning("FAILED: %s (category: %s)", item, category)

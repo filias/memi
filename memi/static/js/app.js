@@ -257,6 +257,7 @@ async function loadNew() {
     const tag = document.getElementById('tag');
 
     card.classList.remove('revealed');
+    card.classList.remove('light-bg');
     image.style.display = 'none';
     clue.style.display = 'none';
     clue.textContent = '';
@@ -289,6 +290,7 @@ async function loadNew() {
         status.style.display = 'none';
         image.style.display = 'block';
         reportBtn.style.display = 'inline-block';
+        if (data.light_bg) card.classList.add('light-bg');
         clue.style.display = 'none';
         if (data.clue) { clue.textContent = data.clue; clue.style.display = 'block'; }
         currentName = data.name;
@@ -334,6 +336,7 @@ async function loadNew() {
             status.style.display = 'none';
             image.style.display = 'block';
             reportBtn.style.display = 'inline-block';
+            if (data.light_bg) card.classList.add('light-bg');
             clue.style.display = 'none';
             if (data.clue) {
                 clue.textContent = data.clue;
