@@ -199,22 +199,18 @@ h1 {
     color: #e74c3c;
 }
 
-.mode-toggle {
-    margin-top: 1rem;
-}
-
-.mode-toggle button {
-    padding: 0.4rem 1rem;
-    border: 2px solid #444;
+.bottom-btn {
+    padding: 0.3rem 0.8rem;
+    border: 1px solid #444;
     border-radius: 2rem;
     background: transparent;
-    color: #888;
-    font-size: 0.85rem;
+    color: #666;
+    font-size: 0.75rem;
     cursor: pointer;
     transition: all 0.2s;
 }
 
-.mode-toggle button.active {
+.bottom-btn.active {
     border-color: #e2b714;
     color: #e2b714;
 }

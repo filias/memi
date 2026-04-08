@@ -77,16 +77,14 @@
         <div class="tag" id="tag"></div>
         <img class="reveal-image" id="reveal-image" alt="">
     </div>
-    <div class="mode-toggle">
-        <button id="clue-toggle" onclick="toggleClueMode()">clues: off</button>
+    <p class="hint" id="hint"></p>
+    <div style="display:flex; align-items:center; justify-content:center; gap:0.75rem;">
+        <button id="clue-toggle" class="bottom-btn" onclick="toggleClueMode()">clues: off</button>
+        <button id="report-btn" class="bottom-btn" onclick="reportItem()" title="Report bad or wrong image — it will be removed" style="display:none;">report</button>
     </div>
     <div id="clue-area" style="display:none; text-align:center;">
         <button id="clue-btn" onclick="revealLetter()">show letter</button>
         <p id="clue-letters" class="clue-letters"></p>
-    </div>
-    <div style="display:flex; align-items:center; justify-content:center; gap:1rem; margin-top:1rem;">
-        <p class="hint" id="hint" style="margin:0;"></p>
-        <button id="report-btn" onclick="reportItem()" title="Report bad or wrong image — it will be removed" style="display:none; padding:0.3rem 0.7rem; border:1px solid #444; border-radius:1rem; background:transparent; color:#666; font-size:0.75rem; cursor:pointer;">report</button>
     </div>
 
     <script id="subcategories-data" type="application/json">{{ subcategories | tojson }}</script>
