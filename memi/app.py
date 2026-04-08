@@ -61,6 +61,17 @@ _report_handler.setFormatter(logging.Formatter("%(asctime)s %(message)s"))
 _report_logger.addHandler(_report_handler)
 _report_logger.setLevel(logging.INFO)
 
+# Load reported items to exclude from rotation
+_reported_items = set()
+try:
+    with open("reported_items.log") as f:
+        for line in f:
+            if "REPORTED:" in line:
+                item = line.split("REPORTED:")[1].split("(categories:")[0].strip()
+                _reported_items.add(item)
+except FileNotFoundError:
+    pass
+
 # Fandom wikis for character categories
 FANDOM_WIKIS = {
     "culture:characters:star wars": "starwars",
@@ -162,6 +173,7 @@ def random_item():
         if not items:
             return jsonify({"error": "No states for selected regions"}), 400
 
+    items = [i for i in items if i not in _reported_items]
     unseen = [i for i in items if i not in seen]
     if not unseen:
         unseen = items  # all seen, reset
@@ -304,4 +316,5 @@ def report_item():
     item = data.get("item", "unknown")
     cats = data.get("cats", "unknown")
     _report_logger.info("REPORTED: %s (categories: %s)", item, cats)
+    _reported_items.add(item)
     return jsonify({"ok": True})
