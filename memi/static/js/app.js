@@ -164,15 +164,17 @@ function isInstrumentCategory() {
     return selectedCategories.includes('culture:instruments');
 }
 
-function hasDogOrCatSelected() {
-    return selectedAnimalClasses.includes('dogs') || selectedAnimalClasses.includes('cats');
+function hasDifficultyFilter() {
+    return isAnimalCategory() ||
+        selectedCategories.some(c => c.startsWith('geography:countries:')) ||
+        selectedCategories.includes('culture:monuments');
 }
 
 function updateFilters() {
     document.getElementById('continent-filter').style.display = hasContinentFilter() ? 'flex' : 'none';
     document.getElementById('state-region-filter').style.display = hasStateRegionFilter() ? 'flex' : 'none';
     document.getElementById('animal-class-filter').style.display = isAnimalCategory() ? 'flex' : 'none';
-    document.getElementById('difficulty-filter').style.display = (isAnimalCategory() && hasDogOrCatSelected()) ? 'flex' : 'none';
+    document.getElementById('difficulty-filter').style.display = hasDifficultyFilter() ? 'flex' : 'none';
     document.getElementById('people-role-filter').style.display = isPeopleCategory() ? 'flex' : 'none';
     document.getElementById('instrument-family-filter').style.display = isInstrumentCategory() ? 'flex' : 'none';
 }

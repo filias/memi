@@ -10,6 +10,8 @@ from memi.categories.albums import MBIDS as ALBUM_MBIDS
 from memi.categories.albums import YEARS as ALBUM_YEARS
 from memi.categories.animals import CLASSES as ANIMAL_CLASSES
 from memi.categories.animals import DIFFICULTY as ANIMAL_DIFFICULTY
+from memi.categories.countries import DIFFICULTY as COUNTRY_DIFFICULTY
+from memi.categories.monuments import DIFFICULTY as MONUMENT_DIFFICULTY
 from memi.categories.dinosaurs import ALL as DINOSAUR_LIST
 from memi.categories.instruments import FAMILIES as INSTRUMENT_FAMILIES
 from memi.categories.countries import CONTINENTS as COUNTRY_CONTINENTS
@@ -148,15 +150,23 @@ def random_item():
         if not items:
             return jsonify({"error": "No animals for selected classes"}), 400
 
-    # Filter by difficulty if provided (dogs/cats)
+    # Filter by difficulty if provided
     difficulty_param = request.args.get("difficulty", "")
-    if difficulty_param and category == "nature:animals":
-        allowed = set()
-        for d in difficulty_param.split(","):
-            allowed.update(ANIMAL_DIFFICULTY.get(d, []))
-        items = [i for i in items if i in allowed]
-        if not items:
-            return jsonify({"error": "No animals for selected difficulty"}), 400
+    if difficulty_param:
+        diff_map = None
+        if category == "nature:animals":
+            diff_map = ANIMAL_DIFFICULTY
+        elif category.startswith("geography:countries:"):
+            diff_map = COUNTRY_DIFFICULTY
+        elif category == "culture:monuments":
+            diff_map = MONUMENT_DIFFICULTY
+        if diff_map:
+            allowed = set()
+            for d in difficulty_param.split(","):
+                allowed.update(diff_map.get(d, []))
+            items = [i for i in items if i in allowed]
+            if not items:
+                return jsonify({"error": "No items for selected difficulty"}), 400
 
     # Filter by people roles if provided
     roles_param = request.args.get("roles", "")
