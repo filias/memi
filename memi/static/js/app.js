@@ -13,6 +13,7 @@ let selectedContinents = [];
 let selectedAnimalClasses = [];
 let selectedPeopleRoles = [];
 let selectedInstrumentFamilies = [];
+let selectedDifficulty = [];
 let prefetchedData = null;
 let prefetchedImage = null;
 
@@ -163,10 +164,15 @@ function isInstrumentCategory() {
     return selectedCategories.includes('culture:instruments');
 }
 
+function hasDogOrCatSelected() {
+    return selectedAnimalClasses.includes('dogs') || selectedAnimalClasses.includes('cats');
+}
+
 function updateFilters() {
     document.getElementById('continent-filter').style.display = hasContinentFilter() ? 'flex' : 'none';
     document.getElementById('state-region-filter').style.display = hasStateRegionFilter() ? 'flex' : 'none';
     document.getElementById('animal-class-filter').style.display = isAnimalCategory() ? 'flex' : 'none';
+    document.getElementById('difficulty-filter').style.display = (isAnimalCategory() && hasDogOrCatSelected()) ? 'flex' : 'none';
     document.getElementById('people-role-filter').style.display = isPeopleCategory() ? 'flex' : 'none';
     document.getElementById('instrument-family-filter').style.display = isInstrumentCategory() ? 'flex' : 'none';
 }
@@ -191,6 +197,19 @@ function toggleAnimalClass(cls, btn) {
         btn.classList.add('active');
     } else {
         selectedAnimalClasses.splice(idx, 1);
+        btn.classList.remove('active');
+    }
+    seenItems = [];
+    if (loaded || selectedCategories.length > 0) loadNew();
+}
+
+function toggleDifficulty(level, btn) {
+    const idx = selectedDifficulty.indexOf(level);
+    if (idx === -1) {
+        selectedDifficulty.push(level);
+        btn.classList.add('active');
+    } else {
+        selectedDifficulty.splice(idx, 1);
         btn.classList.remove('active');
     }
     seenItems = [];
@@ -390,7 +409,8 @@ function buildFetchUrl() {
     const classesParam = selectedAnimalClasses.length > 0 ? `&classes=${encodeURIComponent(selectedAnimalClasses.join(','))}` : '';
     const rolesParam = selectedPeopleRoles.length > 0 ? `&roles=${encodeURIComponent(selectedPeopleRoles.join(','))}` : '';
     const familiesParam = selectedInstrumentFamilies.length > 0 ? `&families=${encodeURIComponent(selectedInstrumentFamilies.join(','))}` : '';
-    return `/api/random?cats=${encodeURIComponent(cats)}${seenParam}${continentsParam}${classesParam}${rolesParam}${familiesParam}`;
+    const difficultyParam = selectedDifficulty.length > 0 ? `&difficulty=${encodeURIComponent(selectedDifficulty.join(','))}` : '';
+    return `/api/random?cats=${encodeURIComponent(cats)}${seenParam}${continentsParam}${classesParam}${rolesParam}${familiesParam}${difficultyParam}`;
 }
 
 async function prefetchNext() {
