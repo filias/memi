@@ -256,7 +256,11 @@ def random_item():
             result["item"] = item
             name = result["name"]
             if "(" in name:
-                result["name"] = name.split("(")[0].strip()
+                name = name.split("(")[0].strip()
+            # Strip trailing " dog" from breed names like "Maltese dog"
+            if name.endswith(" dog"):
+                name = name[:-4]
+            result["name"] = name
             if is_people:
                 desc = get_wikipedia_description(item)
                 if desc:
