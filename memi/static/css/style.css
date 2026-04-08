@@ -2,8 +2,8 @@
 
 body {
     font-family: system-ui, sans-serif;
-    background: #1a1a2e;
-    color: #eee;
+    background: #232530;
+    color: #e8e6e3;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -14,10 +14,11 @@ h1 {
     margin: 2rem 0 0.5rem;
     font-size: 2.5rem;
     letter-spacing: 0.1em;
+    color: #f0ece2;
 }
 
 .subtitle {
-    color: #888;
+    color: #9a9a9a;
     margin-bottom: 1.5rem;
 }
 
@@ -31,23 +32,23 @@ h1 {
 
 .categories button {
     padding: 0.5rem 1.2rem;
-    border: 2px solid #444;
+    border: 2px solid #4a4a5a;
     border-radius: 2rem;
     background: transparent;
-    color: #ccc;
+    color: #b8b8c0;
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.2s;
 }
 
 .categories button:hover:not(.active) {
-    border-color: #888;
-    color: #eee;
+    border-color: #8a8a9a;
+    color: #e8e6e3;
 }
 
 .categories button.active {
-    border-color: #e2b714;
-    color: #e2b714;
+    border-color: #d4a843;
+    color: #d4a843;
 }
 
 .submenu {
@@ -57,8 +58,8 @@ h1 {
 }
 
 .back-btn {
-    border-color: #666 !important;
-    color: #888 !important;
+    border-color: #6a6a7a !important;
+    color: #9a9a9a !important;
     font-size: 1.1rem !important;
     padding: 0.4rem 0.8rem !important;
 }
@@ -74,10 +75,10 @@ h1 {
 
 .continent-filter button {
     padding: 0.4rem 0.8rem;
-    border: 2px solid #444;
+    border: 2px solid #4a4a5a;
     border-radius: 2rem;
     background: transparent;
-    color: #888;
+    color: #9a9a9a;
     font-size: 0.8rem;
     cursor: pointer;
     transition: all 0.2s;
@@ -85,13 +86,13 @@ h1 {
 }
 
 .continent-filter button:hover:not(.active) {
-    border-color: #888;
-    color: #eee;
+    border-color: #8a8a9a;
+    color: #e8e6e3;
 }
 
 .continent-filter button.active {
-    border-color: #e2b714;
-    color: #e2b714;
+    border-color: #d4a843;
+    color: #d4a843;
 }
 
 .card {
@@ -101,8 +102,8 @@ h1 {
     border-radius: 1rem;
     overflow: hidden;
     cursor: pointer;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-    background: #16213e;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    background: #2c2e3a;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -126,7 +127,7 @@ h1 {
     left: 0;
     right: 0;
     background: rgba(0,0,0,0.6);
-    color: #e2b714;
+    color: #d4a843;
     font-size: 1.3rem;
     font-weight: bold;
     text-align: center;
@@ -154,7 +155,7 @@ h1 {
     bottom: 0.75rem;
     right: 0.75rem;
     background: rgba(0,0,0,0.85);
-    color: #e2b714;
+    color: #d4a843;
     font-size: 1.1rem;
     font-weight: bold;
     padding: 0.4rem 0.9rem;
@@ -163,7 +164,7 @@ h1 {
 }
 
 .card .tag .tag-dates {
-    color: #90cea1;
+    color: #7ec89a;
     font-weight: normal;
     font-style: italic;
     margin-left: 0.3rem;
@@ -190,12 +191,12 @@ h1 {
 
 .hint {
     margin-top: 1rem;
-    color: #666;
+    color: #8a8a9a;
     font-size: 0.9rem;
 }
 
 .loading {
-    color: #888;
+    color: #9a9a9a;
     font-size: 1.2rem;
 }
 
@@ -205,34 +206,39 @@ h1 {
 
 .bottom-btn {
     padding: 0.3rem 0.8rem;
-    border: 1px solid #444;
+    border: 1px solid #4a4a5a;
     border-radius: 2rem;
     background: transparent;
-    color: #666;
+    color: #8a8a9a;
     font-size: 0.75rem;
     cursor: pointer;
     transition: all 0.2s;
 }
 
+.bottom-btn:hover {
+    border-color: #8a8a9a;
+    color: #c0c0c0;
+}
+
 .bottom-btn.active {
-    border-color: #e2b714;
-    color: #e2b714;
+    border-color: #d4a843;
+    color: #d4a843;
 }
 
 #clue-btn {
     padding: 0.4rem 1rem;
-    border: 2px solid #444;
+    border: 2px solid #4a4a5a;
     border-radius: 2rem;
     background: transparent;
-    color: #ccc;
+    color: #b8b8c0;
     font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.2s;
 }
 
 #clue-btn:hover {
-    border-color: #e2b714;
-    color: #e2b714;
+    border-color: #d4a843;
+    color: #d4a843;
 }
 
 .clue-letters {
@@ -240,19 +246,19 @@ h1 {
     font-size: 1.5rem;
     font-weight: bold;
     letter-spacing: 0.15em;
-    color: #e2b714;
+    color: #d4a843;
 }
 
 .about-link {
     position: absolute;
     top: 1rem;
     right: 1.5rem;
-    color: #666;
+    color: #8a8a9a;
     text-decoration: none;
     font-size: 0.9rem;
     transition: color 0.2s;
 }
 
 .about-link:hover {
-    color: #e2b714;
+    color: #d4a843;
 }
