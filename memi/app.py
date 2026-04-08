@@ -82,14 +82,14 @@ except FileNotFoundError:
 
 # Fandom wikis for character categories
 FANDOM_WIKIS = {
-    "cinema:characters:star wars": "starwars",
-    "cinema:characters:lord of the rings": "lotr",
-    "cinema:characters:harry potter": "harrypotter",
-    "cinema:characters:disney": "disney",
-    "cinema:characters:marvel": "marvel",
-    "cinema:characters:dc": "dc",
-    "cinema:characters:anime": None,
-    "cinema:characters:all": None,
+    "culture:cinema:characters:star wars": "starwars",
+    "culture:cinema:characters:lord of the rings": "lotr",
+    "culture:cinema:characters:harry potter": "harrypotter",
+    "culture:cinema:characters:disney": "disney",
+    "culture:cinema:characters:marvel": "marvel",
+    "culture:cinema:characters:dc": "dc",
+    "culture:cinema:characters:anime": None,
+    "culture:cinema:characters:all": None,
 }
 
 
@@ -146,7 +146,7 @@ def random_item():
         continent_map = None
         if category.startswith("geography:countries:"):
             continent_map = COUNTRY_CONTINENTS
-        elif category == "art:monuments":
+        elif category == "culture:art:monuments":
             continent_map = MONUMENT_CONTINENTS
         elif category == "nature:landscapes":
             continent_map = LANDSCAPE_CONTINENTS
@@ -178,7 +178,7 @@ def random_item():
             diff_map = ANIMAL_DIFFICULTY
         elif category.startswith("geography:countries:"):
             diff_map = COUNTRY_DIFFICULTY
-        elif category == "art:monuments":
+        elif category == "culture:art:monuments":
             diff_map = MONUMENT_DIFFICULTY
         if diff_map:
             allowed = set()
@@ -200,7 +200,7 @@ def random_item():
 
     # Filter by instrument families if provided
     families_param = request.args.get("families", "")
-    if families_param and category == "music:instruments":
+    if families_param and category == "culture:music:instruments":
         allowed = set()
         for f in families_param.split(","):
             allowed.update(INSTRUMENT_FAMILIES.get(f, []))
@@ -228,17 +228,17 @@ def random_item():
     mode = category.split(":")[-1] if (is_country or is_us_state) else None
     is_bones = category == "humans:bones"
     is_road_signs = category == "geography:road signs"
-    is_albums = category == "music:albums"
-    is_sports = category.startswith("sports:")
+    is_albums = category == "culture:music:albums"
+    is_sports = category.startswith("culture:sports:")
 
     is_people = category == "humans:people" or category in (
-        "cinema:movies:actors",
-        "cinema:movies:directors",
+        "culture:cinema:movies:actors",
+        "culture:cinema:movies:directors",
     )
     is_logo = category == "logos"
-    is_movie = category.startswith("cinema:movies:")
+    is_movie = category.startswith("culture:cinema:movies:")
     movie_mode = category.split(":")[-1] if is_movie else None
-    is_tv = category == "cinema:tv shows:scenes"
+    is_tv = category == "culture:cinema:tv shows:scenes"
     is_anatomy = category.startswith("anatomy:")
     fandom_wiki = FANDOM_WIKIS.get(category)
 
@@ -304,15 +304,15 @@ def random_item():
                 if desc:
                     desc = desc.replace("(born ", "(").replace("(", "").replace(")", "")
                     result["tag"] = desc
-            elif category == "art:paintings:movements" and item in MOVEMENT_PERIODS:
+            elif category == "culture:art:paintings:movements" and item in MOVEMENT_PERIODS:
                 result["tag"] = MOVEMENT_PERIODS[item]
-            elif category == "art:paintings:paintings" and item in PAINTING_INFO:
+            elif category == "culture:art:paintings:paintings" and item in PAINTING_INFO:
                 result["tag"] = PAINTING_INFO[item]
             elif is_tv and item in TV_YEARS:
                 result["tag"] = TV_YEARS[item]
             elif is_movie and item in MOVIE_YEARS:
                 result["tag"] = MOVIE_YEARS[item]
-            elif category == "art:monuments" and item in MONUMENT_LOCATIONS:
+            elif category == "culture:art:monuments" and item in MONUMENT_LOCATIONS:
                 result["tag"] = MONUMENT_LOCATIONS[item]
             elif category == "geography:rivers" and item in RIVER_LOCATIONS:
                 result["tag"] = RIVER_LOCATIONS[item]
