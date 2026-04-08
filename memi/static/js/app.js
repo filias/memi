@@ -13,6 +13,8 @@ let selectedContinents = [];
 let selectedAnimalClasses = [];
 let selectedPeopleRoles = [];
 let selectedInstrumentFamilies = [];
+let prefetchedData = null;
+let prefetchedImage = null;
 
 const subcategories = JSON.parse(document.getElementById('subcategories-data').textContent);
 
@@ -253,17 +255,47 @@ async function loadNew() {
     revealed = false;
     loaded = false;
 
-    const cats = selectedCategories.join(',');
-    const seenParam = seenItems.length > 0 ? `&seen=${encodeURIComponent(seenItems.join(','))}` : '';
-    const continentsParam = selectedContinents.length > 0 ? `&continents=${encodeURIComponent(selectedContinents.join(','))}` : '';
-    const classesParam = selectedAnimalClasses.length > 0 ? `&classes=${encodeURIComponent(selectedAnimalClasses.join(','))}` : '';
-    const rolesParam = selectedPeopleRoles.length > 0 ? `&roles=${encodeURIComponent(selectedPeopleRoles.join(','))}` : '';
-    const familiesParam = selectedInstrumentFamilies.length > 0 ? `&families=${encodeURIComponent(selectedInstrumentFamilies.join(','))}` : '';
     updateFilters();
+
+    // Use prefetched data if available and categories haven't changed
+    if (prefetchedData && prefetchedImage && currentCats === selectedCategories.join(',')) {
+        const data = prefetchedData;
+        image.src = prefetchedImage.src;
+        prefetchedData = null;
+        prefetchedImage = null;
+
+        seenItems.push(data.item || data.name);
+        status.style.display = 'none';
+        image.style.display = 'block';
+        reportBtn.style.display = 'inline-block';
+        clue.style.display = 'none';
+        if (data.clue) { clue.textContent = data.clue; clue.style.display = 'block'; }
+        currentName = data.name;
+        currentTag = data.tag || '';
+        currentRevealImage = data.reveal_image || '';
+        currentItem = data.item || data.name;
+        currentCats = selectedCategories.join(',');
+        lettersRevealed = 0;
+        loaded = true;
+        hint.textContent = 'click the image to reveal the answer';
+
+        const usesTmdb = selectedCategories.some(c => c.includes('movies:posters') || c.includes('movies:scenes') || c.includes('tv shows:scenes'));
+        const usesBones = selectedCategories.includes('humans:bones');
+        const usesAlbums = selectedCategories.includes('culture:music:albums');
+        document.getElementById('tmdb-footer').style.display = usesTmdb ? 'block' : 'none';
+        document.getElementById('eskeletons-footer').style.display = usesBones ? 'block' : 'none';
+        document.getElementById('musicbrainz-footer').style.display = usesAlbums ? 'block' : 'none';
+
+        const clueArea = document.getElementById('clue-area');
+        if (clueMode) { updateClueDisplay(); clueArea.style.display = 'block'; }
+        else { clueArea.style.display = 'none'; }
+        return;
+    }
+
     const maxRetries = 5;
     for (let attempt = 0; attempt < maxRetries; attempt++) {
         try {
-            const resp = await fetch(`/api/random?cats=${encodeURIComponent(cats)}${seenParam}${continentsParam}${classesParam}${rolesParam}${familiesParam}`);
+            const resp = await fetch(buildFetchUrl());
             const data = await resp.json();
 
             if (data.error) continue;
@@ -351,6 +383,37 @@ async function reportItem() {
     } catch (e) {}
 }
 
+function buildFetchUrl() {
+    const cats = selectedCategories.join(',');
+    const seenParam = seenItems.length > 0 ? `&seen=${encodeURIComponent(seenItems.join(','))}` : '';
+    const continentsParam = selectedContinents.length > 0 ? `&continents=${encodeURIComponent(selectedContinents.join(','))}` : '';
+    const classesParam = selectedAnimalClasses.length > 0 ? `&classes=${encodeURIComponent(selectedAnimalClasses.join(','))}` : '';
+    const rolesParam = selectedPeopleRoles.length > 0 ? `&roles=${encodeURIComponent(selectedPeopleRoles.join(','))}` : '';
+    const familiesParam = selectedInstrumentFamilies.length > 0 ? `&families=${encodeURIComponent(selectedInstrumentFamilies.join(','))}` : '';
+    return `/api/random?cats=${encodeURIComponent(cats)}${seenParam}${continentsParam}${classesParam}${rolesParam}${familiesParam}`;
+}
+
+async function prefetchNext() {
+    if (selectedCategories.length === 0) return;
+    prefetchedData = null;
+    prefetchedImage = null;
+    try {
+        const resp = await fetch(buildFetchUrl());
+        const data = await resp.json();
+        if (data.error) return;
+        const img = new Image();
+        const ok = await new Promise(resolve => {
+            img.onload = () => resolve(true);
+            img.onerror = () => resolve(false);
+            img.src = data.image;
+        });
+        if (ok) {
+            prefetchedData = data;
+            prefetchedImage = img;
+        }
+    } catch (e) {}
+}
+
 function handleClick() {
     if (!loaded && selectedCategories.length > 0) {
         loadNew();
@@ -371,6 +434,7 @@ function handleClick() {
             revealImg.style.display = 'block';
         }
         revealed = true;
+        prefetchNext();
     } else if (selectedCategories.length > 0) {
         loadNew();
     }

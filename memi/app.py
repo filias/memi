@@ -85,6 +85,9 @@ FANDOM_WIKIS = {
 }
 
 
+app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 86400  # 1 day for static files
+
+
 @app.route("/")
 def index():
     top_level, subs = build_menu()
