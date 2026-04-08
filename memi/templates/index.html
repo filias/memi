@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memi</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v={{ version }}">
 </head>
 <body>
     <a href="/about" class="about-link">about</a>
@@ -92,7 +92,7 @@
     </div>
 
     <script id="subcategories-data" type="application/json">{{ subcategories | tojson }}</script>
-    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}?v={{ version }}"></script>
     <footer id="tmdb-footer" style="display:none; margin-top:3rem; padding:1rem; text-align:center; opacity:0.4;">
         <a href="https://www.themoviedb.org/" target="_blank" rel="noopener">
             <img src="{{ url_for('static', filename='tmdb-logo.svg') }}" alt="TMDB" style="height:1rem;">
