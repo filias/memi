@@ -280,6 +280,7 @@ async function loadNew() {
 
             status.style.display = 'none';
             image.style.display = 'block';
+            reportBtn.style.display = 'inline-block';
             clue.style.display = 'none';
             if (data.clue) {
                 clue.textContent = data.clue;
