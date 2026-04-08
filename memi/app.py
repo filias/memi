@@ -232,8 +232,8 @@ def random_item():
     is_sports = category.startswith("culture:sports:")
 
     is_people = category == "humans:people" or category in (
-        "culture:cinema:movies:actors",
-        "culture:cinema:movies:directors",
+        "culture:cinema:actors",
+        "culture:cinema:directors",
     )
     is_logo = category == "logos"
     is_movie = category.startswith("culture:cinema:movies:")
