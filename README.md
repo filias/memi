@@ -1,5 +1,7 @@
 # memi
 
+[![Lint](https://github.com/filias/memi/actions/workflows/lint.yml/badge.svg)](https://github.com/filias/memi/actions/workflows/lint.yml)
+
 A memory practice game. Pick a category, look at the image, and try to guess what it is before revealing the answer.
 
 Live at [memi.click](https://memi.click)
