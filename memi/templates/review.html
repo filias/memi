@@ -13,12 +13,16 @@
             background: #fff; border-radius: 0.5rem;
             box-shadow: 0 1px 4px rgba(0,0,0,0.08);
         }
-        .report.excluded { opacity: 0.5; }
-        .report-info { flex: 1; }
+        .report.excluded { opacity: 0.4; }
+        .report-preview {
+            width: 80px; height: 80px; border-radius: 0.4rem;
+            object-fit: contain; background: #f0f0f0; flex-shrink: 0;
+        }
+        .report-info { flex: 1; min-width: 0; }
         .report-item { font-weight: bold; color: #2c2c2c; }
-        .report-cats { font-size: 0.75rem; color: #999; }
+        .report-cats { font-size: 0.75rem; color: #999; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .report-time { font-size: 0.7rem; color: #bbb; }
-        .report-actions { display: flex; gap: 0.4rem; }
+        .report-actions { display: flex; gap: 0.4rem; flex-shrink: 0; }
         .report-actions button {
             padding: 0.3rem 0.7rem; border: 1px solid #ccc; border-radius: 1rem;
             background: transparent; cursor: pointer; font-size: 0.75rem;
@@ -41,6 +45,8 @@
         {% endif %}
         {% for r in reports %}
         <div class="report {{ r.status }}" id="report-{{ loop.index }}">
+            <img class="report-preview" id="img-{{ loop.index }}" src="" alt=""
+                 data-item="{{ r.item }}" data-cats="{{ r.cats }}">
             <div class="report-info">
                 <div class="report-item">{{ r.item }}</div>
                 <div class="report-cats">{{ r.cats }}</div>
@@ -48,9 +54,9 @@
             </div>
             <div class="report-actions">
                 {% if r.status == 'excluded' %}
-                <button class="btn-restore" onclick="restore('{{ r.item }}', {{ loop.index }})">restore</button>
+                <button class="btn-restore" onclick="restore('{{ r.item }}')">restore</button>
                 {% else %}
-                <button class="btn-exclude" onclick="exclude('{{ r.item }}', {{ loop.index }})">exclude</button>
+                <button class="btn-exclude" onclick="exclude('{{ r.item }}')">exclude</button>
                 {% endif %}
             </div>
         </div>
@@ -60,7 +66,18 @@
     <p style="padding:2rem 0;"><a href="/" style="color:#999; font-size:0.9rem;">&larr; back to playing</a></p>
 
     <script>
-        async function exclude(item, idx) {
+        // Load preview images
+        document.querySelectorAll('.report-preview').forEach(async img => {
+            const item = img.dataset.item;
+            const cats = img.dataset.cats;
+            try {
+                const r = await fetch(`/api/review/preview?item=${encodeURIComponent(item)}&cats=${encodeURIComponent(cats)}`);
+                const data = await r.json();
+                if (data.image) img.src = data.image;
+            } catch (e) {}
+        });
+
+        async function exclude(item) {
             await fetch('/api/review/exclude', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
@@ -68,7 +85,7 @@
             });
             location.reload();
         }
-        async function restore(item, idx) {
+        async function restore(item) {
             await fetch('/api/review/restore', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},

@@ -410,6 +410,61 @@ def review_reports():
     return render_template("review.html", reports=pending)
 
 
+@app.route("/api/review/preview")
+def preview_item():
+    """Get the image URL for a reported item."""
+    item = request.args.get("item", "")
+    cats = request.args.get("cats", "")
+    if not item or not cats:
+        return jsonify({"error": "Missing item or cats"}), 400
+    cat = cats.split(",")[0]
+    if cat not in CATEGORIES:
+        return jsonify({"error": "Unknown category"}), 400
+
+    # Reuse the same image logic as random_item
+    category = cat
+    is_bones = category == "humans:bones"
+    is_road_signs = category == "geography:road signs"
+    is_albums = category == "culture:music:albums"
+    is_sports = category.startswith("culture:sports:")
+    is_country = category.startswith("geography:countries:")
+    is_us_state = category.startswith("geography:us states:")
+    mode = category.split(":")[-1] if (is_country or is_us_state) else None
+    fandom_wiki = FANDOM_WIKIS.get(category)
+
+    result = None
+    if is_albums:
+        mbid = ALBUM_MBIDS.get(item)
+        result = get_album_cover(item, mbid)
+    elif is_sports:
+        image_file = SPORT_IMAGE_FILES.get(item)
+        if image_file:
+            result = get_wikipedia_file_image(image_file)
+        if not result or not result.get("image"):
+            wiki = SPORT_WIKIPEDIA.get(item, item)
+            result = get_wikipedia_image(wiki)
+    elif is_bones:
+        result = get_bone_image(item)
+    elif is_road_signs:
+        from memi.categories.roadsigns import COMMONS_FILES as SF
+
+        cf = SF.get(item)
+        if cf:
+            result = get_commons_file_image(cf)
+    elif is_us_state:
+        result = get_state_item(item, mode)
+    elif is_country:
+        result = get_country_item(item, mode)
+    elif fandom_wiki:
+        result = get_fandom_image(item, fandom_wiki)
+    if not result or not result.get("image"):
+        result = get_wikipedia_image(item)
+
+    if result and result.get("image"):
+        return jsonify({"image": result["image"]})
+    return jsonify({"error": "No image found"}), 404
+
+
 @app.route("/api/review/exclude", methods=["POST"])
 def exclude_item():
     """Approve a report — exclude item from rotation."""
