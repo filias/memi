@@ -4,54 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Memi</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: system-ui, sans-serif;
-            background: #f5f3ef;
-            color: #2c2c2c;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        h1 {
-            margin: 2rem 0 0.5rem;
-            font-size: 2.5rem;
-            letter-spacing: 0.1em;
-        }
-
-        h1 a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        .content {
-            max-width: 500px;
-            padding: 2rem 1.5rem;
-            line-height: 1.7;
-            color: #555;
-        }
-
-        .content p {
-            margin-bottom: 1rem;
-        }
-
-        .back-link {
-            color: #999;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.2s;
-        }
-
-        .back-link:hover {
-            color: #b8860b;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v={{ version }}">
+    <script>document.documentElement.dataset.theme = localStorage.getItem('memi-theme') || 'light';</script>
 </head>
 <body>
+    <div class="theme-picker">
+        <div class="theme-dot" data-theme="light" title="light" onclick="setTheme('light')"></div>
+        <div class="theme-dot" data-theme="dark" title="dark" onclick="setTheme('dark')"></div>
+        <div class="theme-dot" data-theme="ocean" title="ocean" onclick="setTheme('ocean')"></div>
+    </div>
     <h1><a href="/">memi</a></h1>
 
     <div class="content">
@@ -63,5 +24,13 @@
 
         <p><a href="/" class="back-link">&larr; back to playing</a></p>
     </div>
+    <script>
+    function setTheme(theme) {
+        document.documentElement.dataset.theme = theme;
+        localStorage.setItem('memi-theme', theme);
+        document.querySelectorAll('.theme-dot').forEach(d => d.classList.toggle('active', d.dataset.theme === theme));
+    }
+    setTheme(localStorage.getItem('memi-theme') || 'light');
+    </script>
 </body>
 </html>

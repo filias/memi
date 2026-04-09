@@ -5,8 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memi</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v={{ version }}">
+    <script>document.documentElement.dataset.theme = localStorage.getItem('memi-theme') || 'light';</script>
 </head>
 <body>
+    <div class="theme-picker">
+        <div class="theme-dot" data-theme="light" title="light" onclick="setTheme('light')"></div>
+        <div class="theme-dot" data-theme="dark" title="dark" onclick="setTheme('dark')"></div>
+        <div class="theme-dot" data-theme="ocean" title="ocean" onclick="setTheme('ocean')"></div>
+    </div>
     <a href="/about" class="about-link">about</a>
     <h1>memi</h1>
     <p class="subtitle">practise your memory</p>
@@ -91,6 +97,14 @@
         <p id="clue-letters" class="clue-letters"></p>
     </div>
 
+    <script>
+    function setTheme(theme) {
+        document.documentElement.dataset.theme = theme;
+        localStorage.setItem('memi-theme', theme);
+        document.querySelectorAll('.theme-dot').forEach(d => d.classList.toggle('active', d.dataset.theme === theme));
+    }
+    setTheme(localStorage.getItem('memi-theme') || 'light');
+    </script>
     <script id="subcategories-data" type="application/json">{{ subcategories | tojson }}</script>
     <script src="{{ url_for('static', filename='js/app.js') }}?v={{ version }}"></script>
     <footer id="tmdb-footer" style="display:none; margin-top:3rem; padding:1rem; text-align:center; opacity:0.4;">
@@ -98,20 +112,20 @@
             <img src="{{ url_for('static', filename='tmdb-logo.svg') }}" alt="TMDB" style="height:1rem;">
         </a>
     </footer>
-    <footer id="eskeletons-footer" style="display:none; margin-top:3rem; padding:1rem; text-align:center; font-size:0.75rem; color:#999;">
-        Bone images courtesy of <a href="https://www.eskeletons.org/" target="_blank" rel="noopener" style="color:#2a7a4a;">eSkeletons.org</a>,
+    <footer id="eskeletons-footer" style="display:none; margin-top:3rem; padding:1rem; text-align:center; font-size:0.75rem; color:var(--muted);">
+        Bone images courtesy of <a href="https://www.eskeletons.org/" target="_blank" rel="noopener" style="color:var(--tag-secondary);">eSkeletons.org</a>,
         John Kappelman &amp; UT Austin
-        (<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:#2a7a4a;">CC BY-NC-SA 4.0</a>)
+        (<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:var(--tag-secondary);">CC BY-NC-SA 4.0</a>)
     </footer>
-    <footer id="musicbrainz-footer" style="display:none; margin-top:3rem; padding:1rem; text-align:center; font-size:0.75rem; color:#999;">
-        Album covers from <a href="https://coverartarchive.org/" target="_blank" rel="noopener" style="color:#2a7a4a;">Cover Art Archive</a>
-        / <a href="https://musicbrainz.org/" target="_blank" rel="noopener" style="color:#2a7a4a;">MusicBrainz</a>
+    <footer id="musicbrainz-footer" style="display:none; margin-top:3rem; padding:1rem; text-align:center; font-size:0.75rem; color:var(--muted);">
+        Album covers from <a href="https://coverartarchive.org/" target="_blank" rel="noopener" style="color:var(--tag-secondary);">Cover Art Archive</a>
+        / <a href="https://musicbrainz.org/" target="_blank" rel="noopener" style="color:var(--tag-secondary);">MusicBrainz</a>
     </footer>
-    <footer id="wikipedia-footer" style="margin-top:3rem; padding:1rem; text-align:center; font-size:0.75rem; color:#aaa;">
-        Images from <a href="https://www.wikipedia.org/" target="_blank" rel="noopener" style="color:#777;">Wikipedia</a>
-        &amp; <a href="https://commons.wikimedia.org/" target="_blank" rel="noopener" style="color:#777;">Wikimedia Commons</a>
+    <footer id="wikipedia-footer" style="margin-top:3rem; padding:1rem; text-align:center; font-size:0.75rem; color:var(--muted);">
+        Images from <a href="https://www.wikipedia.org/" target="_blank" rel="noopener" style="color:var(--link);">Wikipedia</a>
+        &amp; <a href="https://commons.wikimedia.org/" target="_blank" rel="noopener" style="color:var(--link);">Wikimedia Commons</a>
     </footer>
-    <div style="text-align:center; padding:1rem; font-size:0.65rem; color:#bbb;">{{ version }}</div>
+    <div style="text-align:center; padding:1rem; font-size:0.65rem; color:var(--version-color);">{{ version }}</div>
     <script data-goatcounter="https://filias.goatcounter.com/count"
             async src="//gc.zgo.at/count.js"></script>
 </body>

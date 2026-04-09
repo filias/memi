@@ -272,8 +272,8 @@ async function loadNew() {
     reportBtn.style.display = 'none';
     reportBtn.textContent = 'report';
     reportBtn.disabled = false;
-    reportBtn.style.color = '#666';
-    reportBtn.style.borderColor = '#444';
+    reportBtn.style.color = '';
+    reportBtn.style.borderColor = '';
     revealed = false;
     loaded = false;
 
@@ -396,8 +396,8 @@ async function reportItem() {
     const btn = document.getElementById('report-btn');
     btn.textContent = 'reported';
     btn.disabled = true;
-    btn.style.color = '#e2b714';
-    btn.style.borderColor = '#e2b714';
+    btn.style.color = 'var(--accent)';
+    btn.style.borderColor = 'var(--accent)';
     try {
         await fetch('/api/report', {
             method: 'POST',
