@@ -57,31 +57,31 @@
 }
 
 [data-theme="ocean"] {
-    --bg: #0f1926;
-    --text: #c8dce8;
-    --heading: #e0eef8;
-    --subtle: #6a8ca8;
-    --card-bg: #162636;
-    --card-light-bg: #dde8f0;
-    --card-shadow: rgba(0,0,0,0.5);
-    --border: #2a4a60;
-    --border-hover: #4a7a98;
-    --btn-text: #7aa0b8;
-    --btn-hover-text: #c8dce8;
-    --filter-text: #6a8ca8;
-    --filter-hover-text: #c8dce8;
-    --accent: #4db8d4;
-    --tag-secondary: #5cc9a0;
-    --answer-bg: rgba(10,20,35,0.8);
-    --overlay-bg: rgba(10,20,35,0.7);
-    --tag-bg: rgba(10,20,35,0.85);
-    --error: #e06060;
-    --link: #6a8ca8;
-    --muted: #6a8ca8;
-    --back-border: #3a5a70;
-    --bottom-border: #2a4a60;
-    --clue-btn-text: #7aa0b8;
-    --version-color: #2a4a60;
+    --bg: #e8f0f8;
+    --text: #2a3a4a;
+    --heading: #1a2a3a;
+    --subtle: #7a8ea0;
+    --card-bg: #fff;
+    --card-light-bg: #e0eaf2;
+    --card-shadow: rgba(0,40,80,0.12);
+    --border: #b0c8da;
+    --border-hover: #7a9ab8;
+    --btn-text: #5a7a94;
+    --btn-hover-text: #2a3a4a;
+    --filter-text: #6a8aa4;
+    --filter-hover-text: #2a3a4a;
+    --accent: #2a8ab8;
+    --tag-secondary: #3a9a7a;
+    --answer-bg: rgba(20,40,60,0.75);
+    --overlay-bg: rgba(20,40,60,0.6);
+    --tag-bg: rgba(20,40,60,0.8);
+    --error: #d44;
+    --link: #6a8aa4;
+    --muted: #7a8ea0;
+    --back-border: #9ab4c8;
+    --bottom-border: #b0c8da;
+    --clue-btn-text: #5a7a94;
+    --version-color: #b0c8da;
 }
 
 /* --- Base --- */
@@ -365,12 +365,19 @@ h1 a {
     top: 1rem;
     left: 1.5rem;
     display: flex;
-    gap: 0.4rem;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.theme-label {
+    font-size: 0.65rem;
+    color: var(--subtle);
+    margin-right: 0.1rem;
 }
 
 .theme-dot {
-    width: 18px;
-    height: 18px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
     border: 2px solid transparent;
     cursor: pointer;
@@ -378,7 +385,7 @@ h1 a {
 }
 
 .theme-dot:hover {
-    transform: scale(1.2);
+    transform: scale(1.25);
 }
 
 .theme-dot.active {
@@ -387,11 +394,11 @@ h1 a {
 
 .theme-dot[data-theme="light"] { background: #f5f3ef; border-color: #ccc; }
 .theme-dot[data-theme="dark"] { background: #232530; border-color: #4a4a5a; }
-.theme-dot[data-theme="ocean"] { background: #0f1926; border-color: #2a4a60; }
+.theme-dot[data-theme="ocean"] { background: #a0c8e8; border-color: #7aa0c0; }
 
 .theme-dot.active[data-theme="light"] { border-color: #b8860b; }
 .theme-dot.active[data-theme="dark"] { border-color: #d4a843; }
-.theme-dot.active[data-theme="ocean"] { border-color: #4db8d4; }
+.theme-dot.active[data-theme="ocean"] { border-color: #2a8ab8; }
 
 /* --- About page --- */
 
