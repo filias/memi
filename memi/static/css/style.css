@@ -394,7 +394,7 @@ h1 a {
 
 .theme-dot[data-theme="light"] { background: #f5f3ef; border-color: #ccc; }
 .theme-dot[data-theme="dark"] { background: #232530; border-color: #4a4a5a; }
-.theme-dot[data-theme="ocean"] { background: #1a2a3a; border-color: #2e5068; }
+.theme-dot[data-theme="ocean"] { background: #4ab4d8; border-color: #2a8ab8; }
 
 .theme-dot.active[data-theme="light"] { border-color: #b8860b; }
 .theme-dot.active[data-theme="dark"] { border-color: #d4a843; }
