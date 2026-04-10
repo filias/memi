@@ -381,13 +381,14 @@ function showTag(tagEl) {
     const dateMatch = currentTag.match(/^(.*?)(\d{3,4}[–—-]?\d{0,4})\s*$/);
     const sciMatch = currentTag.match(/^[A-Z][a-z]+(\s[a-z]+)?$/);
     if (dateMatch && dateMatch[1].trim()) {
-        tagEl.innerHTML = dateMatch[1].trim() + ' <span class="tag-dates">' + dateMatch[2] + '</span>';
+        const namePart = dateMatch[1].trim().replace(/[,\s]+$/, '');
+        tagEl.innerHTML = namePart + ', <span class="tag-dates">' + dateMatch[2] + '</span>';
     } else if (dateMatch) {
         tagEl.textContent = dateMatch[2];
     } else if (sciMatch) {
         tagEl.innerHTML = '<em class="tag-dates">' + currentTag + '</em>';
     } else {
-        tagEl.textContent = currentTag;
+        tagEl.textContent = currentTag.replace(/[,\s]+$/, '');
     }
     tagEl.style.display = 'block';
 }

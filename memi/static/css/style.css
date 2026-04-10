@@ -262,8 +262,6 @@ h1 a {
     color: var(--tag-secondary);
     font-weight: normal;
     font-style: italic;
-    margin-left: 0.3rem;
-    display: none;
 }
 
 .card .reveal-image {
