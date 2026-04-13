@@ -356,6 +356,16 @@ h1 a {
     color: var(--accent);
 }
 
+.sponsor-link {
+    color: var(--subtle);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.sponsor-link:hover {
+    color: var(--accent);
+}
+
 /* --- Theme picker --- */
 
 .theme-picker {
