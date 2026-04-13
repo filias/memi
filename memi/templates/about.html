@@ -6,14 +6,21 @@
     <title>About - Memi</title>
     <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}?v={{ version }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v={{ version }}">
-    <script>document.documentElement.dataset.theme = localStorage.getItem('memi-theme') || 'light';</script>
+    <script>
+    var t = localStorage.getItem('memi-theme') || 'light';
+    if (t === 'ocean') { t = 'blue'; localStorage.setItem('memi-theme', t); }
+    document.documentElement.dataset.theme = t;
+    </script>
 </head>
 <body>
     <div class="theme-picker">
         <span class="theme-label">theme</span>
         <div class="theme-dot" data-theme="light" title="light" onclick="setTheme('light')"></div>
+        <div class="theme-dot" data-theme="yellow" title="yellow" onclick="setTheme('yellow')"></div>
+        <div class="theme-dot" data-theme="pink" title="pink" onclick="setTheme('pink')"></div>
+        <div class="theme-dot" data-theme="blue" title="blue" onclick="setTheme('blue')"></div>
+        <div class="theme-dot" data-theme="green" title="green" onclick="setTheme('green')"></div>
         <div class="theme-dot" data-theme="dark" title="dark" onclick="setTheme('dark')"></div>
-        <div class="theme-dot" data-theme="ocean" title="ocean" onclick="setTheme('ocean')"></div>
     </div>
     <h1><a href="/">memi</a></h1>
 
