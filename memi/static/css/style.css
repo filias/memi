@@ -426,10 +426,15 @@ h1 a {
     color: var(--accent);
 }
 
-.about-link {
+.top-right {
     position: absolute;
     top: 1rem;
     right: 1.5rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.about-link {
     color: var(--link);
     text-decoration: none;
     font-size: 0.9rem;
@@ -437,16 +442,6 @@ h1 a {
 }
 
 .about-link:hover {
-    color: var(--accent);
-}
-
-.sponsor-link {
-    color: var(--subtle);
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-.sponsor-link:hover {
     color: var(--accent);
 }
 
