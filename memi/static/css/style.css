@@ -141,31 +141,31 @@
 }
 
 [data-theme="brown"] {
-    --bg: #3a3028;
-    --text: #ddd4c8;
-    --heading: #eae0d4;
-    --subtle: #9a8a78;
-    --card-bg: #453a30;
-    --card-light-bg: #e0d8ce;
-    --card-shadow: rgba(0,0,0,0.4);
-    --border: #5a4a3a;
-    --border-hover: #8a7a68;
-    --btn-text: #b0a090;
-    --btn-hover-text: #ddd4c8;
-    --filter-text: #9a8a78;
-    --filter-hover-text: #ddd4c8;
-    --accent: #c8a050;
-    --tag-secondary: #8aba8a;
-    --answer-bg: rgba(20,15,10,0.78);
-    --overlay-bg: rgba(20,15,10,0.6);
-    --tag-bg: rgba(20,15,10,0.85);
-    --error: #e06050;
-    --link: #9a8a78;
-    --muted: #9a8a78;
-    --back-border: #6a5a4a;
-    --bottom-border: #5a4a3a;
-    --clue-btn-text: #b0a090;
-    --version-color: #5a4a3a;
+    --bg: #e8ddd0;
+    --text: #3a2e22;
+    --heading: #2a2018;
+    --subtle: #9a8870;
+    --card-bg: #f0e6d8;
+    --card-light-bg: #dcd0c0;
+    --card-shadow: rgba(40,25,10,0.12);
+    --border: #c8b498;
+    --border-hover: #a08a68;
+    --btn-text: #8a7458;
+    --btn-hover-text: #3a2e22;
+    --filter-text: #9a8870;
+    --filter-hover-text: #3a2e22;
+    --accent: #a07830;
+    --tag-secondary: #6a9a6a;
+    --answer-bg: rgba(30,20,10,0.75);
+    --overlay-bg: rgba(30,20,10,0.6);
+    --tag-bg: rgba(30,20,10,0.8);
+    --error: #d44;
+    --link: #9a8870;
+    --muted: #9a8870;
+    --back-border: #b0a080;
+    --bottom-border: #c8b498;
+    --clue-btn-text: #8a7458;
+    --version-color: #c8b498;
 }
 
 [data-theme="grey"] {
@@ -548,7 +548,7 @@ h1 a {
 .theme-dot[data-theme="pink"] { background: #e8a0b8; border-color: #d080a0; }
 .theme-dot[data-theme="blue"] { background: #4ab4d8; border-color: #2a8ab8; }
 .theme-dot[data-theme="green"] { background: #6aba68; border-color: #4a9a48; }
-.theme-dot[data-theme="brown"] { background: #6a5840; border-color: #5a4a3a; }
+.theme-dot[data-theme="brown"] { background: #c8a878; border-color: #a08a68; }
 .theme-dot[data-theme="grey"] { background: #68686e; border-color: #58585e; }
 .theme-dot[data-theme="dark"] { background: #232530; border-color: #4a4a5a; }
 
