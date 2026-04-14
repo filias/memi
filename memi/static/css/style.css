@@ -445,6 +445,14 @@ h1 a {
     color: var(--accent);
 }
 
+.sponsor-heart {
+    font-size: 1.2rem;
+}
+
+.sponsor-heart:hover {
+    color: #d4608a;
+}
+
 /* --- Theme picker --- */
 
 .theme-picker {
