@@ -322,7 +322,7 @@ def random_item():
                 result["tag"] = MONUMENT_LOCATIONS[item]
             elif category == "geography:rivers" and item in RIVER_LOCATIONS:
                 result["tag"] = RIVER_LOCATIONS[item]
-            elif category == "nature:space" and item in SPACE_LOCATIONS:
+            elif category.startswith("nature:space") and item in SPACE_LOCATIONS:
                 result["tag"] = SPACE_LOCATIONS[item]
             elif category == "nature:animals" or category.startswith("nature:plants:"):
                 sci_name = get_scientific_name(item)

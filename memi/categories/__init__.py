@@ -67,7 +67,9 @@ CATEGORIES = {
     "nature:plants:houseplants": plants.HOUSEPLANTS,
     "nature:plants:other": plants.OTHER,
     "nature:plants:trees": plants.TREES,
-    "nature:space": space.ALL,
+    "nature:space:all": space.ALL,
+    "nature:space:solar system": space.SOLAR_SYSTEM,
+    "nature:space:deep space": space.DEEP_SPACE,
     # Disabled
     # "logos": logos.ALL,  # TODO: find symbol-only logos without text
 }

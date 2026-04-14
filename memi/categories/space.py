@@ -1,4 +1,4 @@
-ALL = [
+SOLAR_SYSTEM = [
     # Planets
     "Mercury (planet)",
     "Venus",
@@ -28,8 +28,47 @@ ALL = [
     "Deimos (moon)",
     "Miranda (moon)",
     "Mimas (moon)",
-    # Stars
+    # Sun
     "Sun",
+    # Comets
+    "Halley's Comet",
+    "Comet Hale–Bopp",
+    "Comet Hyakutake",
+    "Comet McNaught",
+    "Comet NEOWISE",
+    "Comet Lovejoy",
+    "Comet West",
+    # Asteroids & small bodies
+    "Asteroid belt",
+    "Ceres (dwarf planet)",
+    "Vesta (asteroid)",
+    "Bennu (asteroid)",
+    "Ryugu (asteroid)",
+    "Kuiper belt",
+    "Oort cloud",
+    # Solar system phenomena
+    "Solar eclipse",
+    "Lunar eclipse",
+    "Aurora",
+    "Solar flare",
+    "Meteor shower",
+    # Famous solar system features
+    "Olympus Mons",
+    "Valles Marineris",
+    "Great Red Spot",
+    "Rings of Saturn",
+    "Van Allen radiation belt",
+    # Spacecraft & missions
+    "International Space Station",
+    "Hubble Space Telescope",
+    "James Webb Space Telescope",
+    "Voyager 1",
+    "Apollo 11",
+    "Mars rover",
+]
+
+DEEP_SPACE = [
+    # Stars
     "Sirius",
     "Betelgeuse",
     "Rigel",
@@ -85,22 +124,6 @@ ALL = [
     "Omega Centauri",
     "Globular cluster",
     "Hercules Cluster",
-    # Comets
-    "Halley's Comet",
-    "Comet Hale–Bopp",
-    "Comet Hyakutake",
-    "Comet McNaught",
-    "Comet NEOWISE",
-    "Comet Lovejoy",
-    "Comet West",
-    # Asteroids & small bodies
-    "Asteroid belt",
-    "Ceres (dwarf planet)",
-    "Vesta (asteroid)",
-    "Bennu (asteroid)",
-    "Ryugu (asteroid)",
-    "Kuiper belt",
-    "Oort cloud",
     # Phenomena
     "Black hole",
     "Supernova",
@@ -109,30 +132,14 @@ ALL = [
     "Neutron star",
     "White dwarf",
     "Red giant",
-    "Solar eclipse",
-    "Lunar eclipse",
-    "Aurora",
-    "Solar flare",
-    "Meteor shower",
-    # Famous objects & regions
+    # Famous objects
     "Hubble Deep Field",
     "Pale Blue Dot",
     "Sagittarius A*",
     "Cygnus X-1",
-    "Olympus Mons",
-    "Valles Marineris",
-    "Great Red Spot",
-    "Rings of Saturn",
-    "Asteroid belt",
-    "Van Allen radiation belt",
-    # Spacecraft & missions (iconic images)
-    "International Space Station",
-    "Hubble Space Telescope",
-    "James Webb Space Telescope",
-    "Voyager 1",
-    "Apollo 11",
-    "Mars rover",
 ]
+
+ALL = SOLAR_SYSTEM + DEEP_SPACE
 
 LOCATIONS = {
     # Planets
