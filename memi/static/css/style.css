@@ -141,31 +141,31 @@
 }
 
 [data-theme="brown"] {
-    --bg: #e8ddd0;
-    --text: #3a2e22;
-    --heading: #2a2018;
-    --subtle: #9a8870;
-    --card-bg: #f0e6d8;
-    --card-light-bg: #dcd0c0;
-    --card-shadow: rgba(40,25,10,0.12);
-    --border: #c8b498;
-    --border-hover: #a08a68;
-    --btn-text: #8a7458;
-    --btn-hover-text: #3a2e22;
-    --filter-text: #9a8870;
-    --filter-hover-text: #3a2e22;
-    --accent: #a07830;
-    --tag-secondary: #6a9a6a;
-    --answer-bg: rgba(30,20,10,0.75);
-    --overlay-bg: rgba(30,20,10,0.6);
-    --tag-bg: rgba(30,20,10,0.8);
-    --error: #d44;
-    --link: #9a8870;
-    --muted: #9a8870;
-    --back-border: #b0a080;
-    --bottom-border: #c8b498;
-    --clue-btn-text: #8a7458;
-    --version-color: #c8b498;
+    --bg: #c8b8a4;
+    --text: #302418;
+    --heading: #201810;
+    --subtle: #7a6a58;
+    --card-bg: #d4c4b0;
+    --card-light-bg: #c0b0a0;
+    --card-shadow: rgba(30,20,10,0.18);
+    --border: #a89880;
+    --border-hover: #887058;
+    --btn-text: #6a5a44;
+    --btn-hover-text: #302418;
+    --filter-text: #7a6a58;
+    --filter-hover-text: #302418;
+    --accent: #906820;
+    --tag-secondary: #5a8a5a;
+    --answer-bg: rgba(25,18,10,0.78);
+    --overlay-bg: rgba(25,18,10,0.6);
+    --tag-bg: rgba(25,18,10,0.82);
+    --error: #c43;
+    --link: #7a6a58;
+    --muted: #7a6a58;
+    --back-border: #988868;
+    --bottom-border: #a89880;
+    --clue-btn-text: #6a5a44;
+    --version-color: #a89880;
 }
 
 [data-theme="grey"] {
@@ -548,7 +548,7 @@ h1 a {
 .theme-dot[data-theme="pink"] { background: #e8a0b8; border-color: #d080a0; }
 .theme-dot[data-theme="blue"] { background: #4ab4d8; border-color: #2a8ab8; }
 .theme-dot[data-theme="green"] { background: #6aba68; border-color: #4a9a48; }
-.theme-dot[data-theme="brown"] { background: #c8a878; border-color: #a08a68; }
+.theme-dot[data-theme="brown"] { background: #b09878; border-color: #988068; }
 .theme-dot[data-theme="grey"] { background: #68686e; border-color: #58585e; }
 .theme-dot[data-theme="dark"] { background: #232530; border-color: #4a4a5a; }
 
