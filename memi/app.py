@@ -30,6 +30,7 @@ from memi.categories.space import LOCATIONS as SPACE_LOCATIONS
 from memi.categories.rivers import LOCATIONS as RIVER_LOCATIONS
 from memi.categories.roadsigns import COMMONS_FILES as SIGN_FILES
 from memi.categories.roadsigns import REGIONS as SIGN_REGIONS
+from memi.categories.logos import LOGOS
 from memi.categories.sports import IMAGE_FILES as SPORT_IMAGE_FILES
 from memi.categories.sports import TAGS as SPORT_TAGS
 from memi.categories.sports import WIKIPEDIA as SPORT_WIKIPEDIA
@@ -249,12 +250,15 @@ def random_item():
             mbid = ALBUM_MBIDS.get(item)
             result = get_album_cover(item, mbid)
         elif is_sports:
-            image_file = SPORT_IMAGE_FILES.get(item)
-            if image_file:
-                result = get_wikipedia_file_image(image_file)
-            if not result or not result.get("image"):
-                wiki = SPORT_WIKIPEDIA.get(item, item)
-                result = get_wikipedia_image(wiki)
+            if item in LOGOS:
+                result = {"name": item, "image": LOGOS[item]}
+            else:
+                image_file = SPORT_IMAGE_FILES.get(item)
+                if image_file:
+                    result = get_wikipedia_file_image(image_file)
+                if not result or not result.get("image"):
+                    wiki = SPORT_WIKIPEDIA.get(item, item)
+                    result = get_wikipedia_image(wiki)
         elif is_bones:
             result = get_bone_image(item)
         elif is_road_signs:
@@ -437,12 +441,15 @@ def preview_item():
         mbid = ALBUM_MBIDS.get(item)
         result = get_album_cover(item, mbid)
     elif is_sports:
-        image_file = SPORT_IMAGE_FILES.get(item)
-        if image_file:
-            result = get_wikipedia_file_image(image_file)
-        if not result or not result.get("image"):
-            wiki = SPORT_WIKIPEDIA.get(item, item)
-            result = get_wikipedia_image(wiki)
+        if item in LOGOS:
+            result = {"name": item, "image": LOGOS[item]}
+        else:
+            image_file = SPORT_IMAGE_FILES.get(item)
+            if image_file:
+                result = get_wikipedia_file_image(image_file)
+            if not result or not result.get("image"):
+                wiki = SPORT_WIKIPEDIA.get(item, item)
+                result = get_wikipedia_image(wiki)
     elif is_bones:
         result = get_bone_image(item)
     elif is_road_signs:
