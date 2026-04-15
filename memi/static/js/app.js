@@ -372,8 +372,8 @@ async function loadNew() {
         }
     }
     seenItems = [];
-    status.textContent = 'no image found, click to retry';
-    status.className = 'error';
+    status.textContent = 'all done! click to start over';
+    status.className = 'loading';
     loaded = false;
 }
 
