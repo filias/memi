@@ -274,17 +274,28 @@ SPORTS = [
 ]
 
 FOOTBALL_CLUBS = [
-    # England
+    # England — Premier League
     ("Arsenal", "Arsenal F.C.", None, "England"),
+    ("Aston Villa", "Aston Villa F.C.", None, "England"),
+    ("Bournemouth", "AFC Bournemouth", None, "England"),
+    ("Brentford", "Brentford F.C.", None, "England"),
+    ("Brighton", "Brighton & Hove Albion F.C.", None, "England"),
     ("Chelsea", "Chelsea F.C.", None, "England"),
+    ("Crystal Palace", "Crystal Palace F.C.", None, "England"),
+    ("Everton", "Everton F.C.", None, "England"),
+    ("Fulham", "Fulham F.C.", None, "England"),
+    ("Ipswich Town", "Ipswich Town F.C.", None, "England"),
+    ("Leeds United", "Leeds United F.C.", None, "England"),
+    ("Leicester City", "Leicester City F.C.", None, "England"),
     ("Liverpool", "Liverpool F.C.", None, "England"),
     ("Manchester City", "Manchester City F.C.", None, "England"),
     ("Manchester United", "Manchester United F.C.", None, "England"),
-    ("Tottenham Hotspur", "Tottenham Hotspur F.C.", None, "England"),
-    ("Aston Villa", "Aston Villa F.C.", None, "England"),
     ("Newcastle United", "Newcastle United F.C.", None, "England"),
+    ("Nottingham Forest", "Nottingham Forest F.C.", None, "England"),
+    ("Southampton", "Southampton F.C.", None, "England"),
+    ("Tottenham Hotspur", "Tottenham Hotspur F.C.", None, "England"),
     ("West Ham United", "West Ham United F.C.", None, "England"),
-    ("Everton", "Everton F.C.", None, "England"),
+    ("Wolverhampton", "Wolverhampton Wanderers F.C.", None, "England"),
     # Spain
     ("Real Madrid", "Real Madrid CF", None, "Spain"),
     ("Barcelona", "FC Barcelona", None, "Spain"),
@@ -301,6 +312,10 @@ FOOTBALL_CLUBS = [
     ("RB Leipzig", "RB Leipzig", None, "Germany"),
     ("Bayer Leverkusen", "Bayer 04 Leverkusen", None, "Germany"),
     ("Eintracht Frankfurt", "Eintracht Frankfurt", None, "Germany"),
+    ("Schalke 04", "FC Schalke 04", None, "Germany"),
+    ("Borussia Monchengladbach", "Borussia Mönchengladbach", None, "Germany"),
+    ("VfB Stuttgart", "VfB Stuttgart", None, "Germany"),
+    ("Werder Bremen", "SV Werder Bremen", None, "Germany"),
     # Italy
     ("AC Milan", "A.C. Milan", None, "Italy"),
     ("Inter Milan", "Inter Milan", None, "Italy"),
@@ -309,30 +324,94 @@ FOOTBALL_CLUBS = [
     ("Napoli", "S.S.C. Napoli", None, "Italy"),
     ("Lazio", "S.S. Lazio", None, "Italy"),
     ("Atalanta", "Atalanta BC", None, "Italy"),
+    ("Fiorentina", "ACF Fiorentina", None, "Italy"),
     # France
     ("Paris Saint-Germain", "Paris Saint-Germain F.C.", None, "France"),
     ("Olympique Marseille", "Olympique de Marseille", None, "France"),
     ("Olympique Lyonnais", "Olympique Lyonnais", None, "France"),
     ("AS Monaco", "AS Monaco FC", None, "France"),
-    # Portugal
+    ("LOSC Lille", "Lille OSC", None, "France"),
+    # Portugal — Liga Portugal
     ("Benfica", "S.L. Benfica", None, "Portugal"),
     ("Porto", "FC Porto", None, "Portugal"),
     ("Sporting CP", "Sporting CP", None, "Portugal"),
+    ("Braga", "S.C. Braga", None, "Portugal"),
+    ("Vitoria Guimaraes", "Vitória S.C.", None, "Portugal"),
+    ("Gil Vicente", "Gil Vicente F.C.", None, "Portugal"),
+    ("Boavista", "Boavista F.C.", None, "Portugal"),
+    ("Santa Clara", "C.D. Santa Clara", None, "Portugal"),
+    ("Moreirense", "Moreirense F.C.", None, "Portugal"),
+    ("Famalicao", "F.C. Famalicão", None, "Portugal"),
+    ("Arouca", "F.C. Arouca", None, "Portugal"),
+    ("Casa Pia", "Casa Pia A.C.", None, "Portugal"),
+    ("Estoril", "G.D. Estoril Praia", None, "Portugal"),
+    ("Rio Ave", "Rio Ave F.C.", None, "Portugal"),
+    ("Estrela Amadora", "C.F. Estrela da Amadora", None, "Portugal"),
+    ("Nacional", "C.D. Nacional", None, "Portugal"),
+    ("AVS", "AVS Futebol SAD", None, "Portugal"),
+    ("Farense", "S.C. Farense", None, "Portugal"),
     # Netherlands
     ("Ajax", "AFC Ajax", None, "Netherlands"),
     ("PSV Eindhoven", "PSV Eindhoven", None, "Netherlands"),
     ("Feyenoord", "Feyenoord", None, "Netherlands"),
+    # Belgium
+    ("Club Brugge", "Club Brugge KV", None, "Belgium"),
+    ("Anderlecht", "R.S.C. Anderlecht", None, "Belgium"),
+    # Scotland
+    ("Celtic", "Celtic F.C.", None, "Scotland"),
+    ("Rangers", "Rangers F.C.", None, "Scotland"),
+    # Turkey
+    ("Galatasaray", "Galatasaray S.K. (football)", None, "Turkey"),
+    ("Fenerbahce", "Fenerbahçe S.K. (football)", None, "Turkey"),
+    ("Besiktas", "Beşiktaş J.K.", None, "Turkey"),
+    # Greece
+    ("Olympiacos", "Olympiacos F.C.", None, "Greece"),
+    ("Panathinaikos", "Panathinaikos F.C.", None, "Greece"),
+    ("AEK Athens", "AEK Athens F.C.", None, "Greece"),
+    # Switzerland
+    ("FC Basel", "FC Basel", None, "Switzerland"),
+    ("Young Boys", "BSC Young Boys", None, "Switzerland"),
+    # Austria
+    ("Red Bull Salzburg", "FC Red Bull Salzburg", None, "Austria"),
+    ("Rapid Wien", "SK Rapid Wien", None, "Austria"),
+    # Denmark
+    # Sweden
+    ("Malmo FF", "Malmö FF", None, "Sweden"),
+    # Norway
+    ("Rosenborg", "Rosenborg BK", None, "Norway"),
+    # Czech Republic
+    ("Sparta Prague", "AC Sparta Prague", None, "Czech Republic"),
+    ("Slavia Prague", "SK Slavia Prague", None, "Czech Republic"),
+    # Poland
+    ("Legia Warsaw", "Legia Warsaw", None, "Poland"),
+    # Croatia
+    ("Dinamo Zagreb", "GNK Dinamo Zagreb", None, "Croatia"),
+    ("Hajduk Split", "HNK Hajduk Split", None, "Croatia"),
+    # Serbia
+    ("Red Star Belgrade", "Red Star Belgrade", None, "Serbia"),
+    ("Partizan", "FK Partizan", None, "Serbia"),
+    # Ukraine
+    ("Shakhtar Donetsk", "FC Shakhtar Donetsk", None, "Ukraine"),
+    ("Dynamo Kyiv", "FC Dynamo Kyiv", None, "Ukraine"),
+    # Russia
+    ("Spartak Moscow", "FC Spartak Moscow", None, "Russia"),
+    ("CSKA Moscow", "PFC CSKA Moscow", None, "Russia"),
+    ("Zenit St Petersburg", "FC Zenit Saint Petersburg", None, "Russia"),
+    # Romania
+    ("Steaua Bucharest", "FCSB", None, "Romania"),
+    # Hungary
+    ("Ferencvaros", "Ferencvárosi TC", None, "Hungary"),
     # South America
     ("Boca Juniors", "Boca Juniors", None, "Argentina"),
     ("River Plate", "Club Atlético River Plate", None, "Argentina"),
     ("Flamengo", "CR Flamengo", None, "Brazil"),
     ("Santos", "Santos FC", None, "Brazil"),
     ("Palmeiras", "SE Palmeiras", None, "Brazil"),
-    # Other
-    ("Celtic", "Celtic F.C.", None, "Scotland"),
-    ("Rangers", "Rangers F.C.", None, "Scotland"),
-    ("Galatasaray", "Galatasaray S.K. (football)", None, "Turkey"),
-    ("Fenerbahce", "Fenerbahçe S.K. (football)", None, "Turkey"),
+    ("Corinthians", "Sport Club Corinthians Paulista", None, "Brazil"),
+    ("Sao Paulo", "São Paulo FC", None, "Brazil"),
+    # Mexico
+    ("Club America", "Club América", None, "Mexico"),
+    ("Chivas", "C.D. Guadalajara", None, "Mexico"),
 ]
 
 NBA_TEAMS = [
