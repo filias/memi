@@ -11,6 +11,7 @@ from memi.categories.albums import MBIDS as ALBUM_MBIDS
 from memi.categories.albums import YEARS as ALBUM_YEARS
 from memi.categories.animals import CLASSES as ANIMAL_CLASSES
 from memi.categories.animals import DIFFICULTY as ANIMAL_DIFFICULTY
+from memi.categories.scientific_names import SCIENTIFIC_NAMES
 from memi.categories.countries import DIFFICULTY as COUNTRY_DIFFICULTY
 from memi.categories.monuments import DIFFICULTY as MONUMENT_DIFFICULTY
 from memi.categories.dinosaurs import ALL as DINOSAUR_LIST
@@ -45,7 +46,6 @@ from memi.logic.images import (
     get_fandom_image,
     get_grays_anatomy_image,
     get_logo_image,
-    get_scientific_name,
     get_tmdb_image,
     get_tmdb_tv_image,
     get_wikipedia_description,
@@ -325,7 +325,7 @@ def random_item():
             elif category.startswith("nature:space") and item in SPACE_LOCATIONS:
                 result["tag"] = SPACE_LOCATIONS[item]
             elif category == "nature:animals" or category.startswith("nature:plants:"):
-                sci_name = get_scientific_name(item)
+                sci_name = SCIENTIFIC_NAMES.get(item, "")
                 display_name = result["name"].lower()
                 if sci_name and sci_name.lower() != display_name:
                     result["tag"] = sci_name
