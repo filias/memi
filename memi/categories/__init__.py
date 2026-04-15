@@ -41,9 +41,12 @@ CATEGORIES = {
     "culture:cinema:tv shows:scenes": tvshows.ALL,
     "culture:music:albums": albums.ALL,
     "culture:music:instruments": instruments.ALL,
+    "culture:sports:sports": sports.SPORTS_ALL,
     "culture:sports:olympics": sports.OLYMPICS_ALL,
     "culture:sports:fifa world cup": sports.WORLD_CUPS_ALL,
     "culture:sports:uefa euro": sports.EUROS_ALL,
+    "culture:sports:football clubs": sports.FOOTBALL_CLUBS_ALL,
+    "culture:sports:nba teams": sports.NBA_TEAMS_ALL,
     # Geography
     "geography:countries:capitals": countries.ALL,
     "geography:countries:currencies": countries.ALL,
