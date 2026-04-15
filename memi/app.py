@@ -222,7 +222,7 @@ def random_item():
     items = [i for i in items if i not in _excluded_items]
     unseen = [i for i in items if i not in seen]
     if not unseen:
-        unseen = items  # all seen, reset
+        return jsonify({"error": "All items seen"}), 400
     candidates = random.sample(unseen, min(10, len(unseen)))
 
     is_country = category.startswith("geography:countries:")
