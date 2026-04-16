@@ -127,7 +127,39 @@ FOOD_AND_DRINK = [
     ("Guinness", "Guinness", "Food & Drink"),
 ]
 
-ALL = TECH + AUTOMOTIVE + FASHION + FOOD_AND_DRINK
+AIRLINES = [
+    ("Lufthansa", "Lufthansa", "Airlines"),
+    ("British Airways", "British Airways", "Airlines"),
+    ("Air France", "Air France", "Airlines"),
+    ("KLM", "KLM", "Airlines"),
+    ("Emirates", "Emirates (airline)", "Airlines"),
+    ("Qatar Airways", "Qatar Airways", "Airlines"),
+    ("Singapore Airlines", "Singapore Airlines", "Airlines"),
+    ("Cathay Pacific", "Cathay Pacific", "Airlines"),
+    ("Turkish Airlines", "Turkish Airlines", "Airlines"),
+    ("Ryanair", "Ryanair", "Airlines"),
+    ("easyJet", "EasyJet", "Airlines"),
+    ("Delta Air Lines", "Delta Air Lines", "Airlines"),
+    ("American Airlines", "American Airlines", "Airlines"),
+    ("United Airlines", "United Airlines", "Airlines"),
+    ("Southwest Airlines", "Southwest Airlines", "Airlines"),
+    ("JetBlue", "JetBlue", "Airlines"),
+    ("Qantas", "Qantas", "Airlines"),
+    ("Japan Airlines", "Japan Airlines", "Airlines"),
+    ("ANA", "All Nippon Airways", "Airlines"),
+    ("Korean Air", "Korean Air", "Airlines"),
+    ("Etihad Airways", "Etihad Airways", "Airlines"),
+    ("TAP Air Portugal", "TAP Air Portugal", "Airlines"),
+    ("Iberia", "Iberia (airline)", "Airlines"),
+    ("Swiss International", "Swiss International Air Lines", "Airlines"),
+    ("SAS", "Scandinavian Airlines", "Airlines"),
+    ("Finnair", "Finnair", "Airlines"),
+    ("Aer Lingus", "Aer Lingus", "Airlines"),
+    ("LOT Polish Airlines", "LOT Polish Airlines", "Airlines"),
+    ("Wizz Air", "Wizz Air", "Airlines"),
+]
+
+ALL = TECH + AUTOMOTIVE + FASHION + FOOD_AND_DRINK + AIRLINES
 
 CATEGORIES = {
     "tech": TECH,
@@ -145,3 +177,4 @@ TECH_NAMES = [b[0] for b in TECH]
 AUTOMOTIVE_NAMES = [b[0] for b in AUTOMOTIVE]
 FASHION_NAMES = [b[0] for b in FASHION]
 FOOD_AND_DRINK_NAMES = [b[0] for b in FOOD_AND_DRINK]
+AIRLINES_NAMES = [b[0] for b in AIRLINES]

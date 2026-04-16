@@ -56,6 +56,7 @@ CATEGORIES = {
     "brands:automotive": brands.AUTOMOTIVE_NAMES,
     "brands:fashion": brands.FASHION_NAMES,
     "brands:food & drink": brands.FOOD_AND_DRINK_NAMES,
+    "brands:airlines": brands.AIRLINES_NAMES,
     # Geography
     "geography:countries:capitals": countries.ALL,
     "geography:countries:currencies": countries.ALL,
