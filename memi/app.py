@@ -30,6 +30,7 @@ from memi.categories.space import LOCATIONS as SPACE_LOCATIONS
 from memi.categories.rivers import LOCATIONS as RIVER_LOCATIONS
 from memi.categories.roadsigns import COMMONS_FILES as SIGN_FILES
 from memi.categories.roadsigns import REGIONS as SIGN_REGIONS
+from memi.categories.brands import BRAND_TAGS
 from memi.categories.logos import LOGOS
 from memi.categories.sports import IMAGE_FILES as SPORT_IMAGE_FILES
 from memi.categories.sports import TAGS as SPORT_TAGS
@@ -232,6 +233,7 @@ def random_item():
     is_road_signs = category == "geography:road signs"
     is_albums = category == "culture:music:albums"
     is_sports = category.startswith("culture:sports:")
+    is_brands = category.startswith("brands:")
 
     is_people = category == "humans:people" or category in (
         "culture:cinema:actors",
@@ -259,6 +261,9 @@ def random_item():
                 if not result or not result.get("image"):
                     wiki = SPORT_WIKIPEDIA.get(item, item)
                     result = get_wikipedia_image(wiki)
+        elif is_brands:
+            if item in LOGOS:
+                result = {"name": item, "image": LOGOS[item]}
         elif is_bones:
             result = get_bone_image(item)
         elif is_road_signs:
@@ -341,11 +346,13 @@ def random_item():
                 result["tag"] = f"{ALBUM_ARTISTS[item]} {ALBUM_YEARS.get(item, '')}"
             elif is_sports and item in SPORT_TAGS:
                 result["tag"] = SPORT_TAGS[item]
-            if is_sports:
+            elif is_brands and item in BRAND_TAGS:
+                result["tag"] = BRAND_TAGS[item]
+            if is_sports or is_brands:
                 result["name"] = item
             if is_road_signs:
                 result["name"] = item
-            if is_sports or is_road_signs:
+            if is_sports or is_road_signs or is_brands:
                 result["light_bg"] = True
             return jsonify(result)
         else:
@@ -431,6 +438,7 @@ def preview_item():
     is_road_signs = category == "geography:road signs"
     is_albums = category == "culture:music:albums"
     is_sports = category.startswith("culture:sports:")
+    is_brands = category.startswith("brands:")
     is_country = category.startswith("geography:countries:")
     is_us_state = category.startswith("geography:us states:")
     mode = category.split(":")[-1] if (is_country or is_us_state) else None
@@ -450,6 +458,9 @@ def preview_item():
             if not result or not result.get("image"):
                 wiki = SPORT_WIKIPEDIA.get(item, item)
                 result = get_wikipedia_image(wiki)
+    elif is_brands:
+        if item in LOGOS:
+            result = {"name": item, "image": LOGOS[item]}
     elif is_bones:
         result = get_bone_image(item)
     elif is_road_signs:

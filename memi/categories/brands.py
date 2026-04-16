@@ -1,0 +1,147 @@
+"""Famous brands: tech, automotive, fashion, food, retail, etc."""
+
+# (display_name, wikipedia_article, tag)
+
+TECH = [
+    ("Apple", "Apple Inc.", "Technology"),
+    ("Google", "Google", "Technology"),
+    ("Microsoft", "Microsoft", "Technology"),
+    ("Amazon", "Amazon (company)", "Technology"),
+    ("Meta", "Meta Platforms", "Technology"),
+    ("Samsung", "Samsung", "Technology"),
+    ("Intel", "Intel", "Technology"),
+    ("IBM", "IBM", "Technology"),
+    ("Sony", "Sony", "Technology"),
+    ("Nintendo", "Nintendo", "Technology"),
+    ("Netflix", "Netflix", "Technology"),
+    ("Spotify", "Spotify", "Technology"),
+    ("Adobe", "Adobe Inc.", "Technology"),
+    ("Oracle", "Oracle Corporation", "Technology"),
+    ("Cisco", "Cisco", "Technology"),
+    ("HP", "Hewlett-Packard", "Technology"),
+    ("Dell", "Dell", "Technology"),
+    ("Nvidia", "Nvidia", "Technology"),
+    ("PayPal", "PayPal", "Technology"),
+    ("Uber", "Uber", "Technology"),
+    ("Airbnb", "Airbnb", "Technology"),
+    ("Slack", "Slack (software)", "Technology"),
+    ("Zoom", "Zoom Video Communications", "Technology"),
+    ("Twitter", "Twitter", "Technology"),
+    ("TikTok", "TikTok", "Technology"),
+    ("Snapchat", "Snapchat", "Technology"),
+    ("Reddit", "Reddit", "Technology"),
+    ("Pinterest", "Pinterest", "Technology"),
+    ("Dropbox", "Dropbox (service)", "Technology"),
+    ("Shopify", "Shopify", "Technology"),
+]
+
+AUTOMOTIVE = [
+    ("Ferrari", "Ferrari", "Automotive"),
+    ("Porsche", "Porsche", "Automotive"),
+    ("BMW", "BMW", "Automotive"),
+    ("Mercedes-Benz", "Mercedes-Benz", "Automotive"),
+    ("Audi", "Audi", "Automotive"),
+    ("Volkswagen", "Volkswagen", "Automotive"),
+    ("Toyota", "Toyota", "Automotive"),
+    ("Honda", "Honda", "Automotive"),
+    ("Ford", "Ford Motor Company", "Automotive"),
+    ("Chevrolet", "Chevrolet", "Automotive"),
+    ("Tesla", "Tesla, Inc.", "Automotive"),
+    ("Lamborghini", "Lamborghini", "Automotive"),
+    ("Maserati", "Maserati", "Automotive"),
+    ("Bentley", "Bentley", "Automotive"),
+    ("Rolls-Royce", "Rolls-Royce Motor Cars", "Automotive"),
+    ("Aston Martin", "Aston Martin", "Automotive"),
+    ("Jaguar", "Jaguar Cars", "Automotive"),
+    ("Land Rover", "Land Rover", "Automotive"),
+    ("Volvo", "Volvo", "Automotive"),
+    ("Subaru", "Subaru", "Automotive"),
+    ("Mazda", "Mazda", "Automotive"),
+    ("Nissan", "Nissan", "Automotive"),
+    ("Hyundai", "Hyundai", "Automotive"),
+    ("Fiat", "Fiat", "Automotive"),
+    ("Alfa Romeo", "Alfa Romeo", "Automotive"),
+    ("Peugeot", "Peugeot", "Automotive"),
+    ("Renault", "Renault", "Automotive"),
+    ("Citroën", "Citroën", "Automotive"),
+    ("Mini", "Mini (marque)", "Automotive"),
+]
+
+FASHION = [
+    ("Louis Vuitton", "Louis Vuitton", "Fashion"),
+    ("Gucci", "Gucci", "Fashion"),
+    ("Chanel", "Chanel", "Fashion"),
+    ("Prada", "Prada", "Fashion"),
+    ("Hermès", "Hermès", "Fashion"),
+    ("Dior", "Dior", "Fashion"),
+    ("Versace", "Versace", "Fashion"),
+    ("Burberry", "Burberry", "Fashion"),
+    ("Balenciaga", "Balenciaga", "Fashion"),
+    ("Valentino", "Valentino (fashion house)", "Fashion"),
+    ("Armani", "Armani", "Fashion"),
+    ("Dolce & Gabbana", "Dolce & Gabbana", "Fashion"),
+    ("Calvin Klein", "Calvin Klein", "Fashion"),
+    ("Ralph Lauren", "Ralph Lauren", "Fashion"),
+    ("Tommy Hilfiger", "Tommy Hilfiger", "Fashion"),
+    ("Hugo Boss", "Hugo Boss", "Fashion"),
+    ("Zara", "Zara (retailer)", "Fashion"),
+    ("H&M", "H&M", "Fashion"),
+    ("Uniqlo", "Uniqlo", "Fashion"),
+    ("Nike", "Nike, Inc.", "Fashion"),
+    ("Adidas", "Adidas", "Fashion"),
+    ("Puma", "Puma (brand)", "Fashion"),
+    ("New Balance", "New Balance", "Fashion"),
+    ("Converse", "Converse (shoe company)", "Fashion"),
+    ("Vans", "Vans", "Fashion"),
+    ("Levi's", "Levi Strauss & Co.", "Fashion"),
+    ("Ray-Ban", "Ray-Ban", "Fashion"),
+    ("Rolex", "Rolex", "Fashion"),
+    ("Cartier", "Cartier (jeweler)", "Fashion"),
+    ("Tiffany & Co.", "Tiffany & Co.", "Fashion"),
+]
+
+FOOD_AND_DRINK = [
+    ("Coca-Cola", "Coca-Cola", "Food & Drink"),
+    ("Pepsi", "Pepsi", "Food & Drink"),
+    ("McDonald's", "McDonald's", "Food & Drink"),
+    ("Starbucks", "Starbucks", "Food & Drink"),
+    ("KFC", "KFC", "Food & Drink"),
+    ("Burger King", "Burger King", "Food & Drink"),
+    ("Pizza Hut", "Pizza Hut", "Food & Drink"),
+    ("Subway", "Subway (restaurant)", "Food & Drink"),
+    ("Domino's", "Domino's Pizza", "Food & Drink"),
+    ("Dunkin'", "Dunkin' Donuts", "Food & Drink"),
+    ("Nestlé", "Nestlé", "Food & Drink"),
+    ("Heineken", "Heineken N.V.", "Food & Drink"),
+    ("Budweiser", "Budweiser", "Food & Drink"),
+    ("Nutella", "Nutella", "Food & Drink"),
+    ("Oreo", "Oreo", "Food & Drink"),
+    ("Kellogg's", "Kellogg's", "Food & Drink"),
+    ("Lay's", "Lay's", "Food & Drink"),
+    ("M&M's", "M&M's", "Food & Drink"),
+    ("Häagen-Dazs", "Häagen-Dazs", "Food & Drink"),
+    ("Ben & Jerry's", "Ben & Jerry's", "Food & Drink"),
+    ("Nando's", "Nando's", "Food & Drink"),
+    ("Tim Hortons", "Tim Hortons", "Food & Drink"),
+    ("Pringles", "Pringles", "Food & Drink"),
+    ("Guinness", "Guinness", "Food & Drink"),
+]
+
+ALL = TECH + AUTOMOTIVE + FASHION + FOOD_AND_DRINK
+
+CATEGORIES = {
+    "tech": TECH,
+    "automotive": AUTOMOTIVE,
+    "fashion": FASHION,
+    "food & drink": FOOD_AND_DRINK,
+}
+
+# Lookup dicts
+BRAND_WIKIPEDIA = {b[0]: b[1] for b in ALL}
+BRAND_TAGS = {b[0]: b[2] for b in ALL}
+
+ALL_NAMES = [b[0] for b in ALL]
+TECH_NAMES = [b[0] for b in TECH]
+AUTOMOTIVE_NAMES = [b[0] for b in AUTOMOTIVE]
+FASHION_NAMES = [b[0] for b in FASHION]
+FOOD_AND_DRINK_NAMES = [b[0] for b in FOOD_AND_DRINK]

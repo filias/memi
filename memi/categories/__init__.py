@@ -2,6 +2,7 @@ from memi.categories import (
     albums,
     animals,
     bones,
+    brands,
     characters,
     countries,
     directors,
@@ -49,6 +50,12 @@ CATEGORIES = {
     "culture:sports:uefa euro": sports.EUROS_ALL,
     "culture:sports:football clubs": sports.FOOTBALL_CLUBS_ALL,
     "culture:sports:nba teams": sports.NBA_TEAMS_ALL,
+    # Brands
+    "brands:all": brands.ALL_NAMES,
+    "brands:tech": brands.TECH_NAMES,
+    "brands:automotive": brands.AUTOMOTIVE_NAMES,
+    "brands:fashion": brands.FASHION_NAMES,
+    "brands:food & drink": brands.FOOD_AND_DRINK_NAMES,
     # Geography
     "geography:countries:capitals": countries.ALL,
     "geography:countries:currencies": countries.ALL,
