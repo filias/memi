@@ -3,78 +3,68 @@
 # (display_name, wikipedia_article, image_file_or_none, tag)
 # image_file is the exact Wikipedia File: name, or None to use article image
 
-OLYMPICS = [
+SUMMER_OLYMPICS = [
     ("Athens 1896", "1896 Summer Olympics", None, "Greece"),
     ("Paris 1900", "1900 Summer Olympics", None, "France"),
     ("St. Louis 1904", "1904 Summer Olympics", None, "USA"),
     ("London 1908", "1908 Summer Olympics", None, "UK"),
     ("Stockholm 1912", "1912 Summer Olympics", None, "Sweden"),
     ("Antwerp 1920", "1920 Summer Olympics", None, "Belgium"),
-    ("Paris 1924", "1924 Summer Olympics", "1924 Summer Olympics logo.svg", "France"),
+    ("Paris 1924", "1924 Summer Olympics", None, "France"),
     ("Amsterdam 1928", "1928 Summer Olympics", None, "Netherlands"),
-    (
-        "Los Angeles 1932",
-        "1932 Summer Olympics",
-        "1932 Summer Olympics logo.svg",
-        "USA",
-    ),
-    ("Berlin 1936", "1936 Summer Olympics", "1936 Summer Olympics logo.svg", "Germany"),
+    ("Los Angeles 1932", "1932 Summer Olympics", None, "USA"),
+    ("Berlin 1936", "1936 Summer Olympics", None, "Germany"),
     ("London 1948", "1948 Summer Olympics", None, "UK"),
-    (
-        "Helsinki 1952",
-        "1952 Summer Olympics",
-        "1952 Summer Olympics logo.svg",
-        "Finland",
-    ),
-    (
-        "Melbourne 1956",
-        "1956 Summer Olympics",
-        "1956 Summer Olympics logo.svg",
-        "Australia",
-    ),
-    ("Rome 1960", "1960 Summer Olympics", "1960 Summer Olympics logo.png", "Italy"),
+    ("Helsinki 1952", "1952 Summer Olympics", None, "Finland"),
+    ("Melbourne 1956", "1956 Summer Olympics", None, "Australia"),
+    ("Rome 1960", "1960 Summer Olympics", None, "Italy"),
     ("Tokyo 1964", "1964 Summer Olympics", None, "Japan"),
     ("Mexico City 1968", "1968 Summer Olympics", None, "Mexico"),
-    ("Munich 1972", "1972 Summer Olympics", "1972 Summer Olympics logo.svg", "Germany"),
-    (
-        "Montreal 1976",
-        "1976 Summer Olympics",
-        "1976 Summer Olympics logo.svg",
-        "Canada",
-    ),
+    ("Munich 1972", "1972 Summer Olympics", None, "Germany"),
+    ("Montreal 1976", "1976 Summer Olympics", None, "Canada"),
     ("Moscow 1980", "1980 Summer Olympics", None, "Soviet Union"),
-    (
-        "Los Angeles 1984",
-        "1984 Summer Olympics",
-        "1984 Summer Olympics logo.svg",
-        "USA",
-    ),
-    (
-        "Seoul 1988",
-        "1988 Summer Olympics",
-        "1988 Summer Olympics logo.svg",
-        "South Korea",
-    ),
-    (
-        "Barcelona 1992",
-        "1992 Summer Olympics",
-        "1992 Summer Olympics logo.svg",
-        "Spain",
-    ),
-    ("Atlanta 1996", "1996 Summer Olympics", "1996 Summer Olympics logo.svg", "USA"),
-    (
-        "Sydney 2000",
-        "2000 Summer Olympics",
-        "2000 Summer Olympics logo.svg",
-        "Australia",
-    ),
-    ("Athens 2004", "2004 Summer Olympics", "2004 Summer Olympics logo.svg", "Greece"),
-    ("Beijing 2008", "2008 Summer Olympics", "2008 Summer Olympics logo.svg", "China"),
-    ("London 2012", "2012 Summer Olympics", "2012 Summer Olympics logo.svg", "UK"),
-    ("Rio 2016", "2016 Summer Olympics", "2016 Summer Olympics logo.svg", "Brazil"),
-    ("Tokyo 2020", "2020 Summer Olympics", "2020 Summer Olympics logo.svg", "Japan"),
-    ("Paris 2024", "2024 Summer Olympics", "2024 Summer Olympics logo.svg", "France"),
+    ("Los Angeles 1984", "1984 Summer Olympics", None, "USA"),
+    ("Seoul 1988", "1988 Summer Olympics", None, "South Korea"),
+    ("Barcelona 1992", "1992 Summer Olympics", None, "Spain"),
+    ("Atlanta 1996", "1996 Summer Olympics", None, "USA"),
+    ("Sydney 2000", "2000 Summer Olympics", None, "Australia"),
+    ("Athens 2004", "2004 Summer Olympics", None, "Greece"),
+    ("Beijing 2008", "2008 Summer Olympics", None, "China"),
+    ("London 2012", "2012 Summer Olympics", None, "UK"),
+    ("Rio 2016", "2016 Summer Olympics", None, "Brazil"),
+    ("Tokyo 2020", "2020 Summer Olympics", None, "Japan"),
+    ("Paris 2024", "2024 Summer Olympics", None, "France"),
+    ("Los Angeles 2028", "2028 Summer Olympics", None, "USA"),
 ]
+
+WINTER_OLYMPICS = [
+    ("Chamonix 1924", "1924 Winter Olympics", None, "France"),
+    ("St. Moritz 1928", "1928 Winter Olympics", None, "Switzerland"),
+    ("Lake Placid 1932", "1932 Winter Olympics", None, "USA"),
+    ("Garmisch 1936", "1936 Winter Olympics", None, "Germany"),
+    ("Oslo 1952", "1952 Winter Olympics", None, "Norway"),
+    ("Cortina 1956", "1956 Winter Olympics", None, "Italy"),
+    ("Squaw Valley 1960", "1960 Winter Olympics", None, "USA"),
+    ("Innsbruck 1964", "1964 Winter Olympics", None, "Austria"),
+    ("Grenoble 1968", "1968 Winter Olympics", None, "France"),
+    ("Sapporo 1972", "1972 Winter Olympics", None, "Japan"),
+    ("Innsbruck 1976", "1976 Winter Olympics", None, "Austria"),
+    ("Lake Placid 1980", "1980 Winter Olympics", None, "USA"),
+    ("Sarajevo 1984", "1984 Winter Olympics", None, "Yugoslavia"),
+    ("Calgary 1988", "1988 Winter Olympics", None, "Canada"),
+    ("Albertville 1992", "1992 Winter Olympics", None, "France"),
+    ("Lillehammer 1994", "1994 Winter Olympics", None, "Norway"),
+    ("Nagano 1998", "1998 Winter Olympics", None, "Japan"),
+    ("Salt Lake City 2002", "2002 Winter Olympics", None, "USA"),
+    ("Turin 2006", "2006 Winter Olympics", None, "Italy"),
+    ("Vancouver 2010", "2010 Winter Olympics", None, "Canada"),
+    ("Sochi 2014", "2014 Winter Olympics", None, "Russia"),
+    ("Pyeongchang 2018", "2018 Winter Olympics", None, "South Korea"),
+    ("Beijing 2022", "2022 Winter Olympics", None, "China"),
+    ("Milano Cortina 2026", "2026 Winter Olympics", None, "Italy"),
+]
+
+OLYMPICS = SUMMER_OLYMPICS + WINTER_OLYMPICS
 
 WORLD_CUPS = [
     ("Uruguay 1930", "1930 FIFA World Cup", None, "Winner: Uruguay"),
@@ -117,6 +107,7 @@ WORLD_CUPS = [
         "Winner: West Germany",
     ),
     ("Argentina 1978", "1978 FIFA World Cup", None, "Winner: Argentina"),
+    ("Spain 1982", "1982 FIFA World Cup", None, "Winner: Italy"),
     ("Mexico 1986", "1986 FIFA World Cup", None, "Winner: Argentina"),
     ("Italy 1990", "1990 FIFA World Cup", None, "Winner: West Germany"),
     ("USA 1994", "1994 FIFA World Cup", None, "Winner: Brazil"),
@@ -132,6 +123,7 @@ WORLD_CUPS = [
         "2002 FIFA World Cup logo.svg",
         "Winner: Brazil",
     ),
+    ("Germany 2006", "2006 FIFA World Cup", None, "Winner: Italy"),
     (
         "South Africa 2010",
         "2010 FIFA World Cup",
@@ -448,6 +440,8 @@ NBA_TEAMS = [
     ("San Antonio Spurs", "San Antonio Spurs", None, "Western"),
 ]
 
+SUMMER_OLYMPICS_ALL = [e[0] for e in SUMMER_OLYMPICS]
+WINTER_OLYMPICS_ALL = [e[0] for e in WINTER_OLYMPICS]
 OLYMPICS_ALL = [e[0] for e in OLYMPICS]
 WORLD_CUPS_ALL = [e[0] for e in WORLD_CUPS]
 EUROS_ALL = [e[0] for e in EUROS]
