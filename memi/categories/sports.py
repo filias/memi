@@ -91,7 +91,6 @@ WORLD_CUPS = [
         "Winner: Italy",
     ),
     ("Brazil 1950", "1950 FIFA World Cup", None, "Winner: Uruguay"),
-    ("Switzerland 1954", "1954 FIFA World Cup", None, "Winner: West Germany"),
     (
         "Sweden 1958",
         "1958 FIFA World Cup",
@@ -118,7 +117,6 @@ WORLD_CUPS = [
         "Winner: West Germany",
     ),
     ("Argentina 1978", "1978 FIFA World Cup", None, "Winner: Argentina"),
-    ("Spain 1982", "1982 FIFA World Cup", None, "Winner: Italy"),
     ("Mexico 1986", "1986 FIFA World Cup", None, "Winner: Argentina"),
     ("Italy 1990", "1990 FIFA World Cup", None, "Winner: West Germany"),
     ("USA 1994", "1994 FIFA World Cup", None, "Winner: Brazil"),
@@ -134,7 +132,6 @@ WORLD_CUPS = [
         "2002 FIFA World Cup logo.svg",
         "Winner: Brazil",
     ),
-    ("Germany 2006", "2006 FIFA World Cup", None, "Winner: Italy"),
     (
         "South Africa 2010",
         "2010 FIFA World Cup",
@@ -143,7 +140,6 @@ WORLD_CUPS = [
     ),
     ("Brazil 2014", "2014 FIFA World Cup", None, "Winner: Germany"),
     ("Russia 2018", "2018 FIFA World Cup", None, "Winner: France"),
-    ("Qatar 2022", "2022 FIFA World Cup", None, "Winner: Argentina"),
 ]
 
 EUROS = [
@@ -184,7 +180,6 @@ EUROS = [
         "Winner: France",
     ),
     ("Portugal 2004", "UEFA Euro 2004", "UEFA Euro 2004 logo.svg", "Winner: Greece"),
-    ("Austria/Switzerland 2008", "UEFA Euro 2008", None, "Winner: Spain"),
     (
         "Poland/Ukraine 2012",
         "UEFA Euro 2012",
