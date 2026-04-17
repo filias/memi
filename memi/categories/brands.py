@@ -1,4 +1,4 @@
-"""Famous brands: tech, automotive, fashion, food, retail, etc."""
+"""Famous brands: tech, automotive, fashion, food, airlines, etc."""
 
 # (display_name, wikipedia_article, tag)
 
@@ -36,8 +36,6 @@ TECH = [
 ]
 
 AUTOMOTIVE = [
-    ("Ferrari", "Ferrari", "Automotive"),
-    ("Porsche", "Porsche", "Automotive"),
     ("BMW", "BMW", "Automotive"),
     ("Mercedes-Benz", "Mercedes-Benz", "Automotive"),
     ("Audi", "Audi", "Automotive"),
@@ -48,11 +46,9 @@ AUTOMOTIVE = [
     ("Chevrolet", "Chevrolet", "Automotive"),
     ("Tesla", "Tesla, Inc.", "Automotive"),
     ("Lamborghini", "Lamborghini", "Automotive"),
-    ("Maserati", "Maserati", "Automotive"),
     ("Bentley", "Bentley", "Automotive"),
     ("Rolls-Royce", "Rolls-Royce Motor Cars", "Automotive"),
     ("Aston Martin", "Aston Martin", "Automotive"),
-    ("Jaguar", "Jaguar Cars", "Automotive"),
     ("Land Rover", "Land Rover", "Automotive"),
     ("Volvo", "Volvo", "Automotive"),
     ("Subaru", "Subaru", "Automotive"),
@@ -72,16 +68,13 @@ FASHION = [
     ("Gucci", "Gucci", "Fashion"),
     ("Chanel", "Chanel", "Fashion"),
     ("Prada", "Prada", "Fashion"),
-    ("Hermès", "Hermès", "Fashion"),
     ("Dior", "Dior", "Fashion"),
     ("Versace", "Versace", "Fashion"),
     ("Burberry", "Burberry", "Fashion"),
-    ("Balenciaga", "Balenciaga", "Fashion"),
     ("Valentino", "Valentino (fashion house)", "Fashion"),
     ("Armani", "Armani", "Fashion"),
     ("Dolce & Gabbana", "Dolce & Gabbana", "Fashion"),
     ("Calvin Klein", "Calvin Klein", "Fashion"),
-    ("Ralph Lauren", "Ralph Lauren", "Fashion"),
     ("Tommy Hilfiger", "Tommy Hilfiger", "Fashion"),
     ("Hugo Boss", "Hugo Boss", "Fashion"),
     ("Zara", "Zara (retailer)", "Fashion"),
@@ -107,7 +100,6 @@ FOOD_AND_DRINK = [
     ("Starbucks", "Starbucks", "Food & Drink"),
     ("KFC", "KFC", "Food & Drink"),
     ("Burger King", "Burger King", "Food & Drink"),
-    ("Pizza Hut", "Pizza Hut", "Food & Drink"),
     ("Subway", "Subway (restaurant)", "Food & Drink"),
     ("Domino's", "Domino's Pizza", "Food & Drink"),
     ("Dunkin'", "Dunkin' Donuts", "Food & Drink"),
@@ -115,15 +107,12 @@ FOOD_AND_DRINK = [
     ("Heineken", "Heineken N.V.", "Food & Drink"),
     ("Budweiser", "Budweiser", "Food & Drink"),
     ("Nutella", "Nutella", "Food & Drink"),
-    ("Oreo", "Oreo", "Food & Drink"),
     ("Kellogg's", "Kellogg's", "Food & Drink"),
-    ("Lay's", "Lay's", "Food & Drink"),
     ("M&M's", "M&M's", "Food & Drink"),
     ("Häagen-Dazs", "Häagen-Dazs", "Food & Drink"),
     ("Ben & Jerry's", "Ben & Jerry's", "Food & Drink"),
     ("Nando's", "Nando's", "Food & Drink"),
     ("Tim Hortons", "Tim Hortons", "Food & Drink"),
-    ("Pringles", "Pringles", "Food & Drink"),
     ("Guinness", "Guinness", "Food & Drink"),
 ]
 
@@ -144,7 +133,6 @@ AIRLINES = [
     ("United Airlines", "United Airlines", "Airlines"),
     ("Southwest Airlines", "Southwest Airlines", "Airlines"),
     ("JetBlue", "JetBlue", "Airlines"),
-    ("Qantas", "Qantas", "Airlines"),
     ("Japan Airlines", "Japan Airlines", "Airlines"),
     ("ANA", "All Nippon Airways", "Airlines"),
     ("Korean Air", "Korean Air", "Airlines"),
@@ -160,13 +148,6 @@ AIRLINES = [
 ]
 
 ALL = TECH + AUTOMOTIVE + FASHION + FOOD_AND_DRINK + AIRLINES
-
-CATEGORIES = {
-    "tech": TECH,
-    "automotive": AUTOMOTIVE,
-    "fashion": FASHION,
-    "food & drink": FOOD_AND_DRINK,
-}
 
 # Lookup dicts
 BRAND_WIKIPEDIA = {b[0]: b[1] for b in ALL}
