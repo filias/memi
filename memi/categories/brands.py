@@ -56,7 +56,6 @@ AUTOMOTIVE = [
     ("Nissan", "Nissan", "Automotive"),
     ("Hyundai", "Hyundai", "Automotive"),
     ("Fiat", "Fiat", "Automotive"),
-    ("Alfa Romeo", "Alfa Romeo", "Automotive"),
     ("Peugeot", "Peugeot", "Automotive"),
     ("Renault", "Renault", "Automotive"),
     ("Citroën", "Citroën", "Automotive"),
@@ -135,15 +134,12 @@ AIRLINES = [
     ("JetBlue", "JetBlue", "Airlines"),
     ("Japan Airlines", "Japan Airlines", "Airlines"),
     ("ANA", "All Nippon Airways", "Airlines"),
-    ("Korean Air", "Korean Air", "Airlines"),
-    ("Etihad Airways", "Etihad Airways", "Airlines"),
     ("TAP Air Portugal", "TAP Air Portugal", "Airlines"),
     ("Iberia", "Iberia (airline)", "Airlines"),
     ("Swiss International", "Swiss International Air Lines", "Airlines"),
     ("SAS", "Scandinavian Airlines", "Airlines"),
     ("Finnair", "Finnair", "Airlines"),
     ("Aer Lingus", "Aer Lingus", "Airlines"),
-    ("LOT Polish Airlines", "LOT Polish Airlines", "Airlines"),
     ("Wizz Air", "Wizz Air", "Airlines"),
 ]
 
