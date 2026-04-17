@@ -233,7 +233,7 @@ def random_item():
     is_road_signs = category == "geography:road signs"
     is_albums = category == "culture:music:albums"
     is_sports = category.startswith("culture:sports:")
-    is_brands = category.startswith("brands:")
+    is_brands = category.startswith("culture:brands:")
 
     is_people = category == "humans:people" or category in (
         "culture:cinema:actors",
@@ -438,7 +438,7 @@ def preview_item():
     is_road_signs = category == "geography:road signs"
     is_albums = category == "culture:music:albums"
     is_sports = category.startswith("culture:sports:")
-    is_brands = category.startswith("brands:")
+    is_brands = category.startswith("culture:brands:")
     is_country = category.startswith("geography:countries:")
     is_us_state = category.startswith("geography:us states:")
     mode = category.split(":")[-1] if (is_country or is_us_state) else None
