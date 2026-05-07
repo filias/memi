@@ -18,7 +18,6 @@ from memi.categories import (
     space,
     sports,
     tvshows,
-    usstates,
 )
 
 CATEGORIES = {
@@ -49,7 +48,6 @@ CATEGORIES = {
     "culture:sports:fifa world cup": sports.WORLD_CUPS_ALL,
     "culture:sports:uefa euro": sports.EUROS_ALL,
     "culture:sports:football clubs": sports.FOOTBALL_CLUBS_ALL,
-    "culture:sports:nba teams": sports.NBA_TEAMS_ALL,
     "culture:brands:all": brands.ALL_NAMES,
     "culture:brands:tech": brands.TECH_NAMES,
     "culture:brands:automotive": brands.AUTOMOTIVE_NAMES,
@@ -63,9 +61,6 @@ CATEGORIES = {
     "geography:countries:shapes": countries.ALL,
     "geography:rivers": rivers.ALL,
     "geography:road signs": roadsigns.ALL,
-    "geography:us states:capitals": usstates.ALL,
-    "geography:us states:flags": usstates.ALL,
-    "geography:us states:shapes": usstates.ALL,
     # Humans
     "humans:bones": bones.ALL,
     "humans:people": people.ALL,

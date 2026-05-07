@@ -1,4 +1,4 @@
-"""Sports: events, disciplines, football clubs, NBA teams."""
+"""Sports: events, disciplines, football clubs."""
 
 # (display_name, wikipedia_article, image_file_or_none, tag)
 # image_file is the exact Wikipedia File: name, or None to use article image
@@ -401,45 +401,6 @@ FOOTBALL_CLUBS = [
     ("Chivas", "C.D. Guadalajara", None, "Mexico"),
 ]
 
-NBA_TEAMS = [
-    # Eastern Conference - Atlantic
-    ("Boston Celtics", "Boston Celtics", None, "Eastern"),
-    ("Brooklyn Nets", "Brooklyn Nets", None, "Eastern"),
-    ("New York Knicks", "New York Knicks", None, "Eastern"),
-    ("Philadelphia 76ers", "Philadelphia 76ers", None, "Eastern"),
-    ("Toronto Raptors", "Toronto Raptors", None, "Eastern"),
-    # Eastern Conference - Central
-    ("Chicago Bulls", "Chicago Bulls", None, "Eastern"),
-    ("Cleveland Cavaliers", "Cleveland Cavaliers", None, "Eastern"),
-    ("Detroit Pistons", "Detroit Pistons", None, "Eastern"),
-    ("Indiana Pacers", "Indiana Pacers", None, "Eastern"),
-    ("Milwaukee Bucks", "Milwaukee Bucks", None, "Eastern"),
-    # Eastern Conference - Southeast
-    ("Atlanta Hawks", "Atlanta Hawks", None, "Eastern"),
-    ("Charlotte Hornets", "Charlotte Hornets", None, "Eastern"),
-    ("Miami Heat", "Miami Heat", None, "Eastern"),
-    ("Orlando Magic", "Orlando Magic", None, "Eastern"),
-    ("Washington Wizards", "Washington Wizards", None, "Eastern"),
-    # Western Conference - Northwest
-    ("Denver Nuggets", "Denver Nuggets", None, "Western"),
-    ("Minnesota Timberwolves", "Minnesota Timberwolves", None, "Western"),
-    ("Oklahoma City Thunder", "Oklahoma City Thunder", None, "Western"),
-    ("Portland Trail Blazers", "Portland Trail Blazers", None, "Western"),
-    ("Utah Jazz", "Utah Jazz", None, "Western"),
-    # Western Conference - Pacific
-    ("Golden State Warriors", "Golden State Warriors", None, "Western"),
-    ("LA Clippers", "Los Angeles Clippers", None, "Western"),
-    ("Los Angeles Lakers", "Los Angeles Lakers", None, "Western"),
-    ("Phoenix Suns", "Phoenix Suns", None, "Western"),
-    ("Sacramento Kings", "Sacramento Kings", None, "Western"),
-    # Western Conference - Southwest
-    ("Dallas Mavericks", "Dallas Mavericks", None, "Western"),
-    ("Houston Rockets", "Houston Rockets", None, "Western"),
-    ("Memphis Grizzlies", "Memphis Grizzlies", None, "Western"),
-    ("New Orleans Pelicans", "New Orleans Pelicans", None, "Western"),
-    ("San Antonio Spurs", "San Antonio Spurs", None, "Western"),
-]
-
 SUMMER_OLYMPICS_ALL = [e[0] for e in SUMMER_OLYMPICS]
 WINTER_OLYMPICS_ALL = [e[0] for e in WINTER_OLYMPICS]
 OLYMPICS_ALL = [e[0] for e in OLYMPICS]
@@ -447,10 +408,9 @@ WORLD_CUPS_ALL = [e[0] for e in WORLD_CUPS]
 EUROS_ALL = [e[0] for e in EUROS]
 SPORTS_ALL = [e[0] for e in SPORTS]
 FOOTBALL_CLUBS_ALL = [e[0] for e in FOOTBALL_CLUBS]
-NBA_TEAMS_ALL = [e[0] for e in NBA_TEAMS]
 
 # Lookup dicts
-_ALL_EVENTS = OLYMPICS + WORLD_CUPS + EUROS + SPORTS + FOOTBALL_CLUBS + NBA_TEAMS
+_ALL_EVENTS = OLYMPICS + WORLD_CUPS + EUROS + SPORTS + FOOTBALL_CLUBS
 WIKIPEDIA = {e[0]: e[1] for e in _ALL_EVENTS}
 IMAGE_FILES = {e[0]: e[2] for e in _ALL_EVENTS}
 TAGS = {e[0]: e[3] for e in _ALL_EVENTS}

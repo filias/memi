@@ -45,7 +45,6 @@ from memi.categories.sports import (
     WORLD_CUPS_ALL,
     EUROS_ALL,
     FOOTBALL_CLUBS_ALL,
-    NBA_TEAMS_ALL,
     WIKIPEDIA as SPORT_WIKIPEDIA,
     IMAGE_FILES as SPORT_IMAGE_FILES,
     TAGS as SPORT_TAGS,
@@ -283,7 +282,6 @@ WinterOlympicsProvider = _make_sports_provider("culture:sports:olympics:winter",
 WorldCupsProvider = _make_sports_provider("culture:sports:fifa world cup", WORLD_CUPS_ALL)
 EurosProvider = _make_sports_provider("culture:sports:uefa euro", EUROS_ALL)
 FootballClubsProvider = _make_sports_provider("culture:sports:football clubs", FOOTBALL_CLUBS_ALL)
-NBATeamsProvider = _make_sports_provider("culture:sports:nba teams", NBA_TEAMS_ALL)
 
 
 # -- Brands --
@@ -342,7 +340,6 @@ register(WinterOlympicsProvider())
 register(WorldCupsProvider())
 register(EurosProvider())
 register(FootballClubsProvider())
-register(NBATeamsProvider())
 register(BrandsAllProvider())
 register(BrandsTechProvider())
 register(BrandsAutoProvider())

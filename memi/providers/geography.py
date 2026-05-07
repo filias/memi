@@ -1,4 +1,4 @@
-"""Geography providers: countries, rivers, road signs, US states."""
+"""Geography providers: countries, rivers, road signs."""
 
 from memi_engine import CategoryProvider, register
 from memi_engine import images
@@ -19,12 +19,6 @@ from memi.categories.roadsigns import (
     ALL as SIGN_LIST,
     COMMONS_FILES as SIGN_FILES,
     REGIONS as SIGN_REGIONS,
-)
-from memi.categories.usstates import (
-    ALL as STATE_LIST,
-    ABBREVIATIONS as STATE_ABBREVS,
-    CAPITALS as STATE_CAPITALS,
-    REGIONS as STATE_REGIONS,
 )
 
 
@@ -135,72 +129,9 @@ class RoadSignsProvider(CategoryProvider):
         return None
 
 
-def _get_state_map(state):
-    """Fetch the locator map for a US state from Wikimedia Commons."""
-    abbr = STATE_ABBREVS.get(state)
-    if not abbr:
-        return None
-    return images.get_commons_file_image(f"Map of USA {abbr}.svg")
-
-
-class USStateFlagsProvider(CategoryProvider):
-    key = "geography:us states:flags"
-    items = STATE_LIST
-    filters = {
-        "continents": STATE_REGIONS,
-    }
-
-    def get_image(self, item):
-        clean_name = item.split("(")[0].strip()
-        result = images.get_wikipedia_image("Flag of " + clean_name)
-        if result and result.get("image"):
-            result["name"] = clean_name
-            return result
-        return None
-
-
-class USStateCapitalsProvider(CategoryProvider):
-    key = "geography:us states:capitals"
-    items = STATE_LIST
-    filters = {
-        "continents": STATE_REGIONS,
-    }
-
-    def get_image(self, item):
-        result = _get_state_map(item)
-        if result:
-            clean_name = item.split("(")[0].strip()
-            capital = STATE_CAPITALS.get(item, "Unknown")
-            result["clue"] = clean_name
-            result["name"] = capital
-            return result
-        return None
-
-    def get_clue(self, item):
-        return item.split("(")[0].strip()
-
-
-class USStateShapesProvider(CategoryProvider):
-    key = "geography:us states:shapes"
-    items = STATE_LIST
-    filters = {
-        "continents": STATE_REGIONS,
-    }
-
-    def get_image(self, item):
-        result = _get_state_map(item)
-        if result:
-            result["name"] = item.split("(")[0].strip()
-            return result
-        return None
-
-
 register(CountryFlagsProvider())
 register(CountryCapitalsProvider())
 register(CountryCurrenciesProvider())
 register(CountryShapesProvider())
 register(RiversProvider())
 register(RoadSignsProvider())
-register(USStateFlagsProvider())
-register(USStateCapitalsProvider())
-register(USStateShapesProvider())
