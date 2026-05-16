@@ -21,6 +21,13 @@ config = MemiConfig(
     favicon_color="#0d9488",
     sponsor_url="https://github.com/sponsors/filias",
     sponsor_text="sponsor",
+    related_sites=[
+        {"name": "memi portugal", "url": "https://pt.memi.click"},
+        {"name": "memi lisboa", "url": "https://lx.memi.click"},
+        {"name": "memi slovensko", "url": "https://sk.memi.click"},
+        {"name": "memi US", "url": "https://us.memi.click"},
+        {"name": "memi Mallorca", "url": "https://ml.memi.click"},
+    ],
     about_html="""
         <p>I love games and I've always wanted a simple card game that would
         help me learn new things while keeping my memory sharp.</p>
