@@ -26,7 +26,6 @@ config = MemiConfig(
         {"name": "memi lisboa", "url": "https://lx.memi.click"},
         {"name": "memi slovensko", "url": "https://sk.memi.click"},
         {"name": "memi US", "url": "https://us.memi.click"},
-        {"name": "memi Mallorca", "url": "https://ml.memi.click"},
     ],
     about_html="""
         <p>I love games and I've always wanted a simple card game that would
