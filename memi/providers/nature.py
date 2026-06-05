@@ -1,6 +1,6 @@
 """Nature providers: animals, plants, landscapes, nature:all, space."""
 
-from memi_engine import CategoryProvider, register
+from memi_engine import CategoryProvider, ScientificNameProvider, register
 from memi_engine import images
 
 from memi.categories.animals import ALL as ANIMAL_LIST
@@ -32,7 +32,7 @@ from memi.categories.scientific_names import SCIENTIFIC_NAMES
 _DINOSAUR_SET = set(DINOSAUR_LIST)
 
 
-class AnimalsProvider(CategoryProvider):
+class AnimalsProvider(ScientificNameProvider):
     key = "nature:animals"
     items = ANIMAL_LIST
     filters = {
@@ -47,77 +47,35 @@ class AnimalsProvider(CategoryProvider):
                 return result
         return images.get_wikipedia_image(item)
 
-    def get_tag(self, item):
-        sci = SCIENTIFIC_NAMES.get(item, "")
-        if sci and sci.lower() != item.lower():
-            return sci
-        return None
 
-
-class PlantsAllProvider(CategoryProvider):
+class PlantsAllProvider(ScientificNameProvider):
     key = "nature:plants:all"
     items = PLANT_ALL
 
-    def get_tag(self, item):
-        sci = SCIENTIFIC_NAMES.get(item, "")
-        if sci and sci.lower() != item.lower():
-            return sci
-        return None
 
-
-class FlowersProvider(CategoryProvider):
+class FlowersProvider(ScientificNameProvider):
     key = "nature:plants:flowers"
     items = FLOWERS
 
-    def get_tag(self, item):
-        sci = SCIENTIFIC_NAMES.get(item, "")
-        if sci and sci.lower() != item.lower():
-            return sci
-        return None
 
-
-class FruitsAndVegProvider(CategoryProvider):
+class FruitsAndVegProvider(ScientificNameProvider):
     key = "nature:plants:fruits & vegetables"
     items = FRUITS_AND_VEGETABLES
 
-    def get_tag(self, item):
-        sci = SCIENTIFIC_NAMES.get(item, "")
-        if sci and sci.lower() != item.lower():
-            return sci
-        return None
 
-
-class HouseplantsProvider(CategoryProvider):
+class HouseplantsProvider(ScientificNameProvider):
     key = "nature:plants:houseplants"
     items = HOUSEPLANTS
 
-    def get_tag(self, item):
-        sci = SCIENTIFIC_NAMES.get(item, "")
-        if sci and sci.lower() != item.lower():
-            return sci
-        return None
 
-
-class PlantOtherProvider(CategoryProvider):
+class PlantOtherProvider(ScientificNameProvider):
     key = "nature:plants:other"
     items = PLANT_OTHER
 
-    def get_tag(self, item):
-        sci = SCIENTIFIC_NAMES.get(item, "")
-        if sci and sci.lower() != item.lower():
-            return sci
-        return None
 
-
-class TreesProvider(CategoryProvider):
+class TreesProvider(ScientificNameProvider):
     key = "nature:plants:trees"
     items = TREES
-
-    def get_tag(self, item):
-        sci = SCIENTIFIC_NAMES.get(item, "")
-        if sci and sci.lower() != item.lower():
-            return sci
-        return None
 
 
 class LandscapesProvider(CategoryProvider):
