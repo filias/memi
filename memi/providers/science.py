@@ -1,10 +1,14 @@
-"""Science providers: formulas (guess what each formula is for)."""
+"""Science providers: formulas (guess what each is for) and sequences (guess the next term)."""
 
 from memi_engine import CategoryProvider, register
 
 from memi.categories.formulas import ALL as FORMULA_LIST
 from memi.categories.formulas import FIELDS as FORMULA_FIELDS
 from memi.categories.formulas import FORMULAS, slug
+from memi.categories.sequences import ALL as SEQUENCE_LIST
+from memi.categories.sequences import KINDS as SEQUENCE_KINDS
+from memi.categories.sequences import SEQUENCES
+from memi.categories.sequences import slug as seq_slug
 
 
 class FormulasProvider(CategoryProvider):
@@ -25,4 +29,22 @@ class FormulasProvider(CategoryProvider):
         return FORMULAS[item]["field"].capitalize()
 
 
+class SequencesProvider(CategoryProvider):
+    key = "science:sequences"
+    items = SEQUENCE_LIST
+    light_bg = True  # dark numerals on a white card
+    filters = {
+        "kind": SEQUENCE_KINDS,
+    }
+
+    def get_image(self, item):
+        # The answer is the next term; the prompt SVG shows "…, ?".
+        return {"name": str(SEQUENCES[item]["next"]), "image": f"/static/img/sequences/{seq_slug(item)}.svg"}
+
+    def get_tag(self, item):
+        # Reveal which sequence it was.
+        return item
+
+
 register(FormulasProvider())
+register(SequencesProvider())
