@@ -312,7 +312,7 @@ requires-dist = [
 [[package]]
 name = "memi-engine"
 version = "0.1.0"
-source = { git = "https://github.com/filias/memi-engine.git#17e38715f0303e81998ee43b03e0eb7b4f1969d7" }
+source = { git = "https://github.com/filias/memi-engine.git#9ff367374c355b339c8115b89c4afaa72c85f33e" }
 dependencies = [
     { name = "flask" },
     { name = "requests" },

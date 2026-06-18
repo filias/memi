@@ -1,6 +1,6 @@
 """Nature providers: animals, plants, landscapes, rocks & minerals, space, nature:all."""
 
-from memi_engine import CategoryProvider, ScientificNameProvider, register
+from memi_engine import AggregateProvider, CategoryProvider, ScientificNameProvider, register
 from memi_engine import images
 
 from memi.categories.animals import ALL as ANIMAL_LIST
@@ -31,7 +31,6 @@ from memi.categories.minerals import (
     TYPES as MINERAL_TYPES,
     TYPE_LABEL as MINERAL_TYPE_LABEL,
 )
-from memi.categories.scientific_names import SCIENTIFIC_NAMES
 
 
 _DINOSAUR_SET = set(DINOSAUR_LIST)
@@ -105,28 +104,10 @@ class RocksMineralsProvider(CategoryProvider):
         return MINERAL_TYPE_LABEL.get(item)
 
 
-class NatureAllProvider(CategoryProvider):
+class NatureAllProvider(AggregateProvider):
+    # Items, images and tags are the union of every other nature:* provider,
+    # resolved automatically — new nature categories flow in with no changes here.
     key = "nature:all"
-    items = ANIMAL_LIST + PLANT_ALL + LANDSCAPE_LIST + MINERALS_ALL + SPACE_ALL
-
-    def get_image(self, item):
-        if item in _DINOSAUR_SET:
-            result = images.get_dino_image(item)
-            if result and result.get("image"):
-                return result
-        return images.get_wikipedia_image(item)
-
-    def get_tag(self, item):
-        sci = SCIENTIFIC_NAMES.get(item, "")
-        if sci and sci.lower() != item.lower():
-            return sci
-        if item in NATURE_LOCATIONS:
-            return NATURE_LOCATIONS[item]
-        if item in SPACE_LOCATIONS:
-            return SPACE_LOCATIONS[item]
-        if item in MINERAL_TYPE_LABEL:
-            return MINERAL_TYPE_LABEL[item]
-        return None
 
 
 class SpaceAllProvider(CategoryProvider):
