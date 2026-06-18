@@ -1,4 +1,4 @@
-"""Nature providers: animals, plants, landscapes, nature:all, space."""
+"""Nature providers: animals, plants, landscapes, rocks & minerals, space, nature:all."""
 
 from memi_engine import CategoryProvider, ScientificNameProvider, register
 from memi_engine import images
@@ -25,6 +25,11 @@ from memi.categories.space import (
     SOLAR_SYSTEM,
     DEEP_SPACE,
     LOCATIONS as SPACE_LOCATIONS,
+)
+from memi.categories.minerals import (
+    ALL as MINERALS_ALL,
+    TYPES as MINERAL_TYPES,
+    TYPE_LABEL as MINERAL_TYPE_LABEL,
 )
 from memi.categories.scientific_names import SCIENTIFIC_NAMES
 
@@ -89,9 +94,20 @@ class LandscapesProvider(CategoryProvider):
         return NATURE_LOCATIONS.get(item)
 
 
+class RocksMineralsProvider(CategoryProvider):
+    key = "nature:rocks & minerals"
+    items = MINERALS_ALL
+    filters = {
+        "type": MINERAL_TYPES,
+    }
+
+    def get_tag(self, item):
+        return MINERAL_TYPE_LABEL.get(item)
+
+
 class NatureAllProvider(CategoryProvider):
     key = "nature:all"
-    items = ANIMAL_LIST + PLANT_ALL + LANDSCAPE_LIST + SPACE_ALL
+    items = ANIMAL_LIST + PLANT_ALL + LANDSCAPE_LIST + MINERALS_ALL + SPACE_ALL
 
     def get_image(self, item):
         if item in _DINOSAUR_SET:
@@ -108,6 +124,8 @@ class NatureAllProvider(CategoryProvider):
             return NATURE_LOCATIONS[item]
         if item in SPACE_LOCATIONS:
             return SPACE_LOCATIONS[item]
+        if item in MINERAL_TYPE_LABEL:
+            return MINERAL_TYPE_LABEL[item]
         return None
 
 
@@ -143,6 +161,7 @@ register(HouseplantsProvider())
 register(PlantOtherProvider())
 register(TreesProvider())
 register(LandscapesProvider())
+register(RocksMineralsProvider())
 register(NatureAllProvider())
 register(SpaceAllProvider())
 register(SolarSystemProvider())
