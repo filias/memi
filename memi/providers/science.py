@@ -1,13 +1,17 @@
-"""Science providers: formulas, sequences (guess the next term) and metals."""
+"""Science providers: formulas, sequences, periodic table and materials."""
 
 from memi_engine import CategoryProvider, register
 
 from memi.categories.formulas import ALL as FORMULA_LIST
 from memi.categories.formulas import FIELDS as FORMULA_FIELDS
 from memi.categories.formulas import FORMULAS, slug
-from memi.categories.metals import ALL as METAL_LIST
-from memi.categories.metals import KINDS as METAL_KINDS
-from memi.categories.metals import METALS
+from memi.categories.materials import ALL as MATERIAL_LIST
+from memi.categories.materials import TYPES as MATERIAL_TYPES
+from memi.categories.materials import tag_for as material_tag
+from memi.categories.periodic_table import ALL as ELEMENT_LIST
+from memi.categories.periodic_table import CATEGORIES as ELEMENT_CATEGORIES
+from memi.categories.periodic_table import ELEMENTS
+from memi.categories.periodic_table import slug as el_slug
 from memi.categories.sequences import ALL as SEQUENCE_LIST
 from memi.categories.sequences import KINDS as SEQUENCE_KINDS
 from memi.categories.sequences import SEQUENCES
@@ -49,18 +53,34 @@ class SequencesProvider(CategoryProvider):
         return item
 
 
-class MetalsProvider(CategoryProvider):
-    key = "science:metals"
-    items = METAL_LIST
+class PeriodicTableProvider(CategoryProvider):
+    key = "science:periodic table"
+    items = ELEMENT_LIST
+    light_bg = True  # dark tile on a white card
     filters = {
-        "kind": METAL_KINDS,
+        "category": ELEMENT_CATEGORIES,
+    }
+
+    def get_image(self, item):
+        # Tile (atomic number + symbol) pre-rendered by render_periodic_table.py
+        return {"name": item, "image": f"/static/img/elements/{el_slug(item)}.svg"}
+
+    def get_tag(self, item):
+        return ELEMENTS[item]["category"]
+
+
+class MaterialsProvider(CategoryProvider):
+    key = "science:materials"
+    items = MATERIAL_LIST
+    filters = {
+        "type": MATERIAL_TYPES,
     }
 
     def get_tag(self, item):
-        # Symbol for pure metals, composition for alloys.
-        return METALS[item]["tag"]
+        return material_tag(item)
 
 
 register(FormulasProvider())
 register(SequencesProvider())
-register(MetalsProvider())
+register(PeriodicTableProvider())
+register(MaterialsProvider())
