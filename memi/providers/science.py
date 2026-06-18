@@ -1,10 +1,13 @@
-"""Science providers: formulas (guess what each is for) and sequences (guess the next term)."""
+"""Science providers: formulas, sequences (guess the next term) and metals."""
 
 from memi_engine import CategoryProvider, register
 
 from memi.categories.formulas import ALL as FORMULA_LIST
 from memi.categories.formulas import FIELDS as FORMULA_FIELDS
 from memi.categories.formulas import FORMULAS, slug
+from memi.categories.metals import ALL as METAL_LIST
+from memi.categories.metals import KINDS as METAL_KINDS
+from memi.categories.metals import METALS
 from memi.categories.sequences import ALL as SEQUENCE_LIST
 from memi.categories.sequences import KINDS as SEQUENCE_KINDS
 from memi.categories.sequences import SEQUENCES
@@ -46,5 +49,18 @@ class SequencesProvider(CategoryProvider):
         return item
 
 
+class MetalsProvider(CategoryProvider):
+    key = "science:metals"
+    items = METAL_LIST
+    filters = {
+        "kind": METAL_KINDS,
+    }
+
+    def get_tag(self, item):
+        # Symbol for pure metals, composition for alloys.
+        return METALS[item]["tag"]
+
+
 register(FormulasProvider())
 register(SequencesProvider())
+register(MetalsProvider())
