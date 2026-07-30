@@ -16,6 +16,7 @@ from memi_engine.images import BONES_API_URL
 import memi.providers  # noqa: F401
 
 config = MemiConfig(
+    default_category="nature:animals",
     title="memi",
     subtitle="practise your memory",
     favicon_color="#0d9488",
