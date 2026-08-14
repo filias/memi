@@ -1,13 +1,14 @@
 """Geography providers: countries, rivers, road signs."""
 
-from memi_engine import CategoryProvider, register
-from memi_engine import images
+from typing import ClassVar
+
+from memi_engine import CategoryProvider, images, register
 
 from memi.categories.countries import (
     ALL as COUNTRY_LIST,
     CAPITALS,
-    CURRENCIES,
     CONTINENTS as COUNTRY_CONTINENTS,
+    CURRENCIES,
     DIFFICULTY as COUNTRY_DIFFICULTY,
 )
 from memi.categories.rivers import (
@@ -25,7 +26,7 @@ from memi.categories.roadsigns import (
 class CountryFlagsProvider(CategoryProvider):
     key = "geography:countries:flags"
     items = COUNTRY_LIST
-    filters = {
+    filters: ClassVar[dict[str, dict[str, list[str]]]] = {
         "continents": COUNTRY_CONTINENTS,
         "difficulty": COUNTRY_DIFFICULTY,
     }
@@ -41,7 +42,7 @@ class CountryFlagsProvider(CategoryProvider):
 class CountryCapitalsProvider(CategoryProvider):
     key = "geography:countries:capitals"
     items = COUNTRY_LIST
-    filters = {
+    filters: ClassVar[dict[str, dict[str, list[str]]]] = {
         "continents": COUNTRY_CONTINENTS,
         "difficulty": COUNTRY_DIFFICULTY,
     }
@@ -60,7 +61,7 @@ class CountryCapitalsProvider(CategoryProvider):
 class CountryCurrenciesProvider(CategoryProvider):
     key = "geography:countries:currencies"
     items = COUNTRY_LIST
-    filters = {
+    filters: ClassVar[dict[str, dict[str, list[str]]]] = {
         "continents": COUNTRY_CONTINENTS,
         "difficulty": COUNTRY_DIFFICULTY,
     }
@@ -87,7 +88,7 @@ class CountryCurrenciesProvider(CategoryProvider):
 class CountryShapesProvider(CategoryProvider):
     key = "geography:countries:shapes"
     items = COUNTRY_LIST
-    filters = {
+    filters: ClassVar[dict[str, dict[str, list[str]]]] = {
         "continents": COUNTRY_CONTINENTS,
         "difficulty": COUNTRY_DIFFICULTY,
     }
@@ -99,7 +100,7 @@ class CountryShapesProvider(CategoryProvider):
 class RiversProvider(CategoryProvider):
     key = "geography:rivers"
     items = RIVER_LIST
-    filters = {
+    filters: ClassVar[dict[str, dict[str, list[str]]]] = {
         "continents": RIVER_CONTINENTS,
     }
 

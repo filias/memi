@@ -12,10 +12,10 @@ import pathlib
 import matplotlib
 
 matplotlib.use("Agg")
-import matplotlib.pyplot as plt  # noqa: E402
-from matplotlib.patches import Rectangle  # noqa: E402
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
 
-from memi.categories.periodic_table import ELEMENTS, slug  # noqa: E402
+from memi.categories.periodic_table import ELEMENTS, slug
 
 OUT_DIR = pathlib.Path(__file__).resolve().parent.parent / "memi" / "static" / "img" / "elements"
 INK = "#1a2233"

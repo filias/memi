@@ -12,9 +12,9 @@ import pathlib
 import matplotlib
 
 matplotlib.use("Agg")
-import matplotlib.pyplot as plt  # noqa: E402
+import matplotlib.pyplot as plt
 
-from memi.categories.sequences import SEQUENCES, prompt_text, slug  # noqa: E402
+from memi.categories.sequences import SEQUENCES, prompt_text, slug
 
 OUT_DIR = pathlib.Path(__file__).resolve().parent.parent / "memi" / "static" / "img" / "sequences"
 GLYPH_COLOR = "#1a2233"

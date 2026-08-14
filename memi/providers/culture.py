@@ -1,72 +1,75 @@
 """Culture providers: monuments, paintings, characters, cinema, music, sports, brands."""
 
-from memi_engine import CategoryProvider, register
-from memi_engine import images
+from typing import ClassVar
 
-from memi.categories.monuments import (
-    ALL as MONUMENT_LIST,
-    CONTINENTS as MONUMENT_CONTINENTS,
-    DIFFICULTY as MONUMENT_DIFFICULTY,
-    LOCATIONS as MONUMENT_LOCATIONS,
-)
-from memi.categories.paintings import (
-    MOVEMENTS,
-    PAINTERS,
-    PAINTINGS,
-    MOVEMENT_PERIODS,
-    PAINTING_INFO,
-)
-from memi.categories.characters import (
-    ALL as CHAR_ALL,
-    STAR_WARS,
-    LORD_OF_THE_RINGS,
-    HARRY_POTTER,
-    DISNEY,
-    MARVEL,
-    DC,
-    ANIME,
-)
-from memi.categories.people import ACTORS
-from memi.categories.directors import ALL as DIRECTOR_LIST
-from memi.categories.movies import ALL as MOVIE_LIST, YEARS as MOVIE_YEARS
-from memi.categories.tvshows import ALL as TV_LIST, YEARS as TV_YEARS
+from memi_engine import CategoryProvider, images, register
+
 from memi.categories.albums import (
     ALL as ALBUM_LIST,
     ARTISTS as ALBUM_ARTISTS,
     MBIDS as ALBUM_MBIDS,
     YEARS as ALBUM_YEARS,
 )
-from memi.categories.instruments import ALL as INSTRUMENT_LIST, FAMILIES as INSTRUMENT_FAMILIES
-from memi.categories.sports import (
-    SPORTS_ALL,
-    OLYMPICS_ALL,
-    SUMMER_OLYMPICS_ALL,
-    WINTER_OLYMPICS_ALL,
-    WORLD_CUPS_ALL,
-    EUROS_ALL,
-    FOOTBALL_CLUBS_ALL,
-    WIKIPEDIA as SPORT_WIKIPEDIA,
-    IMAGE_FILES as SPORT_IMAGE_FILES,
-    TAGS as SPORT_TAGS,
-)
 from memi.categories.brands import (
+    AIRLINES_NAMES,
     ALL_NAMES as BRAND_ALL_NAMES,
-    TECH_NAMES,
     AUTOMOTIVE_NAMES,
+    BRAND_TAGS,
     FASHION_NAMES,
     FOOD_AND_DRINK_NAMES,
-    AIRLINES_NAMES,
-    BRAND_TAGS,
+    TECH_NAMES,
+)
+from memi.categories.characters import (
+    ALL as CHAR_ALL,
+    ANIME,
+    DC,
+    DISNEY,
+    HARRY_POTTER,
+    LORD_OF_THE_RINGS,
+    MARVEL,
+    STAR_WARS,
+)
+from memi.categories.directors import ALL as DIRECTOR_LIST
+from memi.categories.instruments import (
+    ALL as INSTRUMENT_LIST,
+    FAMILIES as INSTRUMENT_FAMILIES,
 )
 from memi.categories.logos import LOGOS
-
+from memi.categories.monuments import (
+    ALL as MONUMENT_LIST,
+    CONTINENTS as MONUMENT_CONTINENTS,
+    DIFFICULTY as MONUMENT_DIFFICULTY,
+    LOCATIONS as MONUMENT_LOCATIONS,
+)
+from memi.categories.movies import ALL as MOVIE_LIST, YEARS as MOVIE_YEARS
+from memi.categories.paintings import (
+    MOVEMENT_PERIODS,
+    MOVEMENTS,
+    PAINTERS,
+    PAINTING_INFO,
+    PAINTINGS,
+)
+from memi.categories.people import ACTORS
+from memi.categories.sports import (
+    EUROS_ALL,
+    FOOTBALL_CLUBS_ALL,
+    IMAGE_FILES as SPORT_IMAGE_FILES,
+    OLYMPICS_ALL,
+    SPORTS_ALL,
+    SUMMER_OLYMPICS_ALL,
+    TAGS as SPORT_TAGS,
+    WIKIPEDIA as SPORT_WIKIPEDIA,
+    WINTER_OLYMPICS_ALL,
+    WORLD_CUPS_ALL,
+)
+from memi.categories.tvshows import ALL as TV_LIST, YEARS as TV_YEARS
 
 # -- Monuments --
 
 class MonumentsProvider(CategoryProvider):
     key = "culture:art:monuments"
     items = MONUMENT_LIST
-    filters = {
+    filters: ClassVar[dict[str, dict[str, list[str]]]] = {
         "continents": MONUMENT_CONTINENTS,
         "difficulty": MONUMENT_DIFFICULTY,
     }
@@ -176,7 +179,7 @@ class DirectorsProvider(CategoryProvider):
 class MoviePostersProvider(CategoryProvider):
     key = "culture:cinema:movies:posters"
     items = MOVIE_LIST
-    footers = ["tmdb"]
+    footers: ClassVar[list[str]] = ["tmdb"]
 
     def get_image(self, item):
         result = images.get_tmdb_image(item, "poster")
@@ -191,7 +194,7 @@ class MoviePostersProvider(CategoryProvider):
 class MovieScenesProvider(CategoryProvider):
     key = "culture:cinema:movies:scenes"
     items = MOVIE_LIST
-    footers = ["tmdb"]
+    footers: ClassVar[list[str]] = ["tmdb"]
 
     def get_image(self, item):
         result = images.get_tmdb_image(item, "backdrop")
@@ -208,7 +211,7 @@ class MovieScenesProvider(CategoryProvider):
 class TVShowsProvider(CategoryProvider):
     key = "culture:cinema:tv shows:scenes"
     items = TV_LIST
-    footers = ["tmdb"]
+    footers: ClassVar[list[str]] = ["tmdb"]
 
     def get_image(self, item):
         result = images.get_tmdb_tv_image(item, "backdrop")
@@ -225,7 +228,7 @@ class TVShowsProvider(CategoryProvider):
 class AlbumsProvider(CategoryProvider):
     key = "culture:music:albums"
     items = ALBUM_LIST
-    footers = ["musicbrainz"]
+    footers: ClassVar[list[str]] = ["musicbrainz"]
 
     def get_image(self, item):
         mbid = ALBUM_MBIDS.get(item)
@@ -244,7 +247,7 @@ class AlbumsProvider(CategoryProvider):
 class InstrumentsProvider(CategoryProvider):
     key = "culture:music:instruments"
     items = INSTRUMENT_LIST
-    filters = {
+    filters: ClassVar[dict[str, dict[str, list[str]]]] = {
         "families": INSTRUMENT_FAMILIES,
     }
 

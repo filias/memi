@@ -8,7 +8,6 @@ import os
 
 import requests as http_requests
 from flask import Response
-
 from memi_engine import MemiConfig, create_app
 from memi_engine.images import BONES_API_URL
 
@@ -128,5 +127,7 @@ def bones_image(bone_id):
             img_resp.content,
             content_type=img_resp.headers.get("content-type", "image/jpeg"),
         )
-    except Exception:
+    # The only things that can fail here are the two HTTP calls and the JSON
+    # decode; anything else is a real bug and should surface as a 500.
+    except (http_requests.RequestException, ValueError):
         return "Not found", 404

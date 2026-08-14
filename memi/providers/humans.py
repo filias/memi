@@ -1,7 +1,8 @@
 """Humans providers: bones, people."""
 
-from memi_engine import CategoryProvider, register
-from memi_engine import images
+from typing import ClassVar
+
+from memi_engine import CategoryProvider, images, register
 
 from memi.categories.bones import ALL as BONE_LIST
 from memi.categories.people import ALL as PEOPLE_LIST, ROLES as PEOPLE_ROLES
@@ -10,7 +11,7 @@ from memi.categories.people import ALL as PEOPLE_LIST, ROLES as PEOPLE_ROLES
 class BonesProvider(CategoryProvider):
     key = "humans:bones"
     items = BONE_LIST
-    footers = ["eskeletons"]
+    footers: ClassVar[list[str]] = ["eskeletons"]
 
     def get_image(self, item):
         return images.get_bone_image(item)
@@ -19,7 +20,7 @@ class BonesProvider(CategoryProvider):
 class PeopleProvider(CategoryProvider):
     key = "humans:people"
     items = PEOPLE_LIST
-    filters = {
+    filters: ClassVar[dict[str, dict[str, list[str]]]] = {
         "roles": PEOPLE_ROLES,
     }
 

@@ -12,9 +12,9 @@ import pathlib
 import matplotlib
 
 matplotlib.use("Agg")
-import matplotlib.pyplot as plt  # noqa: E402
+import matplotlib.pyplot as plt
 
-from memi.categories.formulas import FORMULAS, slug  # noqa: E402
+from memi.categories.formulas import FORMULAS, slug
 
 OUT_DIR = pathlib.Path(__file__).resolve().parent.parent / "memi" / "static" / "img" / "formulas"
 GLYPH_COLOR = "#1a2233"  # dark, reads on the light card background
@@ -42,7 +42,9 @@ def main() -> None:
         path = OUT_DIR / f"{slug(name)}.svg"
         try:
             render(data["latex"], path)
-        except Exception as exc:  # mathtext parse error, etc.
+        # Deliberately broad: mathtext raises assorted types for a bad formula,
+        # and one bad formula should not stop the rest of the batch rendering.
+        except Exception as exc:  # noqa: BLE001
             failed.append((name, str(exc)))
     print(f"Rendered {len(FORMULAS) - len(failed)}/{len(FORMULAS)} formulas to {OUT_DIR}")
     for name, err in failed:

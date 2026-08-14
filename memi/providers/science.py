@@ -1,21 +1,32 @@
 """Science providers: formulas, sequences, periodic table and materials."""
 
+from typing import ClassVar
+
 from memi_engine import CategoryProvider, register
 
-from memi.categories.formulas import ALL as FORMULA_LIST
-from memi.categories.formulas import FIELDS as FORMULA_FIELDS
-from memi.categories.formulas import FORMULAS, slug
-from memi.categories.materials import ALL as MATERIAL_LIST
-from memi.categories.materials import TYPES as MATERIAL_TYPES
-from memi.categories.materials import tag_for as material_tag
-from memi.categories.periodic_table import ALL as ELEMENT_LIST
-from memi.categories.periodic_table import CATEGORIES as ELEMENT_CATEGORIES
-from memi.categories.periodic_table import ELEMENTS
-from memi.categories.periodic_table import slug as el_slug
-from memi.categories.sequences import ALL as SEQUENCE_LIST
-from memi.categories.sequences import KINDS as SEQUENCE_KINDS
-from memi.categories.sequences import SEQUENCES
-from memi.categories.sequences import slug as seq_slug
+from memi.categories.formulas import (
+    ALL as FORMULA_LIST,
+    FIELDS as FORMULA_FIELDS,
+    FORMULAS,
+    slug,
+)
+from memi.categories.materials import (
+    ALL as MATERIAL_LIST,
+    TYPES as MATERIAL_TYPES,
+    tag_for as material_tag,
+)
+from memi.categories.periodic_table import (
+    ALL as ELEMENT_LIST,
+    CATEGORIES as ELEMENT_CATEGORIES,
+    ELEMENTS,
+    slug as el_slug,
+)
+from memi.categories.sequences import (
+    ALL as SEQUENCE_LIST,
+    KINDS as SEQUENCE_KINDS,
+    SEQUENCES,
+    slug as seq_slug,
+)
 
 
 class FormulasProvider(CategoryProvider):
@@ -23,7 +34,7 @@ class FormulasProvider(CategoryProvider):
     items = FORMULA_LIST
     light_bg = True  # dark formula glyphs on a white card
     override_name = True
-    filters = {
+    filters: ClassVar[dict[str, dict[str, list[str]]]] = {
         "field": FORMULA_FIELDS,
     }
 
@@ -40,7 +51,7 @@ class SequencesProvider(CategoryProvider):
     key = "science:sequences"
     items = SEQUENCE_LIST
     light_bg = True  # dark numerals on a white card
-    filters = {
+    filters: ClassVar[dict[str, dict[str, list[str]]]] = {
         "kind": SEQUENCE_KINDS,
     }
 
@@ -57,7 +68,7 @@ class PeriodicTableProvider(CategoryProvider):
     key = "science:periodic table"
     items = ELEMENT_LIST
     light_bg = True  # dark tile on a white card
-    filters = {
+    filters: ClassVar[dict[str, dict[str, list[str]]]] = {
         "category": ELEMENT_CATEGORIES,
     }
 
@@ -72,7 +83,7 @@ class PeriodicTableProvider(CategoryProvider):
 class MaterialsProvider(CategoryProvider):
     key = "science:materials"
     items = MATERIAL_LIST
-    filters = {
+    filters: ClassVar[dict[str, dict[str, list[str]]]] = {
         "type": MATERIAL_TYPES,
     }
 

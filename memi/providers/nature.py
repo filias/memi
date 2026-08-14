@@ -1,12 +1,31 @@
 """Nature providers: animals, plants, landscapes, rocks & minerals, space, nature:all."""
 
-from memi_engine import AggregateProvider, CategoryProvider, ScientificNameProvider, register
-from memi_engine import images
+from typing import ClassVar
 
-from memi.categories.animals import ALL as ANIMAL_LIST
-from memi.categories.animals import CLASSES as ANIMAL_CLASSES
-from memi.categories.animals import DIFFICULTY as ANIMAL_DIFFICULTY
+from memi_engine import (
+    AggregateProvider,
+    CategoryProvider,
+    ScientificNameProvider,
+    images,
+    register,
+)
+
+from memi.categories.animals import (
+    ALL as ANIMAL_LIST,
+    CLASSES as ANIMAL_CLASSES,
+    DIFFICULTY as ANIMAL_DIFFICULTY,
+)
 from memi.categories.dinosaurs import ALL as DINOSAUR_LIST
+from memi.categories.minerals import (
+    ALL as MINERALS_ALL,
+    TYPE_LABEL as MINERAL_TYPE_LABEL,
+    TYPES as MINERAL_TYPES,
+)
+from memi.categories.nature import (
+    ALL as LANDSCAPE_LIST,
+    CONTINENTS as LANDSCAPE_CONTINENTS,
+    LOCATIONS as NATURE_LOCATIONS,
+)
 from memi.categories.plants import (
     ALL as PLANT_ALL,
     FLOWERS,
@@ -15,23 +34,12 @@ from memi.categories.plants import (
     OTHER as PLANT_OTHER,
     TREES,
 )
-from memi.categories.nature import (
-    ALL as LANDSCAPE_LIST,
-    CONTINENTS as LANDSCAPE_CONTINENTS,
-    LOCATIONS as NATURE_LOCATIONS,
-)
 from memi.categories.space import (
     ALL as SPACE_ALL,
-    SOLAR_SYSTEM,
     DEEP_SPACE,
     LOCATIONS as SPACE_LOCATIONS,
+    SOLAR_SYSTEM,
 )
-from memi.categories.minerals import (
-    ALL as MINERALS_ALL,
-    TYPES as MINERAL_TYPES,
-    TYPE_LABEL as MINERAL_TYPE_LABEL,
-)
-
 
 _DINOSAUR_SET = set(DINOSAUR_LIST)
 
@@ -39,7 +47,7 @@ _DINOSAUR_SET = set(DINOSAUR_LIST)
 class AnimalsProvider(ScientificNameProvider):
     key = "nature:animals"
     items = ANIMAL_LIST
-    filters = {
+    filters: ClassVar[dict[str, dict[str, list[str]]]] = {
         "classes": ANIMAL_CLASSES,
         "difficulty": ANIMAL_DIFFICULTY,
     }
@@ -85,7 +93,7 @@ class TreesProvider(ScientificNameProvider):
 class LandscapesProvider(CategoryProvider):
     key = "nature:landscapes"
     items = LANDSCAPE_LIST
-    filters = {
+    filters: ClassVar[dict[str, dict[str, list[str]]]] = {
         "continents": LANDSCAPE_CONTINENTS,
     }
 
@@ -96,7 +104,7 @@ class LandscapesProvider(CategoryProvider):
 class RocksMineralsProvider(CategoryProvider):
     key = "nature:rocks & minerals"
     items = MINERALS_ALL
-    filters = {
+    filters: ClassVar[dict[str, dict[str, list[str]]]] = {
         "type": MINERAL_TYPES,
     }
 

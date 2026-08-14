@@ -19,3 +19,15 @@ allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
 packages = ["memi"]
+
+[tool.ruff.lint.isort]
+# Keep aliased imports grouped in one statement per module, rather than
+# exploding each `X as Y` into its own from-import.
+combine-as-imports = true
+
+[tool.ruff.lint.per-file-ignores]
+# Legacy, kept for reference and imported by nothing: app_old.py predates the
+# move to memi-engine, and memi/logic/ is only reachable from it. Both are
+# candidates for deletion — until then, don't lint code we no longer run.
+"memi/app_old.py" = ["BLE001", "S110"]
+"memi/logic/*.py" = ["BLE001", "S110"]

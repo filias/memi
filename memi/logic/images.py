@@ -4,8 +4,10 @@ import time
 import requests
 
 from memi.categories.countries import CAPITALS, CURRENCIES
-from memi.categories.usstates import ABBREVIATIONS as STATE_ABBREVS
-from memi.categories.usstates import CAPITALS as STATE_CAPITALS
+from memi.categories.usstates import (
+    ABBREVIATIONS as STATE_ABBREVS,
+    CAPITALS as STATE_CAPITALS,
+)
 
 HEADERS = {"User-Agent": "Memi/1.0 (https://memi.click; memi@memi.click)"}
 TMDB_API_KEY = os.environ.get("TMDB_API_KEY", "")

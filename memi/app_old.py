@@ -6,51 +6,67 @@ import requests as http_requests
 from flask import Flask, Response, jsonify, render_template, request
 
 from memi.categories import CATEGORIES
-from memi.categories.albums import ARTISTS as ALBUM_ARTISTS
-from memi.categories.albums import MBIDS as ALBUM_MBIDS
-from memi.categories.albums import YEARS as ALBUM_YEARS
-from memi.categories.animals import CLASSES as ANIMAL_CLASSES
-from memi.categories.animals import DIFFICULTY as ANIMAL_DIFFICULTY
-from memi.categories.scientific_names import SCIENTIFIC_NAMES
-from memi.categories.countries import DIFFICULTY as COUNTRY_DIFFICULTY
-from memi.categories.monuments import DIFFICULTY as MONUMENT_DIFFICULTY
+from memi.categories.albums import (
+    ARTISTS as ALBUM_ARTISTS,
+    MBIDS as ALBUM_MBIDS,
+    YEARS as ALBUM_YEARS,
+)
+from memi.categories.animals import (
+    CLASSES as ANIMAL_CLASSES,
+    DIFFICULTY as ANIMAL_DIFFICULTY,
+)
+from memi.categories.brands import BRAND_TAGS
+from memi.categories.countries import (
+    CONTINENTS as COUNTRY_CONTINENTS,
+    DIFFICULTY as COUNTRY_DIFFICULTY,
+)
 from memi.categories.dinosaurs import ALL as DINOSAUR_LIST
 from memi.categories.instruments import FAMILIES as INSTRUMENT_FAMILIES
-from memi.categories.countries import CONTINENTS as COUNTRY_CONTINENTS
-from memi.categories.monuments import CONTINENTS as MONUMENT_CONTINENTS
-from memi.categories.monuments import LOCATIONS as MONUMENT_LOCATIONS
-from memi.categories.nature import CONTINENTS as LANDSCAPE_CONTINENTS
-from memi.categories.people import ROLES as PEOPLE_ROLES
-from memi.categories.rivers import CONTINENTS as RIVER_CONTINENTS
-from memi.categories.movies import YEARS as MOVIE_YEARS
-from memi.categories.tvshows import YEARS as TV_YEARS
-from memi.categories.paintings import MOVEMENT_PERIODS, PAINTING_INFO
-from memi.categories.nature import LOCATIONS as NATURE_LOCATIONS
-from memi.categories.space import LOCATIONS as SPACE_LOCATIONS
-from memi.categories.rivers import LOCATIONS as RIVER_LOCATIONS
-from memi.categories.roadsigns import COMMONS_FILES as SIGN_FILES
-from memi.categories.roadsigns import REGIONS as SIGN_REGIONS
-from memi.categories.brands import BRAND_TAGS
 from memi.categories.logos import LOGOS
-from memi.categories.sports import IMAGE_FILES as SPORT_IMAGE_FILES
-from memi.categories.sports import TAGS as SPORT_TAGS
-from memi.categories.sports import WIKIPEDIA as SPORT_WIKIPEDIA
+from memi.categories.monuments import (
+    CONTINENTS as MONUMENT_CONTINENTS,
+    DIFFICULTY as MONUMENT_DIFFICULTY,
+    LOCATIONS as MONUMENT_LOCATIONS,
+)
+from memi.categories.movies import YEARS as MOVIE_YEARS
+from memi.categories.nature import (
+    CONTINENTS as LANDSCAPE_CONTINENTS,
+    LOCATIONS as NATURE_LOCATIONS,
+)
+from memi.categories.paintings import MOVEMENT_PERIODS, PAINTING_INFO
+from memi.categories.people import ROLES as PEOPLE_ROLES
+from memi.categories.rivers import (
+    CONTINENTS as RIVER_CONTINENTS,
+    LOCATIONS as RIVER_LOCATIONS,
+)
+from memi.categories.roadsigns import (
+    COMMONS_FILES as SIGN_FILES,
+    REGIONS as SIGN_REGIONS,
+)
+from memi.categories.scientific_names import SCIENTIFIC_NAMES
+from memi.categories.space import LOCATIONS as SPACE_LOCATIONS
+from memi.categories.sports import (
+    IMAGE_FILES as SPORT_IMAGE_FILES,
+    TAGS as SPORT_TAGS,
+    WIKIPEDIA as SPORT_WIKIPEDIA,
+)
+from memi.categories.tvshows import YEARS as TV_YEARS
 from memi.categories.usstates import REGIONS as STATE_REGIONS
 from memi.logic.images import (
     BONES_API_URL,
     get_album_cover,
     get_bone_image,
-    get_wikipedia_file_image,
-    get_dino_image,
-    get_state_item,
     get_commons_file_image,
     get_country_item,
+    get_dino_image,
     get_fandom_image,
     get_grays_anatomy_image,
     get_logo_image,
+    get_state_item,
     get_tmdb_image,
     get_tmdb_tv_image,
     get_wikipedia_description,
+    get_wikipedia_file_image,
     get_wikipedia_image,
 )
 from memi.logic.menu import build_menu
@@ -306,8 +322,7 @@ def random_item():
             if "(" in name:
                 name = name.split("(")[0].strip()
             # Strip trailing " dog" from breed names like "Maltese dog"
-            if name.endswith(" dog"):
-                name = name[:-4]
+            name = name.removesuffix(" dog")
             result["name"] = name
             if is_people:
                 desc = get_wikipedia_description(item)
@@ -504,6 +519,5 @@ def restore_item():
         _excluded_items.discard(item)
         # Rewrite file without this item
         with open(EXCLUDED_FILE, "w") as f:
-            for i in _excluded_items:
-                f.write(i + "\n")
+            f.writelines(i + "\n" for i in _excluded_items)
     return jsonify({"ok": True})
