@@ -76,7 +76,7 @@ config = MemiConfig(
         <em>spacing effect</em>. A few minutes a day is enough.</p>
     """,
     analytics_html=(
-        '<script data-goatcounter="https://filias.goatcounter.com/count"'
+        '<script data-goatcounter="https://memi.goatcounter.com/count"'
         ' async src="//gc.zgo.at/count.js"></script>'
     ),
     footers={
