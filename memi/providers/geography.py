@@ -57,6 +57,10 @@ class CountryCapitalsProvider(CategoryProvider):
         capital = CAPITALS.get(item, "Unknown")
         return capital
 
+    def get_wikipedia_title(self, item):
+        # The card is a country shape with no article link.
+        return ("en", item)
+
 
 class CountryCurrenciesProvider(CategoryProvider):
     key = "geography:countries:currencies"
@@ -84,6 +88,11 @@ class CountryCurrenciesProvider(CategoryProvider):
     def get_clue(self, item):
         return item
 
+    def get_wikipedia_title(self, item):
+        # The answer is the currency; the card is the country's shape.
+        currency = CURRENCIES.get(item, "").split("(")[0].strip()
+        return ("en", currency) if currency else None
+
 
 class CountryShapesProvider(CategoryProvider):
     key = "geography:countries:shapes"
@@ -96,6 +105,17 @@ class CountryShapesProvider(CategoryProvider):
     def get_image(self, item):
         return images.get_country_shape(item)
 
+    def get_wikipedia_title(self, item):
+        # The card is a country shape with no article link.
+        return ("en", item)
+
+
+# Rivers whose item name isn't their English Wikipedia article.
+RIVER_WIKIPEDIA = {
+    "Clyde (river)": "River Clyde",
+    "Shannon (river)": "River Shannon",
+}
+
 
 class RiversProvider(CategoryProvider):
     key = "geography:rivers"
@@ -106,6 +126,11 @@ class RiversProvider(CategoryProvider):
 
     def get_image(self, item):
         return images.get_river_map(item)
+
+    def get_wikipedia_title(self, item):
+        # The card is a river map with no article link. No map in the panel:
+        # a river's Wikidata point is a single spot on it (often its mouth).
+        return ("en", RIVER_WIKIPEDIA.get(item, item))
 
     def get_tag(self, item):
         return RIVER_LOCATIONS.get(item)

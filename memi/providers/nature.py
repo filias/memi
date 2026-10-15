@@ -93,6 +93,7 @@ class TreesProvider(ScientificNameProvider):
 class LandscapesProvider(CategoryProvider):
     key = "nature:landscapes"
     items = LANDSCAPE_LIST
+    map_zoom = 10
     filters: ClassVar[dict[str, dict[str, list[str]]]] = {
         "continents": LANDSCAPE_CONTINENTS,
     }

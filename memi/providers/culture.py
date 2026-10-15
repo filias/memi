@@ -69,6 +69,7 @@ from memi.categories.tvshows import ALL as TV_LIST, YEARS as TV_YEARS
 class MonumentsProvider(CategoryProvider):
     key = "culture:art:monuments"
     items = MONUMENT_LIST
+    map_zoom = 15
     filters: ClassVar[dict[str, dict[str, list[str]]]] = {
         "continents": MONUMENT_CONTINENTS,
         "difficulty": MONUMENT_DIFFICULTY,

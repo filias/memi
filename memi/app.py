@@ -16,6 +16,9 @@ import memi.providers  # noqa: F401
 
 config = MemiConfig(
     default_category="nature:animals",
+    # Details panel beside the card on reveal: the Wikipedia intro and, for
+    # monuments and landscapes, a map.
+    layout="enriched",
     title="memi",
     subtitle="practise your memory",
     favicon_color="#0d9488",
