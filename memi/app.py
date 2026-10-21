@@ -24,11 +24,17 @@ config = MemiConfig(
     favicon_color="#0d9488",
     sponsor_url="https://github.com/sponsors/filias",
     sponsor_text="sponsor",
+    # The memi.games landing page, then every other public edition (memi
+    # mallorca is private), in the landing page's order.
     related_sites=[
+        {"name": "memi.games", "url": "https://memi.games"},
         {"name": "memi portugal", "url": "https://pt.memi.games"},
         {"name": "memi lisboa", "url": "https://lx.memi.games"},
         {"name": "memi slovensko", "url": "https://sk.memi.games"},
         {"name": "memi united states", "url": "https://us.memi.games"},
+        {"name": "memi pyrenees", "url": "https://py.memi.games"},
+        {"name": "memi kraków", "url": "https://kr.memi.games"},
+        {"name": "memi romania", "url": "https://ro.memi.games"},
     ],
     about_html="""
         <p>I love games and I've always wanted a simple card game that would
